@@ -1,6 +1,10 @@
 import ProjectCard, { ProjectCardProps } from "./ProjectCard";
 import Image from "next/image";
 import HowItWorks from "@/assets/HowItWorks.png";
+import SanLuis from "@/assets/projects/san-luis.png";
+import SanMiguel from "@/assets/projects/san-miguel.png";
+import Surquillo from "@/assets/projects/surquillo.png";
+import PuebloLibre from "@/assets/projects/pueblo-libre.png";
 
 const projects: ProjectCardProps[] = [
   {
@@ -8,28 +12,28 @@ const projects: ProjectCardProps[] = [
     title: "San Miguel",
     location: "Lima",
     boughtPercent: 100,
-    imageSrc: "/images/san-miguel.jpg",
+    imageSrc: SanMiguel,
   },
   {
     id: "pueblo-libre",
     title: "Pueblo Libre",
     location: "Lima",
-    boughtPercent: 80,
-    imageSrc: "/images/pueblo-libre.jpg",
+    boughtPercent: 70,
+    imageSrc: PuebloLibre,
   },
   {
     id: "surquillo",
     title: "Surquillo",
     location: "Lima",
     boughtPercent: 90,
-    imageSrc: "/images/surquillo.jpg",
+    imageSrc: Surquillo,
   },
   {
     id: "san-luis",
     title: "San Luis",
     location: "Lima",
-    boughtPercent: 60,
-    imageSrc: "/images/san-luis.jpg",
+    boughtPercent: 30,
+    imageSrc: SanLuis,
   },
 ];
 
