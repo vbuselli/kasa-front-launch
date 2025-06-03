@@ -103,6 +103,7 @@ export default function CheckoutPage({
       }
 
       router.push("/protected/success");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setToast(err.message || "Ocurrió un error al invertir.");
     } finally {
