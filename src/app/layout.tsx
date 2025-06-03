@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FAQSection from "@/components/FAQ";
+import { DrawerProvider } from "context/DrawerContext";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -34,15 +35,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <link rel="apple-touch-icon" href="assets/logo192.png" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} relative`}
       >
-        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col">
-          <Navbar />
-          <main>{children}</main>
-          <FAQSection />
-          <Footer />
-        </div>
+        <DrawerProvider>
+          <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col">
+            <Navbar />
+            <main className="flex-1 flex flex-col">{children}</main>
+            <FAQSection />
+            <Footer />
+          </div>
+        </DrawerProvider>
       </body>
     </html>
   );

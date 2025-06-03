@@ -1,83 +1,233 @@
 "use client";
-import Link from "next/link";
+import { useInvestmentShare } from "context/InvestmentContext";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function InvestmentCalculator() {
-  const presets = [2000, 5000, 10000];
-  const [investment, setInvestment] = useState(presets[0]);
+export default function InvestmentCalculator({
+  id,
+  minimumInvestment,
+  area,
+  rentGain,
+  appGain,
+  totalShares,
+}: {
+  id: string;
+  minimumInvestment: number;
+  area: number;
+  rentGain: number;
+  appGain: number;
+  totalShares: number;
+}) {
+  const presets = [minimumInvestment, 5000, 10000];
+  const [investment, setInvestment] = useState(minimumInvestment);
   const [terms, setTerms] = useState(false);
-
-  const area = investment / 1000;
-  const rentGain = investment * 0.08;
-  const appGain = investment * 0.03;
+  const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const { setInvestmentAmount } = useInvestmentShare();
+  const router = useRouter();
 
   const handlePreset = (val: number) => {
     setInvestment(val);
   };
 
+  const createAssetToken = async () => {
+    setInvestmentAmount(investment);
+    setLoading(true);
+    setToast(null);
+    try {
+      const num_shares = Math.floor(investment / 100);
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/asset_tokens`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            asset_id: id,
+            num_shares: num_shares,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to create asset token");
+      }
+
+      const responseData = await response.json();
+
+      router.push("/protected/checkout/" + responseData.id);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      setToast(err.message || "Ocurrió un error al pasar al checkout.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="bg-gray-800 p-6 rounded-lg space-y-4">
-      <label className="block text-sm text-gray-300">
-        ¿Cuánto deseas invertir?
-      </label>
-      <input
-        type="number"
-        value={investment}
-        onChange={(e) => setInvestment(Number(e.target.value))}
-        className="w-full px-4 py-2 rounded bg-gray-700 text-white"
-      />
+    <div className="bg-foreground p-6 rounded-lg border border-white space-y-4">
+      <h2 className="text-xl font-bold text-white">Calculadora de Inversión</h2>
+
+      <div>
+        <div className="text-gray-300 mb-1 font-semibold">
+          ¿Cuánto deseas invertir?
+        </div>
+
+        <div className="relative text-3xl font-semibold text-center">
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground pointer-events-none">
+            S/
+          </span>
+          <input
+            type="number"
+            value={investment}
+            onChange={(e) => setInvestment(Number(e.target.value))}
+            className="w-full pl-14 pr-4 py-3 rounded-md bg-background text-foreground text-center"
+            min={minimumInvestment}
+          />
+        </div>
+      </div>
 
       <div className="flex gap-2">
         {presets.map((p) => (
           <button
             key={p}
+            type="button"
             onClick={() => handlePreset(p)}
-            className="flex-1 py-2 bg-green-600 hover:bg-green-500 text-white rounded"
+            className={`flex-1 py-0 border rounded-md transition-colors font-semibold ${
+              investment === p
+                ? "bg-yellow-400 text-gray-900 border-yellow-400"
+                : "bg-transparent border-primary text-primary hover:bg-yellow-100"
+            }`}
           >
-            S/{p.toLocaleString()}
+            S/ {p.toLocaleString()}
           </button>
         ))}
       </div>
 
-      <p className="text-gray-300">Con esa inversión podrás adquirir:</p>
-      <p className="text-white font-semibold">
-        {area.toFixed(2)} m<sup>2</sup>
-      </p>
-
-      <p className="text-gray-300">Tus ganancias serían:</p>
-      <div className="space-y-2">
-        <p className="bg-green-600 text-white px-4 py-2 rounded">
-          De alquiler: S/{rentGain.toFixed(2)}
+      <div>
+        <p className="text-gray-300 mb-1 font-semibold">
+          Con esa inversión podrás adquirir:
         </p>
-        <p className="bg-green-600 text-white px-4 py-2 rounded">
-          De apreciación: S/{appGain.toFixed(2)}
+        <p className="text-foreground font-bold flex-1 py-4 bg-primary hover:bg-green-500 rounded-md text-center text-3xl">
+          {((area * Math.floor(investment / 100)) / totalShares).toFixed(2)} cm
+          <sup className="text-sm align-super">2</sup>
         </p>
       </div>
 
-      <div className="flex items-center">
+      <div>
+        <p className="text-gray-300 mb-1 font-semibold">
+          Tus ganancias serían:
+        </p>
+        <div className="space-y-3">
+          <div className="bg-primary text-foreground p-4 rounded-md">
+            <div className="text-sm font-semibold">De alquiler:</div>
+            <div className="text-3xl font-bold text-center my-2">
+              S/{((rentGain * investment) / 100).toFixed(2)}{" "}
+              <span className="text-sm">Anual</span>
+            </div>
+            <p className="text-sm font-semibold text-center">
+              Puedes recibir S/ {((rentGain * investment) / 1200).toFixed(2)}{" "}
+              mensual o solicitar reinvertirlo
+            </p>
+          </div>
+          <div className="bg-primary text-foreground p-4 rounded-md">
+            <div className="text-sm font-semibold">De apreciación:</div>
+            <div className="text-3xl font-bold text-center my-2">
+              S/{((appGain * investment) / 100).toFixed(2)}{" "}
+              <span className="text-sm">Anual</span>
+            </div>
+            <p className="text-sm font-semibold text-center">
+              Se recibe al vender la propiedad o vender tus fracciones.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gray-100 rounded-md p-4 flex items-center gap-3">
+        <div className="mt-1 text-gray-500">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="var(--foreground)"
+              strokeWidth="3"
+              fill="none"
+            />
+            <path
+              d="M12 8v4m0 4h.01"
+              stroke="var(--foreground)"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+        <div className="text-xs text-gray-800 font-semibold">
+          Recuerda que estas ganancias son estimadas. Nos esforzamos para que la
+          propiedad se alquile la mayor parte del tiempo, pero no podemos
+          garantizar que se alquile todos los meses o que su valor suba de forma
+          exacta.
+        </div>
+      </div>
+
+      <div className="flex items-center mt-4 relative">
         <input
           type="checkbox"
           id="terms"
           checked={terms}
           onChange={() => setTerms(!terms)}
-          className="mr-2"
+          className="appearance-none w-5 h-5 rounded bg-gray-800 border-2 border-gray-600 checked:bg-blue-600 checked:border-blue-600 flex-shrink-0 mr-2 relative transition-colors duration-150"
+          style={{ outline: "none" }}
         />
-        <label htmlFor="terms" className="text-sm text-gray-300">
-          He leído los{" "}
-          <a href="/terms" className="text-green-400 underline">
-            términos y condiciones
+        {terms && (
+          <svg
+            className="absolute ml-2 pointer-events-none"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            style={{ left: -8, top: 6, pointerEvents: "none" }}
+          >
+            <rect width="20" height="20" rx="4" fill="#2563eb" />
+            <path
+              d="M6 10.5L9 13.5L14 8.5"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
+        <label
+          htmlFor="terms"
+          className="text-xs text-gray-100 font-semibold ml-1"
+        >
+          Estoy de acuerdo en continuar con la inversión según los{" "}
+          <a href="/terms" className="underline text-gray-100 font-bold">
+            Términos y Condiciones
           </a>
         </label>
       </div>
 
-      <Link href="/checkout" className="block">
+      {toast && (
+        <div className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded text-center">
+          {toast}
+        </div>
+      )}
+
+      <div className="flex justify-center">
         <button
-          disabled={!terms}
-          className="w-full py-3 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-semibold rounded disabled:opacity-50 cursor-pointer"
+          disabled={!terms || loading}
+          onClick={() => createAssetToken()}
+          className="w-3/4 py-3 bg-yellow-400 hover:bg-yellow-300 text-white font-semibold rounded-3xl disabled:opacity-50 cursor-pointer mt-2"
         >
-          INVERTIR
+          {loading ? "Procesando..." : "INVERTIR"}
         </button>
-      </Link>
+      </div>
     </div>
   );
 }

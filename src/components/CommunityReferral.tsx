@@ -2,6 +2,7 @@
 import Image from "next/image";
 import SanMiguel from "@/assets/projects/san-miguel.png";
 import HowItWorks from "@/assets/HowItWorks.png";
+import Link from "next/link";
 
 export default function CommunityReferralSection() {
   return (
@@ -49,9 +50,11 @@ export default function CommunityReferralSection() {
               Comienza a recibir retornos mensuales de acuerdo a tu inversión
               una vez se compre propiedad.
             </p>
-            <button className="bg-primary hover:bg-green-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto">
-              Invertir
-            </button>
+            <Link href={"/protected/investments"}>
+              <button className="bg-primary hover:bg-green-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto">
+                Invertir
+              </button>
+            </Link>
           </div>
 
           {/* Referrals Card */}
@@ -63,9 +66,11 @@ export default function CommunityReferralSection() {
               Comienza a recibir retornos mensuales de acuerdo a tu inversión
               una vez se compra propiedad.
             </p>
-            <button className="bg-primary hover:bg-green-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto">
-              Invertir
-            </button>
+            <Link href={"/protected/investments"}>
+              <button className="bg-primary hover:bg-green-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto">
+                Invertir
+              </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,8 +1,12 @@
+"use client";
+
 export default function MapEmbed({ src }: { src: string }) {
   return (
-    <div className="w-full h-64 rounded-lg overflow-hidden">
+    <div className="w-full h-90 rounded-lg overflow-hidden">
       <iframe
-        src={src}
+        src={`https://maps.google.com/maps?q=${encodeURIComponent(
+          src
+        )}&z=15&output=embed`}
         width="100%"
         height="100%"
         className="border-0"

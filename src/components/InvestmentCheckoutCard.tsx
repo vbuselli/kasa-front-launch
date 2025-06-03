@@ -1,15 +1,10 @@
 "use client";
-import Link from "next/link";
-import { FC } from "react";
-
-export type InvestmentCheckoutCardProps = {
-  areaTotal: number;
-  amountToPay: number;
-  operationalFees: number;
-  effectiveInvestment: number;
-  expectedAnnualGain: number;
-  onInvest: () => void;
-};
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { AssetPopulated } from "types/models";
+import { useInvestmentShare } from "context/InvestmentContext";
+import LoaderSpinner from "./ui/LoaderSpinner";
+import ReservationTimer from "./ReservationTimer";
 
 const formatCurrency = (value: number) =>
   `S/ ${value.toLocaleString("en-US", {
@@ -17,71 +12,145 @@ const formatCurrency = (value: number) =>
     maximumFractionDigits: 2,
   })}`;
 
-const InvestmentCheckoutCard: FC<InvestmentCheckoutCardProps> = ({
-  areaTotal,
-  amountToPay,
-  operationalFees,
-  effectiveInvestment,
-  expectedAnnualGain,
-  onInvest,
-}) => {
+export default function InvestmentCheckoutCard({
+  asset_token,
+  loading,
+  toast,
+  isButtonDisabled = false,
+}: {
+  asset_token: AssetPopulated;
+  loading: boolean;
+  toast?: string | null;
+  isButtonDisabled?: boolean;
+}) {
+  const { investmentAmount, commission, setPropertyValue } =
+    useInvestmentShare();
+  const [imgSrc, setImgSrc] = useState<string>();
+
+  const {
+    expires_at,
+    asset: { id, total_price, square_cm, rent_roi, apreciation_roi, name },
+  } = asset_token;
+
+  useEffect(() => {
+    const imagesRequest = async () => {
+      const imagesResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/assets/${id}/images`,
+        {
+          next: {
+            revalidate: 60,
+          },
+        }
+      );
+
+      const images: string[] = await imagesResponse.json();
+      setImgSrc(images[0]);
+    };
+
+    imagesRequest();
+    setPropertyValue(total_price);
+  }, [id, total_price, setPropertyValue]);
+
   return (
-    <div className="max-w-sm bg-white rounded-lg shadow-lg p-6 space-y-4">
-      <h2 className="text-lg font-semibold">Detalle de tu inversión</h2>
+    <>
+      <ReservationTimer endDate={expires_at} />
+      <div className="w-full bg-transparent border text-white border-white rounded-lg shadow-lg p-6 space-y-4">
+        <h2 className="text-xl font-semibold">Detalle de tu inversión</h2>
 
-      <div className="flex justify-between">
-        <span className="text-gray-600">Área total:</span>
-        <span className="font-medium">
-          {areaTotal.toLocaleString()} cm<sup>2</sup>
-        </span>
-      </div>
+        <div className="flex flex-row items-start gap-4 border-b border-white pb-4">
+          <div className="relative w-1/2 h-40 rounded-lg overflow-hidden mb-4">
+            {imgSrc && (
+              <Image
+                src={imgSrc}
+                alt="Proyecto"
+                fill
+                className="object-cover"
+              />
+            )}
+          </div>
 
-      <div className="flex justify-between">
-        <span className="text-gray-600">Monto a pagar:</span>
-        <span className="font-medium text-gray-800">
-          {formatCurrency(amountToPay)}
-        </span>
-      </div>
-
-      <div className="bg-gray-100 p-3 rounded">
-        <p className="text-sm font-medium text-gray-700 mb-1">
-          Gastos operativos:
-        </p>
-        <ul className="list-disc list-inside text-gray-600 text-sm">
-          <li>Gastos legales</li>
-          <li>Gastos por transacción</li>
-          <li>Gasto por servicio Kasa</li>
-        </ul>
-        <div className="mt-2 flex justify-between font-medium text-gray-800">
-          <span>Total:</span>
-          <span>{formatCurrency(operationalFees)}</span>
+          <div className="w-1/2 flex flex-col justify-center">
+            <h3 className="text-xl font-semibold">{name}</h3>
+            <p className="text-base text-gray-300">Lima</p>
+          </div>
         </div>
-      </div>
 
-      <div className="flex justify-between">
-        <span className="text-gray-600">Inversión efectiva:</span>
-        <span className="font-medium text-gray-800">
-          {formatCurrency(effectiveInvestment)}
-        </span>
-      </div>
+        <div className="flex justify-between">
+          <span className="font-medium">Área total:</span>
+          <span className="font-bold">
+            {square_cm} cm<sup>2</sup>
+          </span>
+        </div>
 
-      <div className="flex justify-between">
-        <span className="text-gray-600">Ganancia anual esperada:</span>
-        <span className="font-medium text-gray-800">
-          {formatCurrency(expectedAnnualGain)}
-        </span>
-      </div>
+        <div className="flex justify-between">
+          <div>
+            <p className="font-medium">Ganancia anual esperada:</p>
+            <span className="text-sm text-gray-400">
+              (Alquiler + Apreciación)
+            </span>
+          </div>
+          <span className="font-medium">
+            {formatCurrency(
+              ((rent_roi + apreciation_roi) * investmentAmount) / 100
+            )}
+          </span>
+        </div>
 
-      <Link href={"/success"}>
+        <div className="flex justify-between">
+          <div>
+            <p className="font-medium">Inversión efectiva:</p>
+            <span className="text-sm text-gray-400">
+              (Está será tu inversión final)
+            </span>
+          </div>
+          <span className="font-bold">{formatCurrency(investmentAmount)}</span>
+        </div>
+
+        <div className="flex justify-between">
+          <div>
+            <p className="text-sm font-medium mb-1">Gastos operativos:</p>
+            <ul className="list-disc list-inside text-sm text-gray-400">
+              <li>Gastos legales</li>
+              <li>Gastos por transacción</li>
+              <li>Gasto por servicio Kasa</li>
+            </ul>
+          </div>
+          <span className="font-bold">
+            {!commission ? <LoaderSpinner /> : formatCurrency(commission)}
+          </span>
+        </div>
+
+        <div className="flex justify-between">
+          <span className="font-medium">Monto a pagar:</span>
+          <span className="font-bold">
+            {!commission ? (
+              <LoaderSpinner />
+            ) : (
+              formatCurrency(investmentAmount + commission)
+            )}
+          </span>
+        </div>
+
+        <div className="text-gray-400 text-xs">
+          <sup>*</sup>Recuerda que recibirás tus ganancias por alquiler
+          mensualmente y la ganancia por apreciación cuando se venda el
+          inmueble.
+        </div>
+
+        {toast && (
+          <div className="bg-red-600 text-white px-4 py-2 rounded mb-2 text-center">
+            {toast}
+          </div>
+        )}
+
         <button
-          onClick={onInvest}
-          className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-colors cursor-pointer"
+          type="submit"
+          className="w-full bg-primary hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-colors cursor-pointer disabled:opacity-60"
+          disabled={loading || isButtonDisabled}
         >
-          Invertir
+          {loading ? "Procesando..." : "Invertir"}
         </button>
-      </Link>
-    </div>
+      </div>
+    </>
   );
-};
-
-export default InvestmentCheckoutCard;
+}

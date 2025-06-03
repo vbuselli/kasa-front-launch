@@ -78,7 +78,7 @@ export default function Hero() {
             </span>{" "}
             por alquiler, mientras tu inversión crece con la valorización.
           </p>
-          <Link href="/investments">
+          <Link href="/protected/investments">
             <button className="bg-secondary hover:bg-yellow-300 text-white text-lg uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
               Empieza hoy
             </button>
@@ -96,7 +96,7 @@ export default function Hero() {
               return (
                 <Link
                   key={card.id}
-                  href={`/projects/${card.id}`}
+                  href={`/protected/projects/${card.id}`}
                   className="group block relative rounded-[30px] overflow-hidden shadow-lg ring-2 ring-transparent hover:ring-blue-500 transition"
                 >
                   <MasonryCard heightClass={heightClass} {...card} />

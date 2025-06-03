@@ -1,8 +1,12 @@
 "use client";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 
-export default function ImageGallery({ images }: { images: string[] }) {
+export default function ImageGallery({
+  images,
+}: {
+  images: (string | StaticImageData)[];
+}) {
   const [main, setMain] = useState(images[0]);
 
   return (
@@ -11,9 +15,9 @@ export default function ImageGallery({ images }: { images: string[] }) {
         <Image src={main} alt="Proyecto" fill className="object-cover" />
       </div>
       <div className="flex space-x-2">
-        {images.map((src) => (
+        {images.map((src, idx) => (
           <button
-            key={src}
+            key={"image-" + idx}
             onClick={() => setMain(src)}
             className="relative w-20 h-20 rounded-lg overflow-hidden ring-2 ring-transparent hover:ring-green-400"
           >
