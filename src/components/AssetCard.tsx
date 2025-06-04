@@ -20,6 +20,8 @@ export default function AssetCard({
     ? Math.round((owned_shares / total_shares) * 100)
     : 0;
 
+  const completed = owned_shares === total_shares;
+
   useEffect(() => {
     const fetchImage = async () => {
       try {
@@ -60,7 +62,7 @@ export default function AssetCard({
           <div className="mt-2 h-3 bg-black/60 rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full ${
-                is_bought ? "bg-primary" : "bg-yellow-400"
+                completed ? "bg-primary" : "bg-yellow-400"
               }`}
               style={{ width: `${Math.min(boughtPercent, 100)}%` }}
             />
@@ -72,12 +74,12 @@ export default function AssetCard({
           <button
             className={`mt-4 w-full py-2 flex items-center justify-center text-sm font-medium rounded-md transition-colors group-hover:opacity-90 cursor-pointer
               ${
-                is_bought
+                completed
                   ? "bg-green-500 text-white hover:bg-green-600"
                   : "bg-yellow-400 text-white hover:bg-yellow-500"
               }`}
           >
-            {is_bought ? "COMPLETADO" : "INVERTIR"}
+            {completed ? "COMPLETADO" : "INVERTIR"}
           </button>
         </div>
       </div>

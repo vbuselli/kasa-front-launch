@@ -69,7 +69,7 @@ export default function ProjectInfo({
                 className="mr-2 text-gray-400 flex-shrink-0"
               />
               <span>
-                {b.label}: {b.value}
+                {b.label}: <span className="font-bold">{b.value}</span>
               </span>
             </li>
           ))}

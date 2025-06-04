@@ -95,6 +95,7 @@ export default function ProjectPage() {
     apreciation_roi,
     rent_roi,
     total_shares,
+    project_duration,
   } = project;
 
   const addressDetails = highlights ? highlights.split(",") : [];
@@ -110,6 +111,21 @@ export default function ProjectPage() {
     },
   ];
 
+  const breakdown = [
+    {
+      label: "Rentabilidad por alquiler",
+      value: `${rent_roi}%`,
+    },
+    {
+      label: "Rentabilidad por apreciación",
+      value: `${apreciation_roi}%`,
+    },
+    {
+      label: "Duración del proyecto",
+      value: `${project_duration} años`,
+    },
+  ];
+
   return (
     <section className="bg-foreground text-white px-8 py-12 rounded-tl-[30px] flex-1">
       <ProjectHeader title={name} />
@@ -122,6 +138,8 @@ export default function ProjectPage() {
             address={address}
             addressDetails={addressDetails}
             details={details}
+            profitability={rent_roi + apreciation_roi}
+            breakdown={breakdown}
           />
         </div>
 

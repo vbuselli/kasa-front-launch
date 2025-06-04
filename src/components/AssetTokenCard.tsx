@@ -32,12 +32,14 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
   const {
     id,
     state,
-    asset: { name, address, is_bought, total_shares, owned_shares },
+    asset: { name, address, total_shares, owned_shares },
   } = assetToken;
 
   const boughtPercent = owned_shares
     ? Math.round((owned_shares / total_shares) * 100)
     : 0;
+
+  const completed = owned_shares === total_shares;
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -100,7 +102,7 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
         <div className="mt-2 h-3 bg-black/60 rounded-full overflow-hidden">
           <div
             className={`h-full rounded-full ${
-              is_bought ? "bg-primary" : "bg-yellow-400"
+              completed ? "bg-primary" : "bg-yellow-400"
             }`}
             style={{ width: `${Math.min(boughtPercent, 100)}%` }}
           />

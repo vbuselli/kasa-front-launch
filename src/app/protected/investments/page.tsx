@@ -33,8 +33,10 @@ export default function InvestmentsPage() {
   }, []);
 
   const sortedAssets = [...assets].sort((a, b) => {
-    if (a.is_bought === b.is_bought) return 0;
-    return a.is_bought ? 1 : -1;
+    const aFinished = a.owned_shares === a.total_shares;
+    const bFinished = b.owned_shares === b.total_shares;
+    if (aFinished === bFinished) return 0;
+    return aFinished ? 1 : -1;
   });
 
   return (
