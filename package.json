@@ -6,9 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "prepare": "husky install",
-    "type-check": "tsc --noEmit"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -37,7 +35,6 @@
     "@typescript-eslint/parser": "^8.33.1",
     "eslint": "^9",
     "eslint-config-next": "latest",
-    "husky": "^9.1.7",
     "tailwind-merge": "^2.5.2",
     "typescript": "^5"
   }

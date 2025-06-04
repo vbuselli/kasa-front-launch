@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import InvestmentCheckoutCard from "@/components/InvestmentCheckoutCard";
 import InvestmentDetails from "@/components/InvestmentDetails";
 import { AssetPopulated } from "types/models";
@@ -7,6 +7,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
+import { useRouter as useRoute } from "next/router";
 
 const schema = yup.object().shape({
   transaction_number: yup.string().required("Transaction Number requerido"),
@@ -29,12 +30,9 @@ const schema = yup.object().shape({
 
 export type InvestmentFormValues = yup.InferType<typeof schema>;
 
-export default function CheckoutPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = use(params);
+export default function CheckoutPage() {
+  const route = useRoute();
+  const id = route.query.id as string;
   const [assetToken, setAssetToken] = useState<AssetPopulated | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
