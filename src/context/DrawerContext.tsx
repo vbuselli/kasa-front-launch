@@ -1,11 +1,15 @@
 "use client";
+import AssetTokenDrawerContent from "@/components/AssetTokenDrawerContent";
+import AssetTokenPendingDrawerContent from "@/components/AssetTokenPendingDrawerContent";
 import Drawer from "@/components/ui/Drawer";
 import React, { createContext, useContext, useState, ReactNode } from "react";
+import { AssetPopulated } from "types/models";
 
 type DrawerContextType = {
   isOpen: boolean;
-  openDrawer: () => void;
+  openDrawer: (asset?: AssetPopulated) => void;
   closeDrawer: () => void;
+  asset_token?: AssetPopulated;
 };
 
 const DrawerContext = createContext<DrawerContextType | undefined>(undefined);
@@ -19,14 +23,41 @@ export function useDrawer() {
 
 export function DrawerProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [assetToken, setAssetToken] = useState<AssetPopulated | undefined>();
 
-  const openDrawer = () => setIsOpen(true);
+  const openDrawer = (asset?: AssetPopulated) => {
+    setAssetToken(asset);
+    setIsOpen(true);
+  };
   const closeDrawer = () => setIsOpen(false);
 
   return (
-    <DrawerContext.Provider value={{ isOpen, openDrawer, closeDrawer }}>
+    <DrawerContext.Provider
+      value={{
+        isOpen,
+        openDrawer,
+        closeDrawer,
+        asset_token: assetToken,
+      }}
+    >
       {children}
-      <Drawer isOpen={isOpen} onClose={closeDrawer} />
+      <Drawer isOpen={isOpen} onClose={closeDrawer}>
+        {assetToken && (
+          <>
+            {assetToken.state === "settled" && (
+              <AssetTokenDrawerContent assetToken={assetToken} />
+            )}
+            {["pre-funding", "kyc", "documents_pending"].includes(
+              assetToken.state
+            ) && (
+              <AssetTokenPendingDrawerContent
+                assetToken={assetToken}
+                closeDrawer={closeDrawer}
+              />
+            )}
+          </>
+        )}
+      </Drawer>
     </DrawerContext.Provider>
   );
 }

@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import HowItWorks from "@/assets/HowItWorks.png";
 import { Asset } from "types/models";
-import ProjectCard from "@/components/ProjectCard";
+import AssetCard from "@/components/AssetCard";
+import Loader from "@/components/ui/Loader";
 
 export default function InvestmentsPage() {
   const [assets, setAssets] = useState<Asset[]>([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAssets = async () => {
@@ -18,19 +20,22 @@ export default function InvestmentsPage() {
         );
         if (!res.ok) {
           setError(true);
+          setLoading(false);
           return;
         }
         const data = await res.json();
         setAssets(data);
       } catch {
         setError(true);
+      } finally {
+        setLoading(false);
       }
     };
     fetchAssets();
   }, []);
 
   return (
-    <section className="relative py-16 bg-foreground text-white px-16 rounded-tl-[30px]">
+    <section className="relative py-16 bg-foreground text-white px-16 rounded-tl-[30px] flex-1">
       <div className="container mx-auto">
         <div className="flex flex-col items-center justify-center mb-8 w-full">
           <h2 className="text-4xl font-bold">
@@ -54,13 +59,21 @@ export default function InvestmentsPage() {
               height={80}
             />
           </div>
-          {error ? (
+          {loading ? (
+            <Loader />
+          ) : error ? (
             <p>Error al cargar assets.</p>
           ) : (
-            assets.map((proj) => <ProjectCard key={proj.id} {...proj} />)
+            assets.map((proj) => <AssetCard key={proj.id} {...proj} />)
           )}
         </div>
       </div>
+      <style jsx>{`
+        .loader {
+          display: inline-block;
+          border-style: solid;
+        }
+      `}</style>
     </section>
   );
 }

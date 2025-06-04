@@ -43,7 +43,7 @@ export default function Drawer({
           ✕
         </button>
         <div className="p-6 pt-12 sm:pt-10 h-full overflow-y-auto">
-          {children || <span className="text-white">Contenido del Drawer</span>}
+          {children}
         </div>
       </div>
     </>

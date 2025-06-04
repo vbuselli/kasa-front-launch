@@ -12,13 +12,9 @@ export async function GET() {
       error: userError,
     } = await supabase.auth.getUser();
 
-    console.log("User:", user);
-
     if (userError || !user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    console.log("Fetching asset tokens for user:", user.id);
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const accessToken = (await supabase.auth.getSession()).data.session

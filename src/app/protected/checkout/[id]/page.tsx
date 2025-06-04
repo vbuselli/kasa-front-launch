@@ -6,7 +6,8 @@ import { AssetPopulated } from "types/models";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/router";
+import { useParams, useRouter } from "next/navigation";
+import Loader from "@/components/ui/Loader";
 
 const schema = yup.object().shape({
   transaction_number: yup.string().required("Transaction Number requerido"),
@@ -30,8 +31,9 @@ const schema = yup.object().shape({
 export type InvestmentFormValues = yup.InferType<typeof schema>;
 
 export default function CheckoutPage() {
+  const params = useParams();
   const router = useRouter();
-  const id = router.query.id as string;
+  const id = params.id as string;
   const [assetToken, setAssetToken] = useState<AssetPopulated | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -112,7 +114,7 @@ export default function CheckoutPage() {
       {error ? (
         <p className="text-white">{error}</p>
       ) : !assetToken ? (
-        <p className="text-white">Cargando...</p>
+        <Loader />
       ) : (
         <FormProvider {...methods}>
           <form

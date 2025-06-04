@@ -7,14 +7,16 @@ import ProjectInfo from "@/components/ProjectInfo";
 import InvestmentCalculator from "@/components/InvestmentCalculator";
 import MapEmbed from "@/components/MapEmbed";
 import { Asset } from "types/models";
-import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
+import Loader from "@/components/ui/Loader";
 
 export default function ProjectPage() {
-  const router = useRouter();
-  const id = router.query.id as string;
+  const params = useParams();
+  const id = params.id as string;
   const [project, setProject] = useState<Asset | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -47,16 +49,37 @@ export default function ProjectPage() {
       }
     };
 
-    fetchProject();
-    fetchImages();
+    const fetchAll = async () => {
+      setLoading(true);
+      await Promise.all([fetchProject(), fetchImages()]);
+      setLoading(false);
+    };
+
+    fetchAll();
   }, [id]);
 
   if (error) {
-    return <p>Error al cargar el proyecto.</p>;
+    return (
+      <section className="bg-foreground text-white px-8 py-12 rounded-tl-[30px] flex-1">
+        <p>Error al cargar el proyecto.</p>
+      </section>
+    );
+  }
+
+  if (loading) {
+    return (
+      <section className="bg-foreground text-white px-8 py-12 rounded-tl-[30px] flex-1">
+        <Loader />
+      </section>
+    );
   }
 
   if (!project) {
-    return <p>Cargando...</p>;
+    return (
+      <section className="bg-foreground text-white px-8 py-12 rounded-tl-[30px] flex-1">
+        <p>No se encontró el proyecto.</p>
+      </section>
+    );
   }
 
   const {
@@ -88,7 +111,7 @@ export default function ProjectPage() {
   ];
 
   return (
-    <section className="bg-foreground text-white px-8 py-12 rounded-tl-[30px]">
+    <section className="bg-foreground text-white px-8 py-12 rounded-tl-[30px] flex-1">
       <ProjectHeader title={name} />
 
       <div className="grid lg:grid-cols-2 gap-12">

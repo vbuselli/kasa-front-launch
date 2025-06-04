@@ -5,21 +5,15 @@ export async function GET() {
   try {
     const supabase = await createClient();
 
-    // Get user session
     const {
       data: { user },
       error: userError,
     } = await supabase.auth.getUser();
 
-    console.log("User:", user);
-
     if (userError || !user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    console.log("Fetching asset tokens for user:", user.id);
-
-    // Fetch user's asset tokens with asset details
     const { data: tokens, error: tokensError } = await supabase
       .from("asset_tokens")
       .select("*")
@@ -48,23 +42,18 @@ export async function POST(req: NextRequest) {
   try {
     const supabase = await createClient();
 
-    // Get user session
     const {
       data: { user },
       error: userError,
     } = await supabase.auth.getUser();
 
-    console.log("User:", user);
-
     if (userError || !user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Parse request body
     const body = await req.json();
     const { asset_id, num_shares } = body;
 
-    // Validate input
     if (!asset_id || !num_shares) {
       return NextResponse.json(
         { error: "Missing required fields: asset_id and num_shares" },
@@ -79,7 +68,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Call the Supabase Edge Function to create asset token
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const response = await fetch(
       `${supabaseUrl}/functions/v1/create-asset-token`,

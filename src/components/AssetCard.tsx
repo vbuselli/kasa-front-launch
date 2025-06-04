@@ -2,25 +2,19 @@
 import Link from "next/link";
 import { Asset } from "types/models";
 import Image from "next/image";
-import { useState } from "react";
-import { useDrawer } from "context/DrawerContext";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
-export type ProjectCardProps = Asset & {
-  isFromPortfolio?: boolean;
-};
+export type AssetCardProps = Asset;
 
-export default function ProjectCard({
+export default function AssetCard({
   id,
   name,
   address,
   is_bought,
   total_shares,
   owned_shares,
-  isFromPortfolio = false,
-}: ProjectCardProps) {
+}: AssetCardProps) {
   const [currentSrc, setCurrentSrc] = useState<string>();
-  const { openDrawer } = useDrawer();
 
   const boughtPercent = owned_shares
     ? Math.round((owned_shares / total_shares) * 100)
@@ -41,7 +35,6 @@ export default function ProjectCard({
         if (imagesResponse.ok) {
           const images: string[] = await imagesResponse.json();
           setCurrentSrc(images[0]);
-        } else {
         }
       } catch {}
     };
@@ -74,29 +67,18 @@ export default function ProjectCard({
         <p className="mt-1 text-xs text-gray-200 font-semibold">
           {boughtPercent}% comprado
         </p>
-        {isFromPortfolio ? (
-          <>
-            <button
-              className="mt-4 w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2 rounded-lg cursor-pointer"
-              onClick={() => openDrawer()}
-            >
-              Ver inversión
-            </button>
-          </>
-        ) : (
-          <Link href={`/protected/projects/${id}`}>
-            <button
-              className={`mt-4 w-full py-2 flex items-center justify-center text-sm font-medium rounded-md transition-colors group-hover:opacity-90 cursor-pointer
+        <Link href={`/protected/projects/${id}`}>
+          <button
+            className={`mt-4 w-full py-2 flex items-center justify-center text-sm font-medium rounded-md transition-colors group-hover:opacity-90 cursor-pointer
             ${
               is_bought
                 ? "bg-green-500 text-white hover:bg-green-600"
                 : "bg-yellow-400 text-white hover:bg-yellow-500"
             }`}
-            >
-              {is_bought ? "COMPLETADO" : "INVERTIR"}
-            </button>
-          </Link>
-        )}
+          >
+            {is_bought ? "COMPLETADO" : "INVERTIR"}
+          </button>
+        </Link>
       </div>
     </div>
   );
