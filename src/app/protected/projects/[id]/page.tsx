@@ -4,11 +4,13 @@ import ProjectInfo from "@/components/ProjectInfo";
 import InvestmentCalculator from "@/components/InvestmentCalculator";
 import MapEmbed from "@/components/MapEmbed";
 import { Asset } from "types/models";
-import { useRouter } from "next/router";
 
-export default async function ProjectPage() {
-  const router = useRouter();
-  const id = router.query.id as string;
+export default async function ProjectPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = await params;
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_APP_URL}/api/assets/${id}`,
