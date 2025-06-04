@@ -19,7 +19,7 @@ export default async function Signup(props: {
     <>
       <form className="flex flex-col min-w-64 max-w-64 mx-auto">
         <h1 className="text-2xl font-medium">Sign up</h1>
-        <p className="text-sm text text-foreground">
+        <p className="text-sm text">
           Already have an account?{" "}
           <Link className="text-primary font-medium underline" href="/sign-in">
             Sign in
@@ -31,6 +31,7 @@ export default async function Signup(props: {
             type="email"
             name="email"
             placeholder="you@example.com"
+            className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
             required
           />
           <label htmlFor="password">Password</label>
@@ -39,6 +40,7 @@ export default async function Signup(props: {
             name="password"
             placeholder="Your password"
             minLength={6}
+            className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
             required
           />
           <SubmitButton formAction={signUpAction} pendingText="Signing up...">

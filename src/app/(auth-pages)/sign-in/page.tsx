@@ -8,9 +8,9 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
   return (
     <form className="flex-1 flex flex-col min-w-64">
       <h1 className="text-2xl font-medium">Sign in</h1>
-      <p className="text-sm text-foreground">
+      <p className="text-sm">
         Don&apos;t have an account?{" "}
-        <Link className="text-foreground font-medium underline" href="/sign-up">
+        <Link className="font-medium underline" href="/sign-up">
           Sign up
         </Link>
       </p>
@@ -20,6 +20,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
           type="email"
           name="email"
           placeholder="you@example.com"
+          className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
           required
         />
         <div className="flex justify-between items-center">
@@ -35,6 +36,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
           type="password"
           name="password"
           placeholder="Your password"
+          className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
           required
         />
         <SubmitButton pendingText="Signing In..." formAction={signInAction}>
