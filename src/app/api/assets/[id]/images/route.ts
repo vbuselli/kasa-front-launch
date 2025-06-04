@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest) {
   try {
-    const { id } = await params;
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id") || "";
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const response = await fetch(
       `${supabaseUrl}/functions/v1/get-images?bucket=asset-images&folder=${id}`,
