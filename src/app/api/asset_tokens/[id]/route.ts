@@ -16,8 +16,8 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = params;
-
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id") || "";
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const url = new URL(`${supabaseUrl}/functions/v1/get-asset-token-by-id`);
     url.searchParams.append("id", id);
