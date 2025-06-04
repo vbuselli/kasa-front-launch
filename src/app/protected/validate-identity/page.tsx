@@ -113,10 +113,11 @@ export default function ValidateIdentityPage() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-2 w-full">
             <div>
-              <label className="block mb-1 font-medium">
+              <label htmlFor="document_type" className="block mb-1 font-medium">
                 Tipo de documento
               </label>
               <select
+                id="document_type"
                 {...register("document_type")}
                 className="w-full border rounded px-3 py-2"
               >
@@ -132,10 +133,14 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">
+              <label
+                htmlFor="document_number"
+                className="block mb-1 font-medium"
+              >
                 Número de documento
               </label>
               <input
+                id="document_number"
                 type="text"
                 {...register("document_number")}
                 className="w-full border rounded px-3 py-2"
@@ -147,8 +152,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">Nombres</label>
+              <label htmlFor="names_first" className="block mb-1 font-medium">
+                Nombres
+              </label>
               <input
+                id="names_first"
                 type="text"
                 {...register("names_first")}
                 className="w-full border rounded px-3 py-2"
@@ -160,8 +168,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">Apellidos</label>
+              <label htmlFor="names_last" className="block mb-1 font-medium">
+                Apellidos
+              </label>
               <input
+                id="names_last"
                 type="text"
                 {...register("names_last")}
                 className="w-full border rounded px-3 py-2"
@@ -173,8 +184,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">Género</label>
+              <label htmlFor="gender" className="block mb-1 font-medium">
+                Género
+              </label>
               <select
+                id="gender"
                 {...register("gender")}
                 className="w-full border rounded px-3 py-2"
               >
@@ -189,8 +203,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">Celular</label>
+              <label htmlFor="phone_number" className="block mb-1 font-medium">
+                Celular
+              </label>
               <input
+                id="phone_number"
                 type="text"
                 {...register("phone_number")}
                 className="w-full border rounded px-3 py-2"
@@ -202,8 +219,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">Dirección</label>
+              <label htmlFor="address" className="block mb-1 font-medium">
+                Dirección
+              </label>
               <input
+                id="address"
                 type="text"
                 {...register("address")}
                 className="w-full border rounded px-3 py-2"
@@ -215,8 +235,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">Nacionalidad</label>
+              <label htmlFor="nationality" className="block mb-1 font-medium">
+                Nacionalidad
+              </label>
               <input
+                id="nationality"
                 type="text"
                 {...register("nationality")}
                 className="w-full border rounded px-3 py-2"
@@ -228,8 +251,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">País</label>
+              <label htmlFor="country" className="block mb-1 font-medium">
+                País
+              </label>
               <input
+                id="country"
                 type="text"
                 {...register("country")}
                 className="w-full border rounded px-3 py-2"
@@ -241,8 +267,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">Región</label>
+              <label htmlFor="region" className="block mb-1 font-medium">
+                Región
+              </label>
               <input
+                id="region"
                 type="text"
                 {...register("region")}
                 className="w-full border rounded px-3 py-2"
@@ -254,8 +283,14 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">Número de cuenta</label>
+              <label
+                htmlFor="account_number"
+                className="block mb-1 font-medium"
+              >
+                Número de cuenta
+              </label>
               <input
+                id="account_number"
                 type="text"
                 {...register("account_number")}
                 className="w-full border rounded px-3 py-2"
@@ -267,8 +302,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">CCI</label>
+              <label htmlFor="cci" className="block mb-1 font-medium">
+                CCI
+              </label>
               <input
+                id="cci"
                 type="text"
                 {...register("cci")}
                 className="w-full border rounded px-3 py-2"
@@ -280,10 +318,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">
+              <label htmlFor="front" className="block mb-1 font-medium">
                 Foto frontal del documento
               </label>
               <input
+                id="front"
                 type="file"
                 accept="image/*"
                 {...register("front")}
@@ -296,10 +335,11 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium">
+              <label htmlFor="back" className="block mb-1 font-medium">
                 Foto posterior del documento
               </label>
               <input
+                id="back"
                 type="file"
                 accept="image/*"
                 {...register("back")}
