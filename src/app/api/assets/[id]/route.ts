@@ -22,7 +22,6 @@ export async function GET(request: NextRequest) {
 
     const data = await response.json();
 
-    // Find the asset by ID
     const asset = data.find((item: { id: string }) => item.id === id);
 
     return NextResponse.json(asset);

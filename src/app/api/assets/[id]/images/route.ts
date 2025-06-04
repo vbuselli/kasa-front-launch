@@ -15,10 +15,6 @@ export async function GET(request: NextRequest) {
       }
     );
 
-    console.log(
-      `${supabaseUrl}/functions/v1/get-images?bucket=asset-images&folder=${id}`
-    );
-
     if (!response.ok) {
       const errorData = await response.json();
       return NextResponse.json(

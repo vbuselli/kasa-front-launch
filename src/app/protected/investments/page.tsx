@@ -1,16 +1,33 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import HowItWorks from "@/assets/HowItWorks.png";
 import { Asset } from "types/models";
 import ProjectCard from "@/components/ProjectCard";
 
-export default async function InvestmentsPage() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/assets`, {
-    next: {
-      revalidate: 60,
-    },
-  });
+export default function InvestmentsPage() {
+  const [assets, setAssets] = useState<Asset[]>([]);
+  const [error, setError] = useState(false);
 
-  const assets: Asset[] = await res.json();
+  useEffect(() => {
+    const fetchAssets = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_APP_URL}/api/assets`
+        );
+        if (!res.ok) {
+          setError(true);
+          return;
+        }
+        const data = await res.json();
+        setAssets(data);
+      } catch {
+        setError(true);
+      }
+    };
+    fetchAssets();
+  }, []);
 
   return (
     <section className="relative py-16 bg-foreground text-white px-16 rounded-tl-[30px]">
@@ -37,7 +54,7 @@ export default async function InvestmentsPage() {
               height={80}
             />
           </div>
-          {!res.ok ? (
+          {error ? (
             <p>Error al cargar assets.</p>
           ) : (
             assets.map((proj) => <ProjectCard key={proj.id} {...proj} />)
