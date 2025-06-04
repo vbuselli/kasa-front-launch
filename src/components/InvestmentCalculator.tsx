@@ -84,7 +84,7 @@ export default function InvestmentCalculator({
             type="number"
             value={investment}
             onChange={(e) => setInvestment(Number(e.target.value))}
-            className="w-full pl-14 pr-4 py-3 rounded-md bg-background text-foreground text-center"
+            className="w-full pl-14 pr-4 py-3 rounded-md bg-white text-foreground text-center"
             min={minimumInvestment}
           />
         </div>

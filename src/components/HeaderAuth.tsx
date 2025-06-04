@@ -15,7 +15,7 @@ export default async function AuthButton() {
       <form action={signOutAction}>
         <button
           type="submit"
-          className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors"
+          className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer"
         >
           Sign out
         </button>
@@ -23,10 +23,10 @@ export default async function AuthButton() {
     </div>
   ) : (
     <div className="flex gap-2">
-      <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors">
+      <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer">
         <Link href="/sign-in">Sign in</Link>
       </button>
-      <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors">
+      <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer">
         <Link href="/sign-up">Sign up</Link>
       </button>
     </div>

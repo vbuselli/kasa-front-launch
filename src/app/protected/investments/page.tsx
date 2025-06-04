@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import HowItWorks from "@/assets/HowItWorks.png";
 import { Asset } from "types/models";
 import AssetCard from "@/components/AssetCard";
 import Loader from "@/components/ui/Loader";
@@ -34,6 +32,11 @@ export default function InvestmentsPage() {
     fetchAssets();
   }, []);
 
+  const sortedAssets = [...assets].sort((a, b) => {
+    if (a.is_bought === b.is_bought) return 0;
+    return a.is_bought ? 1 : -1;
+  });
+
   return (
     <section className="relative py-16 bg-foreground text-white px-16 rounded-tl-[30px] flex-1">
       <div className="container mx-auto">
@@ -47,33 +50,15 @@ export default function InvestmentsPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-          <div
-            className="absolute -top-7 -right-7 transform z-1 rounded-full shadow-lg flex items-center justify-center"
-            aria-label="Cómo funciona"
-          >
-            <Image
-              src={HowItWorks}
-              alt={"Cómo funciona Kasa"}
-              className="text-white"
-              width={80}
-              height={80}
-            />
-          </div>
           {loading ? (
             <Loader />
           ) : error ? (
             <p>Error al cargar assets.</p>
           ) : (
-            assets.map((proj) => <AssetCard key={proj.id} {...proj} />)
+            sortedAssets.map((proj) => <AssetCard key={proj.id} {...proj} />)
           )}
         </div>
       </div>
-      <style jsx>{`
-        .loader {
-          display: inline-block;
-          border-style: solid;
-        }
-      `}</style>
     </section>
   );
 }

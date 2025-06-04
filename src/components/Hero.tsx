@@ -96,7 +96,7 @@ export default function Hero() {
               return (
                 <Link
                   key={card.id}
-                  href={`/protected/projects/${card.id}`}
+                  href={`/protected/investments/${card.id}`}
                   className="group block relative rounded-[30px] overflow-hidden shadow-lg ring-2 ring-transparent hover:ring-blue-500 transition"
                 >
                   <MasonryCard heightClass={heightClass} {...card} />
