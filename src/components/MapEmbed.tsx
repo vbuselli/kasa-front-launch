@@ -13,6 +13,7 @@ export default function MapEmbed({ src }: { src: string }) {
         allowFullScreen
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
+        title={`Google Map location: ${src}`}
       />
     </div>
   );
