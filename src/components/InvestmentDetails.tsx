@@ -77,17 +77,17 @@ export default function InvestmentDetails({
         {terms && ownership && showAccount && (
           <div className="space-y-4 mt-6">
             <div>
-              <label className="block text-sm font-medium mb-1">Banco</label>
+              <span className="block text-sm font-medium mb-1">Banco</span>
               <div className="px-3 py-2">{asset_token.asset.bank_name}</div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">CCI</label>
+              <span className="block text-sm font-medium mb-1">CCI</span>
               <div className="px-3 py-2">{asset_token.asset.bank_cci}</div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <span className="block text-sm font-medium mb-1">
                 Número de cuenta
-              </label>
+              </span>
               <div className="px-3 py-2">
                 {asset_token.asset.bank_number_account}
               </div>
