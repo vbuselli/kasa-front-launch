@@ -1,8 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { AssetPopulated } from "types/models";
 
-export default function InvestmentDetails() {
+export default function InvestmentDetails({
+  asset_token,
+}: {
+  asset_token: AssetPopulated;
+}) {
   const [terms, setTerms] = useState(false);
   const [ownership, setOwnership] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
@@ -11,6 +16,8 @@ export default function InvestmentDetails() {
     register,
     formState: { errors },
   } = useFormContext();
+
+  console.log("Asset Token:", asset_token);
 
   return (
     <div className="mb-8 bg-transparent rounded-md border border-white text-white p-6">
@@ -69,6 +76,22 @@ export default function InvestmentDetails() {
 
         {terms && ownership && showAccount && (
           <div className="space-y-4 mt-6">
+            <div>
+              <label className="block text-sm font-medium mb-1">Banco</label>
+              <div className="px-3 py-2">{asset_token.asset.bank_name}</div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">CCI</label>
+              <div className="px-3 py-2">{asset_token.asset.bank_cci}</div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Número de cuenta
+              </label>
+              <div className="px-3 py-2">
+                {asset_token.asset.bank_number_account}
+              </div>
+            </div>
             <div>
               <label
                 className="block text-sm font-medium mb-2"

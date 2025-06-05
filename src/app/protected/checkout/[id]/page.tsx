@@ -123,7 +123,7 @@ export default function CheckoutPage() {
             autoComplete="off"
           >
             <div>
-              <InvestmentDetails />
+              <InvestmentDetails asset_token={assetToken} />
             </div>
             <div>
               <InvestmentCheckoutCard
