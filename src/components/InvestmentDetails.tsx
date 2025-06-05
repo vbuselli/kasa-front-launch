@@ -17,8 +17,6 @@ export default function InvestmentDetails({
     formState: { errors },
   } = useFormContext();
 
-  console.log("Asset Token:", asset_token);
-
   return (
     <div className="mb-8 bg-transparent rounded-md border border-white text-white p-6">
       <h2 className="text-xl font-semibold mb-4">Datos para transferencia</h2>

@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FAQSection from "@/components/FAQ";
 import { DrawerProvider } from "context/DrawerContext";
+import { CartProvider } from "context/CartContext";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -42,12 +43,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} relative`}
       >
         <DrawerProvider>
-          <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col">
-            <Navbar />
-            <main className="flex-1 flex flex-col">{children}</main>
-            <FAQSection />
-            <Footer />
-          </div>
+          <CartProvider>
+            <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col">
+              <Navbar />
+              <main className="flex-1 flex flex-col">{children}</main>
+              <FAQSection />
+              <Footer />
+            </div>
+          </CartProvider>
         </DrawerProvider>
       </body>
     </html>
