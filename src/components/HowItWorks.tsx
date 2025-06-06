@@ -57,12 +57,12 @@ export default function HowItWorksSection() {
           <span className="text-primary">sin papeleos”</span>
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-[55%_50%] items-center overflow-visible">
-          <div className="bg-foreground pl-10 pr-20 py-14 rounded-3xl space-y-10 shadow-button">
+          <div className="bg-foreground rounded-3xl shadow-button order-2 lg:order-1 mt-5 lg:mt-0">
             {steps.map((step) => (
               <React.Fragment key={step.num}>
                 {step.num === "2" ? (
-                  <div className="flex items-start space-x-4 w-[calc(100%+7rem)]">
-                    <div className="relative bg-primary p-10 rounded-tl-[30px] rounded-bl-[30px] -left-20 shadow-hero overflow-visible">
+                  <div className="flex items-start space-x-4 lg:w-[calc(100%+7rem)] lg:pl-10 lg:pr-20">
+                    <div className="relative bg-primary p-14 lg:p-10 lg:rounded-tl-[30px] lg:rounded-bl-[30px] lg:-left-20 shadow-hero overflow-visible">
                       <h3 className="text-3xl font-extrabold uppercase text-foreground mb-1">
                         {step.num}. {step.title}
                       </h3>
@@ -72,7 +72,7 @@ export default function HowItWorksSection() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-start space-x-4">
+                  <div className="flex items-start space-x-4 p-14 pr-20">
                     <div>
                       <h3 className="text-3xl font-extrabold uppercase text-white mb-1">
                         {step.num}. {step.title}
@@ -87,7 +87,7 @@ export default function HowItWorksSection() {
             ))}
           </div>
 
-          <div className="relative overflow-visible h-full -left-12">
+          <div className="relative overflow-visible h-full lg:-left-12 order-1 lg:order-2">
             <Image
               src={HowItWorks}
               alt="Ilustración Cómo funciona"

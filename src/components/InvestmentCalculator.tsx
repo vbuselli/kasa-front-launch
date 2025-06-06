@@ -1,7 +1,7 @@
 "use client";
 import { useInvestmentShare } from "context/InvestmentContext";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function InvestmentCalculator({
   id,
@@ -23,20 +23,20 @@ export default function InvestmentCalculator({
   const [terms, setTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState(minimumInvestment);
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
   const { setInvestmentAmount } = useInvestmentShare();
   const router = useRouter();
 
   const handlePreset = (val: number) => {
-    setInvestment(val);
+    setInputValue(val);
   };
 
   const createAssetToken = async () => {
-    setInvestmentAmount(investment);
+    setInvestmentAmount(inputValue);
     setLoading(true);
     setToast(null);
     try {
-      const num_shares = Math.floor(investment / 100);
-
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_APP_URL}/api/asset_tokens`,
         {
@@ -46,7 +46,7 @@ export default function InvestmentCalculator({
           },
           body: JSON.stringify({
             asset_id: id,
-            num_shares: num_shares,
+            num_shares: investment,
           }),
         }
       );
@@ -67,6 +67,23 @@ export default function InvestmentCalculator({
     }
   };
 
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    debounceRef.current = setTimeout(() => {
+      let value = Number(inputValue);
+      if (isNaN(value) || value < 2000) value = 2000;
+      value = Math.floor(value / 100) * 100;
+      setInputValue(value);
+      const floored = Math.floor(value / 100);
+      setInvestment(floored);
+    }, 1000);
+
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [inputValue]);
+
   return (
     <div className="bg-foreground p-6 rounded-lg border border-white space-y-4">
       <h2 className="text-xl font-bold text-white">Calculadora de Inversión</h2>
@@ -82,8 +99,8 @@ export default function InvestmentCalculator({
           </span>
           <input
             type="number"
-            value={investment}
-            onChange={(e) => setInvestment(Number(e.target.value))}
+            value={inputValue}
+            onChange={(e) => setInputValue(Number(e.target.value))}
             className="w-full pl-14 pr-4 py-3 rounded-md bg-white text-foreground text-center"
             min={minimumInvestment}
           />
@@ -97,7 +114,7 @@ export default function InvestmentCalculator({
             type="button"
             onClick={() => handlePreset(p)}
             className={`flex-1 py-0 border rounded-md transition-colors font-semibold ${
-              investment === p
+              inputValue === p
                 ? "bg-yellow-400 text-gray-900 border-yellow-400"
                 : "bg-transparent border-primary text-primary hover:bg-yellow-100"
             }`}
@@ -112,7 +129,7 @@ export default function InvestmentCalculator({
           Con esa inversión podrás adquirir:
         </p>
         <p className="text-foreground font-bold flex-1 py-4 bg-primary hover:bg-green-500 rounded-md text-center text-3xl">
-          {((area * Math.floor(investment / 100)) / totalShares).toFixed(2)} cm
+          {((area * Math.floor(inputValue / 100)) / totalShares).toFixed(2)} cm
           <sup className="text-sm align-super">2</sup>
         </p>
       </div>
@@ -125,18 +142,18 @@ export default function InvestmentCalculator({
           <div className="bg-primary text-foreground p-4 rounded-md">
             <div className="text-sm font-semibold">De alquiler:</div>
             <div className="text-3xl font-bold text-center my-2">
-              S/{((rentGain * investment) / 100).toFixed(2)}{" "}
+              S/{((rentGain * inputValue) / 100).toFixed(2)}{" "}
               <span className="text-sm">Anual</span>
             </div>
             <p className="text-sm font-semibold text-center">
-              Puedes recibir S/ {((rentGain * investment) / 1200).toFixed(2)}{" "}
+              Puedes recibir S/ {((rentGain * inputValue) / 1200).toFixed(2)}{" "}
               mensual o solicitar reinvertirlo
             </p>
           </div>
           <div className="bg-primary text-foreground p-4 rounded-md">
             <div className="text-sm font-semibold">De apreciación:</div>
             <div className="text-3xl font-bold text-center my-2">
-              S/{((appGain * investment) / 100).toFixed(2)}{" "}
+              S/{((appGain * inputValue) / 100).toFixed(2)}{" "}
               <span className="text-sm">Anual</span>
             </div>
             <p className="text-sm font-semibold text-center">

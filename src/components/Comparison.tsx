@@ -39,7 +39,7 @@ const columns = [
 
 export default function ComparisonSection() {
   return (
-    <section className="bg-foreground px-12 relative pb-8">
+    <section className="bg-foreground px-12 relative pb-8 hidden lg:block">
       <button className="bg-primary text-foreground text-base px-10 py-3 rounded-[10px] font-bold mr-6 absolute left-18 top-3 transition hover:bg-primary/90">
         KASA VS OTROS
       </button>

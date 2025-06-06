@@ -68,7 +68,7 @@ export default function ProjectPage() {
 
   if (loading) {
     return (
-      <section className="bg-foreground text-white px-8 py-12 rounded-tl-[30px] flex-1">
+      <section className="bg-foreground text-white px-8 py-12 rounded-tl-[30px] flex-1 flex items-center justify-center">
         <Loader />
       </section>
     );

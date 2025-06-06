@@ -16,26 +16,31 @@ export default function AuthButton() {
   }, []);
 
   return user ? (
-    <div className="flex items-center gap-4 text-white">
-      Hey, {user.email}!
+    <div className="flex items-center gap-4 text-white ml-2">
+      <span
+        className="max-w-[150px] truncate inline-block align-middle"
+        title={user.email}
+      >
+        Hey, {user.email}!
+      </span>
       <form action={signOutAction}>
         <button
           type="submit"
-          className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer"
+          className="bg-primary text-white text-sm px-2.5 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer text-nowrap"
         >
           Sign out
         </button>
       </form>
     </div>
   ) : (
-    <div className="flex gap-2">
+    <div className="flex gap-2 ml-2">
       <Link href="/sign-in" passHref>
-        <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer">
+        <button className="bg-primary text-white text-sm px-2.5 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer text-nowrap">
           Sign in
         </button>
       </Link>
       <Link href="/sign-up" passHref>
-        <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer">
+        <button className="bg-primary text-white text-sm px-2.5 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer text-nowrap">
           Sign up
         </button>
       </Link>

@@ -110,7 +110,7 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="bg-foreground py-20 px-12 justify-center rounded-tl-[30px] w-full h-full flex-1">
+    <div className="bg-foreground py-20 px-12 rounded-tl-[30px] w-full h-full flex-1 flex justify-center items-center">
       {error ? (
         <p className="text-white">{error}</p>
       ) : !assetToken ? (

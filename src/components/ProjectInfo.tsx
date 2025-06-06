@@ -14,7 +14,7 @@ export default function ProjectInfo({
   address,
   addressDetails = [],
   details,
-  profitability = 7,
+  profitability = 0,
   breakdown,
 }: ProjectInfoProps) {
   return (
@@ -59,7 +59,7 @@ export default function ProjectInfo({
       <div>
         <h4 className="text-white font-semibold mb-2">
           Rentabilidad anual estimada:{" "}
-          <span className="text-green-400">{profitability}%</span>
+          <span className="text-green-400">{profitability.toFixed(2)}%</span>
         </h4>
         <ul className="space-y-1">
           {breakdown?.map((b) => (

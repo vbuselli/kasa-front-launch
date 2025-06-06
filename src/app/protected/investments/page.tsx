@@ -40,8 +40,8 @@ export default function InvestmentsPage() {
   });
 
   return (
-    <section className="relative py-16 bg-foreground text-white px-16 rounded-tl-[30px] flex-1">
-      <div className="container mx-auto">
+    <section className="relative py-16 bg-foreground text-white px-16 rounded-tl-[30px] flex-1 flex flex-col">
+      <div className="container mx-auto flex-1 flex flex-col">
         <div className="flex flex-col items-center justify-center mb-8 w-full">
           <h2 className="text-4xl font-bold">
             PROYECTOS PARA <span className="text-green-400">INVERTIR</span>
@@ -51,15 +51,19 @@ export default function InvestmentsPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-          {loading ? (
+        {loading ? (
+          <div className="flex justify-center items-center flex-1">
             <Loader />
-          ) : error ? (
-            <p>Error al cargar assets.</p>
-          ) : (
-            sortedAssets.map((proj) => <AssetCard key={proj.id} {...proj} />)
-          )}
-        </div>
+          </div>
+        ) : error ? (
+          <p>Error al cargar assets.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            {sortedAssets.map((proj) => (
+              <AssetCard key={proj.id} {...proj} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

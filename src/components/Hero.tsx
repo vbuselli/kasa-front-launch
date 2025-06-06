@@ -39,7 +39,8 @@ const cards = [
 const breakpointColumnsObj = {
   default: 2,
   1200: 2,
-  800: 1,
+  800: 2,
+  600: 1,
 };
 
 const imagesSizes: { [i: number]: string } = {
@@ -51,11 +52,12 @@ const imagesSizes: { [i: number]: string } = {
 
 export default function Hero() {
   return (
-    <section className="relative bg-foreground text-white px-8 pb-8 rounded-bl-3xl overflow-hidden rounded-tl-[30px] rounded-br-[30px] shadow-hero">
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-[50%_50%] items-center">
+    <section className="relative bg-foreground text-white px-8 pb-8 pt-8 lg:pt-0 rounded-bl-3xl overflow-hidden rounded-tl-[30px] rounded-br-[30px] shadow-hero">
+      <div className="container mx-auto grid grid-cols-1 gap-8 lg:grid-cols-[50%_50%] lg:gap-0 items-center pt-5 lg:pt-0">
         <div className="space-y-6">
           <p className="uppercase text-3xl font-bold text-white font-montserrat">
-            BIENVENIDO <br /> <span className="text-green-400">A KASA</span>
+            BIENVENIDO <br className="hidden lg:block" />{" "}
+            <span className="text-green-400">A KASA</span>
           </p>
           <div>
             <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">
@@ -67,7 +69,7 @@ export default function Hero() {
               Fácil, sin bancos ni papeleos
             </p>
           </div>
-          <p className="text-base lg:text-2xl">
+          <p className="text-base lg:text-2xl mb-2 lg:mb-6">
             Compra{" "}
             <span className="text-green-400 font-semibold">
               fracciones de propiedades
@@ -78,7 +80,10 @@ export default function Hero() {
             </span>{" "}
             por alquiler, mientras tu inversión crece con la valorización.
           </p>
-          <Link href="/protected/investments">
+          <Link
+            href="/protected/investments"
+            className="flex justify-center lg:justify-start"
+          >
             <button className="bg-secondary hover:bg-yellow-300 text-white text-lg uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
               Empieza hoy
             </button>
@@ -106,7 +111,7 @@ export default function Hero() {
           </Masonry>
 
           <button
-            className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 bg-green-400 hover:bg-green-300 rounded-full shadow-xl flex items-center justify-center transition"
+            className="absolute top-0 right-0 lg:top-1/2 lg:left-0 lg:right-auto lg:-translate-x-1/2 -translate-y-1/2 bg-green-400 hover:bg-green-300 rounded-full shadow-xl flex items-center justify-center transition"
             aria-label="Cómo funciona"
           >
             <Image
