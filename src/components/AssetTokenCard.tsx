@@ -30,9 +30,8 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
   const { openDrawer } = useDrawer();
 
   const {
-    id,
     state,
-    asset: { name, address, total_shares, owned_shares },
+    asset: { id, name, address, total_shares, owned_shares },
   } = assetToken;
 
   const boughtPercent = owned_shares
