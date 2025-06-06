@@ -36,6 +36,12 @@ export default function Navbar() {
         <div
           className="fixed inset-0 py-27 z-40 bg-black/40 flex justify-end lg:hidden"
           onClick={() => setOpen(false)}
+          role="button"
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") setOpen(false);
+          }}
         >
           <div
             className="bg-foreground w-4/5 max-w-xs h-full p-8 flex flex-col gap-8 rounded-tl-[30px] rounded-bl-[30px] shadow-xl"
