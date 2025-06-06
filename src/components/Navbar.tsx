@@ -45,37 +45,15 @@ export default function Navbar() {
         >
           <div
             className="bg-foreground w-4/5 max-w-xs h-full p-8 flex flex-col gap-8 rounded-tl-[30px] rounded-bl-[30px] shadow-xl"
+            role="dialog"
+            aria-modal="true"
+            tabIndex={-1}
             onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => {
+              e.stopPropagation();
+            }}
           >
-            <ul className="flex flex-col gap-6 text-white font-medium text-lg">
-              <li>
-                <Link
-                  href="/protected/investments"
-                  onClick={() => setOpen(false)}
-                >
-                  Proyectos
-                </Link>
-              </li>
-              <li>
-                <Link href="/" onClick={() => setOpen(false)}>
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/" onClick={() => setOpen(false)}>
-                  Ayuda
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/protected/portfolio"
-                  onClick={() => setOpen(false)}
-                >
-                  Portafolio
-                </Link>
-              </li>
-            </ul>
-            <div className="flex items-center gap-4 mt-auto">
+            <div className="flex items-center gap-4">
               <button
                 aria-label="Notificaciones"
                 className="text-white cursor-pointer"
@@ -107,8 +85,36 @@ export default function Navbar() {
                   )}
                 </div>
               </Link>
-              <HeaderAuth />
             </div>
+            <HeaderAuth />
+            <ul className="flex flex-col gap-6 text-white font-medium text-lg">
+              <li>
+                <Link
+                  href="/protected/investments"
+                  onClick={() => setOpen(false)}
+                >
+                  Proyectos
+                </Link>
+              </li>
+              <li>
+                <Link href="/" onClick={() => setOpen(false)}>
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/" onClick={() => setOpen(false)}>
+                  Ayuda
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/protected/portfolio"
+                  onClick={() => setOpen(false)}
+                >
+                  Portafolio
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       )}

@@ -16,7 +16,7 @@ export default function AuthButton() {
   }, []);
 
   return user ? (
-    <div className="flex items-center gap-4 text-white ml-2">
+    <div className="flex items-center gap-4 text-white lg:ml-2">
       <span
         className="max-w-[150px] truncate inline-block align-middle"
         title={user.email}
@@ -33,7 +33,7 @@ export default function AuthButton() {
       </form>
     </div>
   ) : (
-    <div className="flex gap-2 ml-2">
+    <div className="flex gap-2 lg:ml-2">
       <Link href="/sign-in" passHref>
         <button className="bg-primary text-white text-sm px-2.5 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer text-nowrap">
           Sign in
