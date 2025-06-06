@@ -35,24 +35,15 @@ export default function Navbar() {
       {open && (
         <div
           className="fixed inset-0 py-27 z-40 bg-black/40 flex justify-end lg:hidden"
-          onClick={() => setOpen(false)}
           role="button"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           tabIndex={0}
+          onClick={() => setOpen(false)}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") setOpen(false);
           }}
         >
-          <div
-            className="bg-foreground w-4/5 max-w-xs h-full p-8 flex flex-col gap-8 rounded-tl-[30px] rounded-bl-[30px] shadow-xl"
-            role="dialog"
-            aria-modal="true"
-            tabIndex={-1}
-            onClick={(e) => e.stopPropagation()}
-            onKeyDown={(e) => {
-              e.stopPropagation();
-            }}
-          >
+          <aside className="bg-foreground w-4/5 max-w-xs h-full p-8 flex flex-col gap-8 rounded-tl-[30px] rounded-bl-[30px] shadow-xl">
             <div className="flex items-center gap-4">
               <button
                 aria-label="Notificaciones"
@@ -115,7 +106,7 @@ export default function Navbar() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </aside>
         </div>
       )}
 
