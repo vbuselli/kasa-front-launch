@@ -47,7 +47,7 @@ export default function WhyKasaSection() {
           <div
             key={title}
             className="relative bg-background text-center text-gray-900 px-4 py-8 rounded-[30px]
-              shadow-inset flex flex-col items-center justify-between gap-5"
+              shadow-inset flex flex-col items-center justify-start gap-5"
           >
             <div className="mb-4">
               <Image
@@ -58,7 +58,7 @@ export default function WhyKasaSection() {
                 className="mx-auto"
               />
             </div>
-            <div className="flex-none h-26">
+            <div className="flex-none h-fit">
               <h3 className="text-base leading-5 uppercase font-bold mb-2">
                 {title}
               </h3>

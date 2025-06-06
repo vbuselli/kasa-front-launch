@@ -44,11 +44,11 @@ export default function FAQSection() {
           NOSOTROS TE AYUDAMOS
         </p>
 
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
           {faqs.map((faq) => (
             <div
               key={faq.id}
-              className="flex-shrink-0 w-48 bg-gray-900 text-white rounded-2xl p-6 shadow-hero flex flex-col items-center"
+              className="flex-shrink-0 w-48 mx-auto bg-gray-900 text-white rounded-2xl p-6 shadow-hero flex flex-col items-center"
             >
               <div className="w-16 h-16 mb-4">
                 <Image

@@ -50,8 +50,8 @@ const steps: {
 
 export default function HowItWorksSection() {
   return (
-    <section className="py-5 px-5" id="how-it-works">
-      <div className="container mx-auto px-6">
+    <section className="py-5 md:px-5" id="how-it-works">
+      <div className="container mx-auto md:px-6">
         <h2 className="text-center text-4xl italic font-bold mb-8">
           “La nueva forma de invertir en inmuebles{" "}
           <span className="text-primary">sin papeleos”</span>

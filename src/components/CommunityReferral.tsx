@@ -34,7 +34,7 @@ export default function CommunityReferralSection() {
           <blockquote className="text-gray-200 text-2xl">
             “Elegimos proyecto de calidad y accesibles para inversionistas”
           </blockquote>
-          <p className="mt-4 text-gray-400 leading-relaxed">
+          <p className="mt-4 text-gray-400 leading-relaxed mb-5 lg:mb-0">
             Lorem ipsum dolor sit amet consectetur. Sem dolor libero eu purus
             luctus at. Utma elit e etiam justo tincidunt congue. Donec viv
             suspsende ultricies malesuada.
@@ -50,7 +50,10 @@ export default function CommunityReferralSection() {
               Comienza a recibir retornos mensuales de acuerdo a tu inversión
               una vez se compre propiedad.
             </p>
-            <Link href={"/protected/investments"}>
+            <Link
+              href={"/protected/investments"}
+              className="flex justify-center"
+            >
               <button className="bg-primary hover:bg-green-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto">
                 Invertir
               </button>
@@ -66,7 +69,10 @@ export default function CommunityReferralSection() {
               Comienza a recibir retornos mensuales de acuerdo a tu inversión
               una vez se compra propiedad.
             </p>
-            <Link href={"/protected/investments"}>
+            <Link
+              href={"/protected/investments"}
+              className="flex justify-center"
+            >
               <button className="bg-primary hover:bg-green-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto">
                 Invertir
               </button>

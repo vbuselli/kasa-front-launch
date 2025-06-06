@@ -143,7 +143,7 @@ export default function Navbar() {
           ></span>
         </button>
 
-        <div className="hidden lg:flex items-center gap-4 md:gap-6 lg:gap-8">
+        <div className="hidden lg:flex flex-1 justify-between items-center gap-4 md:gap-6 lg:gap-8">
           <ul className="hidden md:flex gap-6 gap-md-8 text-white font-medium">
             <li>
               <Link href="/protected/investments">Proyectos</Link>
