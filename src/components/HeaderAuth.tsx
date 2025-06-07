@@ -12,7 +12,7 @@ export default function AuthButton({ user }: { user: User | null }) {
         className="max-w-[150px] truncate inline-block align-middle"
         title={user.email}
       >
-        Hey, {user.user_metadata.name || user.email}!
+        Hey, {user.user_metadata.name.split(" ")[0] || user.email}!
       </span>
       <form action={signOutAction}>
         <button

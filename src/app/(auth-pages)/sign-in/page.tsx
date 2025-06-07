@@ -46,7 +46,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
           <FormMessage message={searchParams} />
           <button
             type="button"
-            className="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-2 text-foreground hover:bg-gray-100 transition-colors"
+            className="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-2 text-foreground hover:bg-gray-100 transition-colors cursor-pointer"
             onClick={signInWithGoogle}
           >
             <svg width="20" height="20" viewBox="0 0 48 48" className="mr-2">
