@@ -18,7 +18,7 @@ export function SubmitButton({
       type="submit"
       aria-disabled={pending}
       {...props}
-      className="bg-primary text-white font-medium rounded-md px-4 py-2 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+      className="bg-primary text-white font-medium rounded-md px-4 py-2 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer"
     >
       {pending ? pendingText : children}
     </button>

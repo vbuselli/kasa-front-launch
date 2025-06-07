@@ -6,11 +6,23 @@ import CartIcon from "@/assets/icons/CartIcon.png";
 import Logo from "@/assets/Logo.png";
 import HeaderAuth from "@/components/HeaderAuth";
 import { useCart } from "context/CartContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { User } from "@supabase/supabase-js";
+import { createClient } from "@/utils/supabase/client";
 
 export default function Navbar() {
   const { count, firstPendingToken } = useCart();
   const [open, setOpen] = useState(false);
+
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (user) return;
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user);
+    });
+  });
 
   return (
     <header className="relative h-20 lg:h-24 mt-4 lg:mt-7">
@@ -77,7 +89,7 @@ export default function Navbar() {
                 </div>
               </Link>
             </div>
-            <HeaderAuth />
+            <HeaderAuth user={user} />
             <ul className="flex flex-col gap-6 text-white font-medium text-lg">
               <li>
                 <Link
@@ -163,33 +175,44 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center gap-3">
-            <button
-              aria-label="Notificaciones"
-              className="text-white cursor-pointer"
-            >
-              <Image
-                src={BellIcon}
-                width={24}
-                height={24}
-                alt="Notificaciones"
-              />
-            </button>
-            <Link href={`/protected/checkout/${firstPendingToken?.id || ""}`}>
-              <div className="relative h-6">
+            {user && (
+              <>
                 <button
-                  aria-label="Carrito"
+                  aria-label="Notificaciones"
                   className="text-white cursor-pointer"
                 >
-                  <Image src={CartIcon} width={24} height={24} alt="Carrito" />
+                  <Image
+                    src={BellIcon}
+                    width={24}
+                    height={24}
+                    alt="Notificaciones"
+                  />
                 </button>
-                {count > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                    {count}
-                  </span>
-                )}
-              </div>
-            </Link>
-            <HeaderAuth />
+                <Link
+                  href={`/protected/checkout/${firstPendingToken?.id || ""}`}
+                >
+                  <div className="relative h-6">
+                    <button
+                      aria-label="Carrito"
+                      className="text-white cursor-pointer"
+                    >
+                      <Image
+                        src={CartIcon}
+                        width={24}
+                        height={24}
+                        alt="Carrito"
+                      />
+                    </button>
+                    {count > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                        {count}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              </>
+            )}
+            <HeaderAuth user={user} />
           </div>
         </div>
       </nav>

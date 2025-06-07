@@ -1,6 +1,5 @@
 "use client";
 import AssetTokenDrawerContent from "@/components/AssetTokenDrawerContent";
-import AssetTokenPendingDrawerContent from "@/components/AssetTokenPendingDrawerContent";
 import Drawer from "@/components/ui/Drawer";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { AssetPopulated } from "types/models";
@@ -43,19 +42,10 @@ export function DrawerProvider({ children }: { children: ReactNode }) {
       {children}
       <Drawer isOpen={isOpen} onClose={closeDrawer}>
         {assetToken && (
-          <>
-            {assetToken.state === "settled" && (
-              <AssetTokenDrawerContent assetToken={assetToken} />
-            )}
-            {["pre-funding", "kyc", "documents_pending"].includes(
-              assetToken.state
-            ) && (
-              <AssetTokenPendingDrawerContent
-                assetToken={assetToken}
-                closeDrawer={closeDrawer}
-              />
-            )}
-          </>
+          <AssetTokenDrawerContent
+            closeDrawer={closeDrawer}
+            assetToken={assetToken}
+          />
         )}
       </Drawer>
     </DrawerContext.Provider>

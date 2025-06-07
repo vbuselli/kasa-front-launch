@@ -18,7 +18,7 @@ export default function InvestmentDetails({
   } = useFormContext();
 
   return (
-    <div className="mb-8 bg-transparent rounded-md border border-white text-white p-6">
+    <div className="mb-0 lg:mb-8 bg-transparent rounded-md border border-white text-white p-6">
       <h2 className="text-xl font-semibold mb-4">Datos para transferencia</h2>
       <div className="space-y-4">
         <div>
@@ -76,17 +76,17 @@ export default function InvestmentDetails({
           <div className="space-y-4 mt-6">
             <div>
               <span className="block text-sm font-medium mb-1">Banco</span>
-              <div className="px-3 py-2">{asset_token.asset.bank_name}</div>
+              <div className="py-2">{asset_token.asset.bank_name}</div>
             </div>
             <div>
               <span className="block text-sm font-medium mb-1">CCI</span>
-              <div className="px-3 py-2">{asset_token.asset.bank_cci}</div>
+              <div className="py-2">{asset_token.asset.bank_cci}</div>
             </div>
             <div>
               <span className="block text-sm font-medium mb-1">
                 Número de cuenta
               </span>
-              <div className="px-3 py-2">
+              <div className="py-2">
                 {asset_token.asset.bank_number_account}
               </div>
             </div>

@@ -1,134 +1,265 @@
+import { User } from "@supabase/supabase-js";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AssetPopulated } from "types/models";
 
 type Props = {
   assetToken: AssetPopulated;
+  closeDrawer: () => void;
 };
 
-const AssetTokenDrawerContent: React.FC<Props> = ({ assetToken }) => {
+const AssetTokenDrawerContent: React.FC<Props> = ({
+  assetToken,
+  closeDrawer,
+}) => {
+  const [activeTab, setActiveTab] = useState(
+    ["pre-funding", "kyc", "documents_pending"].includes(assetToken.state)
+      ? "estatus"
+      : "inversion"
+  );
+  const [user, setUser] = useState<User>();
+
+  // const { isVerified } = useUserVerification();
+
+  // const isKycRequired =
+  //   (assetToken.state === "pre-funding" && !isVerified) ||
+  //   assetToken.state === "kyc";
+
+  const tabs = [
+    {
+      key: "inversion",
+      label: "Inversión",
+      disabled: assetToken.state !== "settled",
+    },
+    { key: "estatus", label: "Estatus", disabled: false },
+    { key: "pagos", label: "Pagos", disabled: true },
+    { key: "apreciacion", label: "Apreciación", disabled: true },
+  ];
+
+  const fetchUser = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/auth`);
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data);
+      }
+    } catch {}
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
-    <div className="text-white mt-6 flex flex-col space-y-4">
-      <div className="flex flex-col space-y-2">
-        <div className="flex space-x-2">
-          <span className="bg-[#1ED760] text-black px-3 py-1 rounded-full text-xs font-semibold">
-            Inversión
-          </span>
-          <span className="bg-[#1ED760] text-black px-3 py-1 rounded-full text-xs font-semibold">
-            Estatus
-          </span>
-          <span className="bg-[#1ED760] text-black px-3 py-1 rounded-full text-xs font-semibold">
-            Pagos
-          </span>
-          <span className="bg-[#1ED760] text-black px-3 py-1 rounded-full text-xs font-semibold">
-            Apreciación
-          </span>
-        </div>
-        <div className="flex items-center space-x-2 mt-2">
-          <img src="/logo-lider.png" alt="Lider" className="h-6" />
-          <span className="font-bold text-lg">Los Viñedos de Surco</span>
-        </div>
-        <div>
-          <span className="font-semibold">Dirección</span>
-          <p className="text-sm">{assetToken.asset.address}</p>
-          <Link href="#" className="text-[#1ED760] text-xs font-semibold">
-            Ver detalle
-          </Link>
-        </div>
+    <div className="text-white mt-6 flex flex-col space-y-6 p-3">
+      <div className="flex space-x-2">
+        {tabs.map((tab) => (
+          <button
+            key={tab.key}
+            type="button"
+            disabled={tab.disabled}
+            onClick={() => !tab.disabled && setActiveTab(tab.key)}
+            className={`
+                px-3 py-1 rounded-full text-xs font-semibold
+                ${
+                  activeTab === tab.key
+                    ? "bg-primary text-foreground"
+                    : "bg-gray-700 text-gray-300"
+                }
+                ${
+                  tab.disabled
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer"
+                }
+                transition
+              `}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
-      <div className="bg-[#1a2b3c] rounded-lg p-4">
-        <h3 className="font-bold text-base mb-2">
-          Rentabilidad total anual estimada:{" "}
-          <span className="text-[#1ED760]">10.9%</span>
-        </h3>
-        <ul className="text-xs list-disc ml-5">
-          <li>
-            Proveniente de alquileres: 3.9%{" "}
-            <span className="text-gray-400">(se recibe mensual)</span>
-          </li>
-          <li>
-            Proveniente de apreciación del inmueble: 7%{" "}
-            <span className="text-gray-400">
-              (se recibe al vender la propiedad)
+      {activeTab === "inversion" && (
+        <>
+          <div className="flex items-center space-x-2 mt-2">
+            {/* <img src="/logo-lider.png" alt="Lider" className="h-6" /> */}
+            <span className="font-bold text-lg">{assetToken.asset.name}</span>
+          </div>
+
+          <div>
+            <span className="font-semibold">Dirección</span>
+            <p className="text-sm">{assetToken.asset.address}</p>
+            <span className="text-primary text-xs font-semibold">
+              Ver detalle
             </span>
-          </li>
-        </ul>
-      </div>
+          </div>
 
-      <div>
-        <h3 className="font-bold text-base mb-2">
-          Información de tu inversión
-        </h3>
-        <div className="border border-[#1ED760] rounded-lg p-4 mb-4">
-          <div className="text-[#1ED760] font-semibold text-sm">
-            Precio inicial del inmueble
+          <div>
+            <h3 className="font-bold text-base mb-2">
+              Rentabilidad total anual estimada:{" "}
+              <span className="text-primary">
+                {(
+                  assetToken.asset.rent_roi + assetToken.asset.apreciation_roi
+                ).toFixed(2)}
+                %
+              </span>
+            </h3>
+            <ul className="text-xs list-disc ml-5 space-y-2">
+              <li>
+                Proveniente de alquileres: {assetToken.asset.rent_roi}% <br />
+                <span className="text-gray-400"> (se recibe mensual)</span>
+              </li>
+              <li>
+                Proveniente de apreciación del inmueble:{" "}
+                {assetToken.asset.apreciation_roi}% <br />
+                <span className="text-gray-400">
+                  (se recibe al vender la propiedad)
+                </span>
+              </li>
+            </ul>
           </div>
-          <div className="text-white text-lg font-bold mb-2">
-            S/{" "}
-            {
-              /* assetToken.asset.price?.toLocaleString("es-PE") ?? */ "271,500.00"
-            }
+
+          <div>
+            <h3 className="font-bold text-base mb-2">
+              Información de tu inversión
+            </h3>
+
+            <div className="border border-primary rounded-lg p-4 my-6 text-center">
+              <div className="text-primary font-semibold text-sm">
+                Precio inicial del inmueble
+              </div>
+              <div className="text-white text-lg font-bold mb-2">
+                S/ {assetToken.asset.total_price?.toLocaleString("es-PE")}
+              </div>
+              <div className="text-primary font-semibold text-sm">
+                Participación:
+              </div>
+              <div className="text-primary text-2xl font-bold mb-1">
+                {(
+                  (assetToken.num_shares / assetToken.asset.total_price) *
+                  100
+                ).toFixed(2)}
+                %
+              </div>
+              <div className="text-white text-sm font-bold">
+                S/ {(assetToken.num_shares * 100).toLocaleString("es-PE")}
+              </div>
+            </div>
+
+            <div className="text-xs space-y-6">
+              <div className="space-y-1">
+                <div className="font-bold">
+                  <span className="font-normal">Nombre de la sociedad:</span>{" "}
+                  {assetToken.asset.spv_name}
+                </div>
+                <div className="font-bold">
+                  <span className="font-normal">RUC:</span>{" "}
+                  {assetToken.asset.spv_ruc}
+                </div>
+                <div className="font-bold">
+                  <span className="font-normal">Dirección Legal:</span>{" "}
+                  {assetToken.asset.spv_address}
+                </div>
+                <div className="font-bold">
+                  <span className="text-primary font-normal">
+                    Descargar documentos legales
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <div className="font-bold">
+                  <span className="font-normal">Nombre del inversor:</span>{" "}
+                  {user?.user_metadata.full_name || user?.user_metadata.name}
+                </div>
+                <div className="font-bold">
+                  <span className="font-normal">Rol:</span> Accionista
+                  preferente
+                </div>
+                <div className="font-bold">
+                  <span className="font-normal">Inversión:</span> S/ S/{" "}
+                  {(assetToken.num_shares * 100).toLocaleString("es-PE")}
+                </div>
+                <div className="font-bold">
+                  <span className="font-normal">Territorio comprado:</span>{" "}
+                  {(
+                    (assetToken.asset.square_cm * assetToken.num_shares) /
+                    100
+                  ).toFixed(2)}{" "}
+                  cm
+                  <sup className="text-2xs align-super">2</sup>
+                </div>
+                <div className="font-bold">
+                  <span className="font-normal">
+                    Participación del área total:
+                  </span>{" "}
+                  {(
+                    (assetToken.num_shares / assetToken.asset.total_price) *
+                    100
+                  ).toFixed(2)}
+                  %
+                </div>
+                <div className="text-primary font-semibold">
+                  Relación accionistas
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="text-[#1ED760] font-semibold text-sm">
-            Participación:
-          </div>
-          <div className="text-[#1ED760] text-2xl font-bold mb-1">
-            {(/* assetToken.percentage ?? */ 0 * 100).toFixed(2)}%
-          </div>
-          <div className="text-white text-lg font-bold">
-            S/{" "}
-            {
-              /* assetToken.amount_invested?.toLocaleString("es-PE") ?? */ "1,940.00"
-            }
-          </div>
+        </>
+      )}
+
+      {activeTab === "estatus" && (
+        <div className="text-white mt-6 flex flex-col space-y-4">
+          <h2 className="text-xl font-bold mb-2">{assetToken.asset.name}</h2>
+
+          {assetToken.state === "pre-funding" && (
+            <h3 className="text-lg font-semibold mb-2">
+              Estamos validando tu transferencia bancaria, te informaremos
+              apenas sea validada por el equipo.
+            </h3>
+          )}
+
+          {assetToken.state === "kyc" && (
+            <div>
+              <h3 className="text-lg font-semibold mb-1">
+                Validación de identidad
+              </h3>
+              <p className="mb-2">
+                Aquí debes validar tu identidad para cumplir con la normativa
+                peruana contra lavado de activos.
+              </p>
+              <Link href="/protected/validate-identity/">
+                <button
+                  onClick={closeDrawer}
+                  className="bg-primary text-white px-4 py-2 rounded mb-4 w-full cursor-pointer"
+                >
+                  Iniciar validación
+                </button>
+              </Link>
+            </div>
+          )}
+
+          {assetToken.state === "documents_pending" &&
+            assetToken.document_sign_url && (
+              <div>
+                <h3 className="text-lg font-semibold mb-1">
+                  Firma de contrato
+                </h3>
+                <p className="mb-2">
+                  Cómo último paso para completar tu inversión debes firmar tu
+                  contrato que respaldará tu inversión.
+                </p>
+                <Link href={assetToken.document_sign_url}>
+                  <button
+                    onClick={closeDrawer}
+                    className="bg-primary text-white px-4 py-2 rounded w-full cursor-pointer"
+                  >
+                    Ir a firmar contrato
+                  </button>
+                </Link>
+              </div>
+            )}
         </div>
-        <div className="text-xs space-y-1">
-          <div>
-            <span className="font-semibold">Nombre de la sociedad:</span>{" "}
-            {/* assetToken.asset.company_name ?? */ "Departamento 1 S.A."}
-          </div>
-          <div>
-            <span className="font-semibold">RUC:</span>{" "}
-            {/* assetToken.asset.company_ruc ?? */ "00000000000"}
-          </div>
-          <div>
-            <span className="font-semibold">Tipo de sociedad:</span> Sociedad
-            Anónima
-          </div>
-          <div>
-            <Link href="#" className="text-[#1ED760] font-semibold">
-              Descargar documentos legales
-            </Link>
-          </div>
-          <div className="mt-2">
-            <span className="font-semibold">Nombre del inversor:</span>{" "}
-            {/* assetToken.investor_name ?? */ "Omar Contreras"}
-          </div>
-          <div>
-            <span className="font-semibold">Rol:</span> Accionista
-          </div>
-          <div>
-            <span className="font-semibold">Inversión:</span> S/{" "}
-            {
-              /* assetToken.amount_invested?.toLocaleString("es-PE") ?? */ "1,940.00"
-            }
-          </div>
-          <div>
-            <span className="font-semibold">Territorio comprado:</span>{" "}
-            {/* assetToken.territory_cm2 ?? */ "3.5772"} cm2
-          </div>
-          <div>
-            <span className="font-semibold">Participación del área total:</span>{" "}
-            {/* assetToken.percentage ?? */ (0.0074).toFixed(4)}%
-          </div>
-          <div>
-            <Link href="#" className="text-[#1ED760] font-semibold">
-              Relación accionistas
-            </Link>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

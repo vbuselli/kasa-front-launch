@@ -35,7 +35,7 @@ export default function Drawer({
         aria-hidden={!isOpen}
       >
         <button
-          className="absolute top-6 right-6 text-white text-2xl focus:outline-none cursor-pointer"
+          className="absolute top-6 right-6 text-primary text-2xl focus:outline-none cursor-pointer"
           onClick={onClose}
           aria-label="Cerrar"
           style={{ zIndex: 10 }}

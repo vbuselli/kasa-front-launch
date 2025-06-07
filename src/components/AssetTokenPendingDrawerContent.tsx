@@ -1,5 +1,6 @@
-import Link from "next/link";
 import React from "react";
+import { useUserVerification } from "context/UserVerificationContext";
+import Link from "next/link";
 import { AssetPopulated } from "types/models";
 
 type Props = {
@@ -11,6 +12,12 @@ const AssetTokenPendingDrawerContent: React.FC<Props> = ({
   assetToken,
   closeDrawer,
 }) => {
+  const { isVerified } = useUserVerification();
+
+  const isKycRequired =
+    (assetToken.state === "pre-funding" && !isVerified) ||
+    assetToken.state === "kyc";
+
   return (
     <div className="text-white mt-6 flex flex-col space-y-4">
       <h2 className="text-xl font-bold mb-2">{assetToken.asset.name}</h2>
@@ -22,7 +29,7 @@ const AssetTokenPendingDrawerContent: React.FC<Props> = ({
         </h3>
       )}
 
-      {["pre-funding", "kyc"].includes(assetToken.state) && (
+      {isKycRequired && (
         <div>
           <h3 className="text-lg font-semibold mb-1">
             Validación de identidad

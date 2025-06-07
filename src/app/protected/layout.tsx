@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import { DrawerProvider } from "context/DrawerContext";
 import { InvestmentShareProvider } from "context/InvestmentContext";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
@@ -18,5 +19,9 @@ export default async function DashboardLayout({ children }: Props) {
     return redirect("/sign-in");
   }
 
-  return <InvestmentShareProvider>{children}</InvestmentShareProvider>;
+  return (
+    <DrawerProvider>
+      <InvestmentShareProvider>{children}</InvestmentShareProvider>
+    </DrawerProvider>
+  );
 }

@@ -89,7 +89,7 @@ export default function InvestmentCheckoutCard({
               (Alquiler + Apreciación)
             </span>
           </div>
-          <span className="font-medium">
+          <span className="font-bold text-nowrap">
             {formatCurrency(
               ((rent_roi + apreciation_roi) * investmentAmount) / 100
             )}
@@ -103,7 +103,9 @@ export default function InvestmentCheckoutCard({
               (Está será tu inversión final)
             </span>
           </div>
-          <span className="font-bold">{formatCurrency(investmentAmount)}</span>
+          <span className="font-bold text-nowrap">
+            {formatCurrency(investmentAmount)}
+          </span>
         </div>
 
         <div className="flex justify-between">
@@ -138,7 +140,7 @@ export default function InvestmentCheckoutCard({
         </div>
 
         {toast && (
-          <div className="bg-red-600 text-white px-4 py-2 rounded mb-2 text-center">
+          <div className="bg-red-600 text-white px-4 py-2 rounded mb-2 text-center max-w-2xs mx-auto">
             {toast}
           </div>
         )}

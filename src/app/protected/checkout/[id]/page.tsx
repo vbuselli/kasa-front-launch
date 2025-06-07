@@ -110,7 +110,7 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="bg-foreground py-20 px-12 rounded-tl-[30px] w-full h-full flex-1 flex justify-center items-center">
+    <div className="bg-foreground py-8 px-8 lg:py-20 lg:px-12 rounded-tl-[30px] w-full h-full flex-1 flex justify-center items-center">
       {error ? (
         <p className="text-white">{error}</p>
       ) : !assetToken ? (
@@ -118,7 +118,7 @@ export default function CheckoutPage() {
       ) : (
         <FormProvider {...methods}>
           <form
-            className="grid lg:grid-cols-2 gap-12"
+            className="grid lg:grid-cols-2 gap-3 lg:gap-12"
             onSubmit={methods.handleSubmit(handleInvestment)}
             autoComplete="off"
           >
