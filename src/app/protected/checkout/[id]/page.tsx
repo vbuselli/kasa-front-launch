@@ -26,6 +26,7 @@ const schema = yup.object().shape({
       const file = (value as FileList)[0] as File;
       return file && file.size <= 5 * 1024 * 1024;
     }),
+  funds_origin: yup.string().required("Origen de los fondos requerido"),
 });
 
 export type InvestmentFormValues = yup.InferType<typeof schema>;
@@ -82,6 +83,7 @@ export default function CheckoutPage() {
       const formData = new FormData();
       formData.append("asset_token_id", assetToken.id);
       formData.append("transaction_number", data.transaction_number);
+      formData.append("funds_origin", data.funds_origin);
       formData.append(
         "voucherImage",
         (data.voucherImage as FileList)[0] as File

@@ -19,10 +19,11 @@ export async function POST(req: NextRequest) {
     const body = await req.formData();
     const asset_token_id = body.get("asset_token_id") as string;
     const transaction_number = body.get("transaction_number") as string;
+    const funds_origin = body.get("funds_origin") as string;
     const voucherImage = body.get("voucherImage") as File | null;
 
     // Validate input
-    if (!asset_token_id || !transaction_number || !voucherImage) {
+    if (!asset_token_id || !transaction_number || !voucherImage || !funds_origin) {
       return NextResponse.json(
         {
           error:
@@ -36,6 +37,7 @@ export async function POST(req: NextRequest) {
     const formData = new FormData();
     formData.append("asset_token_id", asset_token_id);
     formData.append("transaction_number", transaction_number);
+    formData.append("funds_origin", funds_origin);
     formData.append("voucherImage", voucherImage);
 
     // Call the create-transaction endpoint

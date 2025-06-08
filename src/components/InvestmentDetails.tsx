@@ -130,6 +130,26 @@ export default function InvestmentDetails({
                 </span>
               )}
             </div>
+            <div>
+              <label
+                className="block text-sm font-medium mb-2"
+                htmlFor="funds_origin"
+              >
+                Origen de los fondos
+              </label>
+              <input
+                id="funds_origin"
+                type="text"
+                className="w-full border rounded px-3 py-2 text-white"
+                placeholder="Ingresa el origen de los fondos"
+                {...register("funds_origin")}
+              />
+              {errors.funds_origin && (
+                <span className="text-red-400 text-xs">
+                  {errors.funds_origin.message as string}
+                </span>
+              )}
+            </div>
           </div>
         )}
       </div>
