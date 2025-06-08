@@ -13,7 +13,9 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
   closeDrawer,
 }) => {
   const [activeTab, setActiveTab] = useState(
-    ["pre-funding", "kyc", "documents_pending"].includes(assetToken.state)
+    ["pending", "pre-funding", "kyc", "documents_pending"].includes(
+      assetToken.state
+    )
       ? "estatus"
       : "inversion"
   );

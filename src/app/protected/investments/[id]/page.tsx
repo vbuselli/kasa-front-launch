@@ -98,7 +98,7 @@ export default function ProjectPage() {
     project_duration,
   } = project;
 
-  const addressDetails = highlights ? highlights.split(",") : [];
+  const addressDetails = highlights ? highlights.split(";") : [];
 
   const details = [
     { label: "Área total", value: `${square_cm}` || "N/A" },
