@@ -12,27 +12,27 @@ import MasonryCard from "./MasonryCard";
 const cards = [
   {
     id: "san-luis",
-    title: "San Luis",
+    title: "Depa Los Negocios - Surquillo",
     bought: 50,
-    img: SanLuis,
+    img: SanMiguel,
   },
   {
     id: "pueblo-libre",
-    title: "Pueblo Libre",
+    title: "Proximamente...",
     bought: 0,
-    img: SanLuis,
+    img: SanMiguel,
   },
   {
     id: "surquillo",
-    title: "Surquillo",
+    title: "Proximamente...",
     bought: 0,
-    img: SanLuis,
+    img: SanMiguel,
   },
   {
     id: "san-miguel",
-    title: "San Miguel",
+    title: "Proximamente...",
     bought: 0,
-    img: SanLuis,
+    img: SanMiguel,
   },
 ];
 
@@ -105,7 +105,7 @@ export default function Hero() {
           </Link>
         </div>
 
-        <div className="relative">
+        <div className="relative mt-2">
           <Masonry
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
@@ -116,7 +116,7 @@ export default function Hero() {
               return (
                 <Link
                   key={card.id}
-                  href={`/protected/proyectos`}
+                  href={`/protected/investments`}
                   className="group block relative rounded-[30px] overflow-hidden shadow-lg ring-2 ring-transparent hover:ring-blue-500 transition"
                 >
                   <MasonryCard heightClass={heightClass} {...card} />

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Play } from "lucide-react";
+import Link from "next/link";
 import SanLuis from "@/assets/projects/san-luis.png";
 import SanMiguel from "@/assets/projects/san-miguel.png";
 import Surquillo from "@/assets/projects/surquillo.png";
@@ -10,35 +11,26 @@ import MasonryCard from "./MasonryCard";
 const projects = [
   {
     id: "san-miguel",
-    title: "San Miguel",
+    title: "Proximamente...",
     location: "Lima",
     bought: 100,
-    img: SanMiguel,
-  },
-  {
-    id: "pueblo-libre",
-    title: "Pueblo Libre",
-    location: "Lima",
-    bought: 80,
-    img: PuebloLibre,
-  },
-  {
-    id: "surquillo",
-    title: "Surquillo",
-    location: "Lima",
-    bought: 60,
     img: Surquillo,
   },
   {
-    id: "san-luis",
-    title: "San Luis",
+    id: "pueblo-libre",
+    title: "Proximamente...",
     location: "Lima",
-    bought: 50,
-    img: SanLuis,
+    bought: 80,
+    img: Surquillo,
   },
+  {
+    id: "surquillo",
+    title: "Proximamente...",
+    location: "Lima",
+    bought: 60,
+    img: Surquillo,
+  }
 ];
-
-const filters = ["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"];
 
 export default function InvestmentsCarousel() {
   const [active, setActive] = useState(0);
@@ -56,24 +48,9 @@ export default function InvestmentsCarousel() {
           <br />
           <span className="text-primary">TÚ ELIGES</span> EN QUÉ INVERTIR
         </h2>
-        <div className="flex justify-center gap-4 mb-8">
-          <div className="rounded-full border-1 border-primary">
-            {filters.map((f, i) => (
-              <button
-                key={i}
-                onClick={() => setFilter(i)}
-                className={`px-4 py-1 rounded-full text-sm font-medium uppercase transition 
-                ${filter === i ? "bg-primary text-white" : "text-primary"}`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
-        </div>
 
         <div className="relative flex items-center justify-center pt-6">
           <button
-            onClick={prev}
             className="absolute left-0 z-10 p-2 shadow-none rounded-full"
             aria-label="Anterior"
           >
@@ -86,7 +63,6 @@ export default function InvestmentsCarousel() {
           </button>
 
           <button
-            onClick={next}
             className="absolute right-0 z-10 p-2 shadow-none rounded-full"
             aria-label="Siguiente"
           >
@@ -115,30 +91,18 @@ export default function InvestmentsCarousel() {
                     heightClass="h-80"
                   />
                 </div>
-                <button
-                  className={`w-10/12 py-2 uppercase text-sm rounded-full font-semibold transition 
-                    ${
-                      idx === active
-                        ? "bg-primary text-white"
-                        : "border border-primary text-primary"
-                    }`}
+                <Link
+                  href="/protected/investments"
+                  className="w-10/12 py-2 uppercase text-sm rounded-full font-semibold transition 
+                  border border-primary text-primary
+                  hover:bg-primary hover:text-white
+                  no-external-icon" // Add this class
                 >
                   Invertir
-                </button>
+                </Link>
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="flex justify-center mt-6 space-x-2">
-          {projects.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActive(idx)}
-              className={`w-3 h-3 rounded-full transition 
-                ${idx === active ? "bg-primary" : "bg-gray-300"}`}
-            />
-          ))}
         </div>
       </div>
     </section>
