@@ -319,10 +319,13 @@ export default function ValidateIdentityPage() {
           </div>
 
           {/* Banking Information Section */}
-          <div className="w-full pt-6 mt-6 border-t border-gray-200">
+          <div className="w-full pt-6 mt-6 border-t border-gray-800">
             <h3 className="text-lg font-semibold mb-4 text-gray-800">
               Información Bancaria
             </h3>
+            <p>
+              Registra tu informacion bancaria, aquí depositaremos mes a mes tus ganancias
+            </p>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-2 w-full">
               <div>
                 <label
