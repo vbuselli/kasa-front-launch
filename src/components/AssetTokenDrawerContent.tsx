@@ -250,7 +250,11 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
                   Cómo último paso para completar tu inversión debes firmar tu
                   contrato que respaldará tu inversión.
                 </p>
-                <Link href={assetToken.document_sign_url}>
+                <Link 
+                  href={assetToken.document_sign_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <button
                     onClick={closeDrawer}
                     className="bg-primary text-white px-4 py-2 rounded w-full cursor-pointer"
