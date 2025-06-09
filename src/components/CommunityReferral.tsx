@@ -37,9 +37,7 @@ export default function CommunityReferralSection() {
             “Elegimos proyecto de calidad y accesibles para inversionistas”
           </blockquote>
           <p className="mt-4 text-gray-400 leading-relaxed mb-5 lg:mb-0">
-            Lorem ipsum dolor sit amet consectetur. Sem dolor libero eu purus
-            luctus at. Utma elit e etiam justo tincidunt congue. Donec viv
-            suspsende ultricies malesuada.
+            Trabajamos con especialistas en la búsqueda y análisis de oportunidades de inversión inmobiliaria para ofrecerte las mejores oportunidades de inversión.
           </p>
         </div>
 
@@ -49,8 +47,7 @@ export default function CommunityReferralSection() {
               COMUNIDAD
             </h3>
             <p className="text-gray-300 mb-4">
-              Comienza a recibir retornos mensuales de acuerdo a tu inversión
-              una vez se compre propiedad.
+              ¡Estamos creando la primera comunidad de inversión colectiva en inmuebles en el Perú! ¿Te sumas?
             </p>
             <Link
               href={"/protected/investments"}
@@ -68,8 +65,7 @@ export default function CommunityReferralSection() {
               REFERIDOS
             </h3>
             <p className="text-gray-300 mb-4">
-              Comienza a recibir retornos mensuales de acuerdo a tu inversión
-              una vez se compra propiedad.
+              Pronto podrás recibir beneficios al invitar a tus amigos a invertir con Kasa.
             </p>
             <Link
               href={"/protected/investments"}

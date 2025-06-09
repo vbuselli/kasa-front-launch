@@ -26,19 +26,40 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
-                <Link href="/team">Nuestro equipo</Link>
+                <Link 
+                  href="https://intercom.help/inviertekasa/es/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >
+                  Blog
+                </Link>
               </li>
               <li>
-                <Link href="/values">Nuestros valores</Link>
+                <Link 
+                  href="https://intercom.help/inviertekasa/es/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >
+                  Preguntas frecuentes
+                </Link>
               </li>
               <li>
-                <Link href="/investors">Inversionistas Venture Capital</Link>
+                <Link 
+                  href="https://drive.google.com/file/d/1HSf3dvCssOkjMe48U90r7tPRzvScWevE/view"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >
+                  Términos y condiciones
+                </Link>
               </li>
               <li>
-                <Link href="/faq">Preguntas frecuentes</Link>
-              </li>
-              <li>
-                <Link href="/contact">Información de contacto</Link>
+                <Link
+                  href="https://drive.google.com/file/d/1jPHNTb5T7633Kfb9s-BX7iSZEXuB6wGT/view"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Política de privacidad
+                </Link>
               </li>
             </ul>
           </div>
@@ -47,7 +68,13 @@ export default function Footer() {
             <h4 className="text-foreground font-bold text-lg mb-3">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
-                <Link href="/legal">Aspectos legales de Kasa</Link>
+                <Link
+                  href="https://intercom.help/inviertekasa/es/collections/13211892-seguridad"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Aspectos legales de Kasa
+                </Link>
               </li>
             </ul>
           </div>
@@ -57,8 +84,10 @@ export default function Footer() {
           <h4 className="text-foreground font-bold text-lg mb-3">Síguenos</h4>
           <div className="flex space-x-4 text-gray-600">
             <Link
-              href="https://facebook.com"
+              href="https://www.linkedin.com/company/inviertekasa/?originalSubdomain=pe"
               className="bg-foreground p-2 w-10 h-10 rounded-lg flex items-center justify-center transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Image
                 alt="Facebook"
@@ -68,8 +97,10 @@ export default function Footer() {
               ></Image>
             </Link>
             <Link
-              href="https://instagram.com"
+              href="https://www.instagram.com/inviertekasa/"
               className="bg-foreground p-2 w-10 h-10 rounded-lg flex items-center justify-center transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Image
                 alt="Instagram"
@@ -79,8 +110,10 @@ export default function Footer() {
               ></Image>
             </Link>
             <Link
-              href="https://wa.me/"
+              href="https://wa.me/51960400734?text=%C2%A1Hola!%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20acerca%20de%20la%20inversi%C3%B3n%20en%20inmuebles%20con%20Kasa."
               className="bg-foreground p-2 w-10 h-10 rounded-lg flex items-center justify-center transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Image
                 alt="WhatsApp"

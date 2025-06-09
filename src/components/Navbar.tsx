@@ -142,19 +142,16 @@ export default function Navbar() {
           onClick={() => setOpen((v) => !v)}
         >
           <span
-            className={`block w-7 h-1 bg-white rounded transition-all duration-300 ${
-              open ? "rotate-45 translate-y-2" : ""
-            }`}
+            className={`block w-7 h-1 bg-white rounded transition-all duration-300 ${open ? "rotate-45 translate-y-2" : ""
+              }`}
           ></span>
           <span
-            className={`block w-7 h-1 bg-white rounded my-1 transition-all duration-300 ${
-              open ? "opacity-0" : ""
-            }`}
+            className={`block w-7 h-1 bg-white rounded my-1 transition-all duration-300 ${open ? "opacity-0" : ""
+              }`}
           ></span>
           <span
-            className={`block w-7 h-1 bg-white rounded transition-all duration-300 ${
-              open ? "-rotate-45 -translate-y-2" : ""
-            }`}
+            className={`block w-7 h-1 bg-white rounded transition-all duration-300 ${open ? "-rotate-45 -translate-y-2" : ""
+              }`}
           ></span>
         </button>
 
@@ -164,10 +161,20 @@ export default function Navbar() {
               <Link href="/protected/investments">Proyectos</Link>
             </li>
             <li>
-              <Link href="/">Blog</Link>
+              <Link
+                href="https://intercom.help/inviertekasa/es/"
+                target="_blank"
+                rel="noopener noreferrer">
+                  Blog
+              </Link>
             </li>
             <li>
-              <Link href="/">Ayuda</Link>
+              <Link
+                href="https://intercom.help/inviertekasa/es/"
+                target="_blank"
+                rel="noopener noreferrer">
+                Ayuda
+              </Link>
             </li>
             <li>
               <Link href="/protected/portfolio">Portafolio</Link>
