@@ -20,7 +20,7 @@ export default function AuthButton({ user }: { user: User | null }) {
           className="bg-primary text-white text-sm px-2.5 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer text-nowrap"
           onClick={(e) => e.stopPropagation()}
         >
-          Sign out
+          Cerrar Sesión
         </button>
       </form>
     </div>
@@ -31,7 +31,7 @@ export default function AuthButton({ user }: { user: User | null }) {
           className="bg-transparent border border-primary text-white text-sm px-2.5 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer text-nowrap"
           onClick={(e) => e.stopPropagation()}
         >
-          Sign in
+          Ingresar
         </button>
       </Link>
       <Link href="/sign-up" passHref>
@@ -39,7 +39,7 @@ export default function AuthButton({ user }: { user: User | null }) {
           className="bg-primary text-white text-sm px-2.5 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer text-nowrap"
           onClick={(e) => e.stopPropagation()}
         >
-          Sign up
+          Empezar Ahora
         </button>
       </Link>
     </div>

@@ -37,7 +37,7 @@ export default function PortfolioPage() {
   }, []);
 
   const completed = assets.filter((a) => a.state === "settled");
-  const pending = assets.filter((a) => a.state !== "settled");
+  const pending = assets.filter((a) => {a.state !== "settled" && a.state !== "expired"});
 
   return (
     <section className="relative py-16 h-full w-full flex-1 bg-foreground text-white px-16 rounded-tl-[30px]">

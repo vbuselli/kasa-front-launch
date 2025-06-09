@@ -12,6 +12,7 @@ export default function CommunityReferralSection() {
           className="absolute z-1 top-0 left-10 -translate-x-1/2 -translate-y-1/2 bg-green-400 hover:bg-green-300 rounded-full shadow-xl flex items-center justify-center transition"
           aria-label="Cómo funciona"
         >
+          {/*
           <Image
             src={HowItWorks}
             alt={"Cómo funciona Kasa"}
@@ -19,6 +20,7 @@ export default function CommunityReferralSection() {
             width={80}
             height={80}
           />
+        */}
         </button>
 
         <div className="lg:w-1/2">

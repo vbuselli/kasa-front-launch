@@ -57,10 +57,25 @@ export default function Hero() {
         <div className="space-y-6">
           <p className="uppercase text-3xl font-bold text-white font-montserrat">
             BIENVENIDO <br className="hidden lg:block" />{" "}
-            <span className="text-green-400">A KASA</span>
+            <span
+              className="text-green-400"
+              style={{
+                animation: 'fadeInOut 3s ease-in-out infinite',
+                animationName: 'fadeInOut'
+              }}
+            >
+              A KASA
+            </span>
+            <style>{`
+              @keyframes fadeInOut {
+              0% { opacity: 1; }
+              50% { opacity: 0; }
+              100% { opacity: 1; }
+              }
+        `}</style>
           </p>
           <div>
-            <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">
+            <h1 className="text-3xl font-extrabold leading-tight">
               Invierte en inmuebles
               <br />
               desde S/2,000 <span>😎</span>
@@ -84,7 +99,7 @@ export default function Hero() {
             href="/protected/investments"
             className="flex justify-center lg:justify-start"
           >
-            <button className="bg-secondary hover:bg-yellow-300 text-white text-lg uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
+            <button className="bg-secondary hover:bg-yellow-300 text-white text-sm uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
               Empieza hoy
             </button>
           </Link>
@@ -114,13 +129,15 @@ export default function Hero() {
             className="absolute top-0 right-0 lg:top-1/2 lg:left-0 lg:right-auto lg:-translate-x-1/2 -translate-y-1/2 bg-green-400 hover:bg-green-300 rounded-full shadow-xl flex items-center justify-center transition"
             aria-label="Cómo funciona"
           >
-            <Image
-              src={HowItWorks}
-              alt={"Cómo funciona Kasa"}
-              className="text-white"
-              width={80}
-              height={80}
-            />
+            {
+              /* <Image
+                src={HowItWorks}
+                alt={"Cómo funciona Kasa"}
+                className="text-white"
+                width={80}
+                height={80}
+              /> */
+            }
           </button>
         </div>
       </div>

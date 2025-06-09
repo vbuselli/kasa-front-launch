@@ -138,7 +138,7 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
               </div>
               <div className="text-primary text-2xl font-bold mb-1">
                 {(
-                  (assetToken.num_shares / assetToken.asset.total_price) *
+                  (assetToken.num_shares / assetToken.asset.total_shares) *
                   100
                 ).toFixed(2)}
                 %
@@ -178,7 +178,7 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
                   preferente
                 </div>
                 <div className="font-bold">
-                  <span className="font-normal">Inversión:</span> S/ S/{" "}
+                  <span className="font-normal">Inversión:</span> S/{" "}
                   {(assetToken.num_shares * 100).toLocaleString("es-PE")}
                 </div>
                 <div className="font-bold">

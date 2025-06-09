@@ -62,6 +62,10 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
     fetchImage();
   }, [id]);
 
+  if (state === "expired") {
+    return (<></>)
+  }
+
   return (
     <div className="relative rounded-xl overflow-hidden shadow-lg group h-100">
       {state !== "settled" && (

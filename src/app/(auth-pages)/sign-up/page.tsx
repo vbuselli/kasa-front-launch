@@ -70,11 +70,11 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
         onSubmit={handleSubmit}
         action={signUpAction}
       >
-        <h1 className="text-2xl font-medium">Sign up</h1>
+        <h1 className="text-2xl font-medium">Empezar Ahora</h1>
         <p className="text-sm text">
-          Already have an account?{" "}
+          Ya tienes una cuenta?{" "}
           <Link className="text-primary font-medium underline" href="/sign-in">
-            Sign in
+            Ingresar
           </Link>
         </p>
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
@@ -82,26 +82,26 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
           <input
             type="email"
             name="email"
-            placeholder="you@example.com"
+            placeholder="usuario@ejemplo.com"
             className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
             required
           />
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Contraseña</label>
           <input
             type="password"
             name="password"
-            placeholder="Your password"
+            placeholder="tu contraseña"
             minLength={6}
             className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
             required
             value={password}
             onChange={handlePasswordChange}
           />
-          <label htmlFor="repeat-password">Repeat password</label>
+          <label htmlFor="repeat-password">Repetir contraseña</label>
           <input
             type="password"
             name="repeat-password"
-            placeholder="Repeat your password"
+            placeholder="tu contraseña"
             minLength={6}
             className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
             required
@@ -117,7 +117,7 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
               pendingText="Signing up..."
               disabled={!!passwordError || !password || !repeatPassword}
             >
-              Sign up
+              Empezar Ahora
             </SubmitButton>
             {searchParams && <FormMessage message={searchParams} />}
             {formError && (
@@ -148,7 +148,7 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
                   />
                 </g>
               </svg>
-              Sign up with Google
+              Ingresar con Google
             </button>
           </div>
         </div>

@@ -38,7 +38,7 @@ export default function WhyKasaSection() {
           ¿Por qué sí te puedes sentir como{" "}
           <span className="text-primary">en Kasa?</span>
         </h2>
-        <p className="text-gray-400 mt-2 text-lg">
+        <p className="text-white-400 mt-2 text-lg">
           Inversiones simples, accesibles y sin miedo a endeudarte
         </p>
       </div>

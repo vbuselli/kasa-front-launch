@@ -55,25 +55,58 @@ const sponsors: Sponsor[] = [
 
 export default function Sponsors() {
   return (
-    <section className="py-8 mt-3">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between space-x-8 overflow-x-auto scrollbar-hide">
-          {sponsors.map((s) => (
-            <div
-              key={s.alt}
-              className="flex-shrink-0 opacity-80 hover:opacity-100 transition"
-            >
-              <Image
-                src={s.src}
-                alt={s.alt}
-                width={s.width}
-                height={s.height}
-                className="object-contain filter brightness-0 saturate-100"
-              />
-            </div>
-          ))}
+    <section className="py-8 mt-3 -mx-4 md:-mx-6 lg:-mx-8 xl:-mx-12">
+      <div className="w-full max-w-[100vw] relative overflow-hidden">
+        <div className="relative overflow-hidden">
+          <div className="flex animate-scroll">
+            {/* First set of sponsors */}
+            {sponsors.map((s, index) => (
+              <div
+                key={`first-${s.alt}-${index}`}
+                className="flex-shrink-0 mx-8 opacity-80"
+              >
+                <Image
+                  src={s.src}
+                  alt={s.alt}
+                  width={s.width}
+                  height={s.height}
+                  className="object-contain filter brightness-0 saturate-100"
+                />
+              </div>
+            ))}
+            {/* Duplicate set for seamless loop */}
+            {sponsors.map((s, index) => (
+              <div
+                key={`second-${s.alt}-${index}`}
+                className="flex-shrink-0 mx-8 opacity-80"
+              >
+                <Image
+                  src={s.src}
+                  alt={s.alt}
+                  width={s.width}
+                  height={s.height}
+                  className="object-contain filter brightness-0 saturate-100"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }

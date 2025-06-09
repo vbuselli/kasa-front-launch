@@ -13,9 +13,9 @@ export default async function ForgotPassword(props: {
         <div>
           <h1 className="text-2xl font-medium">Reset Password</h1>
           <p className="text-sm text-secondary-foreground">
-            Already have an account?{" "}
+            Ya tienes una cuenta?{" "}
             <Link className="text-primary underline" href="/sign-in">
-              Sign in
+              Ingresar
             </Link>
           </p>
         </div>
@@ -28,7 +28,7 @@ export default async function ForgotPassword(props: {
             required
           />
           <SubmitButton formAction={forgotPasswordAction}>
-            Reset Password
+            Resetear Contraseña
           </SubmitButton>
           <FormMessage message={searchParams} />
         </div>
