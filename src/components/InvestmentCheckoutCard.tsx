@@ -17,11 +17,13 @@ export default function InvestmentCheckoutCard({
   loading,
   toast,
   isButtonDisabled = false,
+  component
 }: {
   asset_token: AssetPopulated;
   loading: boolean;
   toast?: string | null;
   isButtonDisabled?: boolean;
+  component: React.ReactNode;
 }) {
   const { investmentAmount, commission, setPropertyValue } =
     useInvestmentShare();
@@ -144,6 +146,8 @@ export default function InvestmentCheckoutCard({
             {toast}
           </div>
         )}
+
+        {component}
 
         <button
           type="submit"
