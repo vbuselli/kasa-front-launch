@@ -120,16 +120,19 @@ export default function CheckoutPage() {
       ) : (
         <FormProvider {...methods}>
           <form
+            className="grid lg:grid-cols-2 gap-3 lg:gap-12"
             onSubmit={methods.handleSubmit(handleInvestment)}
             autoComplete="off"
           >
+            <div>
+              <InvestmentDetails asset_token={assetToken} />
+            </div>
             <div>
               <InvestmentCheckoutCard
                 asset_token={assetToken}
                 loading={loading}
                 toast={toast}
                 isButtonDisabled={!methods.formState.isValid}
-                component = {<InvestmentDetails asset_token={assetToken} />}
               />
             </div>
           </form>

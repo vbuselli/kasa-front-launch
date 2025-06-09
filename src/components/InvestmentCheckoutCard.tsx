@@ -17,13 +17,11 @@ export default function InvestmentCheckoutCard({
   loading,
   toast,
   isButtonDisabled = false,
-  component
 }: {
   asset_token: AssetPopulated;
   loading: boolean;
   toast?: string | null;
   isButtonDisabled?: boolean;
-  component: React.ReactNode;
 }) {
   const { investmentAmount, commission, setPropertyValue } =
     useInvestmentShare();
@@ -31,7 +29,7 @@ export default function InvestmentCheckoutCard({
 
   const {
     expires_at,
-    asset: { id, total_price, square_cm, rent_roi, apreciation_roi, name},
+    asset: { id, total_price, square_cm, rent_roi, apreciation_roi, name },
   } = asset_token;
 
   useEffect(() => {
@@ -80,7 +78,7 @@ export default function InvestmentCheckoutCard({
         <div className="flex justify-between">
           <span className="font-medium">Área total:</span>
           <span className="font-bold">
-            {(square_cm * (asset_token.num_shares / asset_token.asset.total_shares)).toFixed(2)} cm<sup>2</sup>
+            {square_cm} cm<sup>2</sup>
           </span>
         </div>
 
@@ -146,8 +144,6 @@ export default function InvestmentCheckoutCard({
             {toast}
           </div>
         )}
-
-        {component}
 
         <button
           type="submit"

@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 import { AssetPopulated } from "types/models";
 
 export default function InvestmentDetails({
-  asset_token
+  asset_token,
 }: {
   asset_token: AssetPopulated;
 }) {
