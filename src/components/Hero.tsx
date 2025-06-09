@@ -3,6 +3,9 @@ import Image from "next/image";
 import HowItWorks from "@/assets/HowItWorks.png";
 import Link from "next/link";
 import SanLuis from "@/assets/projects/san-luis.png";
+import blur1 from "@/assets/projects/image.png";
+import blur2 from "@/assets/projects/image (1).png";
+import blur3 from "@/assets/projects/image (2).png";
 import SanMiguel from "@/assets/projects/san-miguel.png";
 import Surquillo from "@/assets/projects/surquillo.png";
 import PuebloLibre from "@/assets/projects/pueblo-libre.png";
@@ -20,19 +23,19 @@ const cards = [
     id: "pueblo-libre",
     title: "Proximamente...",
     bought: 0,
-    img: SanMiguel,
+    img: blur3,
   },
   {
     id: "surquillo",
     title: "Proximamente...",
     bought: 0,
-    img: SanMiguel,
+    img: blur1,
   },
   {
     id: "san-miguel",
     title: "Proximamente...",
     bought: 0,
-    img: SanMiguel,
+    img: blur2,
   },
 ];
 

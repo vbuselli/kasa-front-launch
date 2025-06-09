@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
 import Link from "next/link";
-import SanLuis from "@/assets/projects/san-luis.png";
+import blur1 from "@/assets/projects/image.png";
+import blur2 from "@/assets/projects/image (1).png";
 import SanMiguel from "@/assets/projects/san-miguel.png";
 import Surquillo from "@/assets/projects/surquillo.png";
 import PuebloLibre from "@/assets/projects/pueblo-libre.png";
@@ -14,21 +15,21 @@ const projects = [
     title: "Proximamente...",
     location: "Lima",
     bought: 100,
-    img: Surquillo,
+    img: blur1,
   },
   {
     id: "pueblo-libre",
-    title: "Proximamente...",
+    title: "Depa Los Negocios - Surquillo",
     location: "Lima",
     bought: 80,
-    img: Surquillo,
+    img: SanMiguel,
   },
   {
     id: "surquillo",
     title: "Proximamente...",
     location: "Lima",
     bought: 60,
-    img: Surquillo,
+    img: blur2,
   }
 ];
 
