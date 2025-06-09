@@ -19,20 +19,20 @@ const cards = [
   {
     id: "pueblo-libre",
     title: "Pueblo Libre",
-    bought: 80,
-    img: PuebloLibre,
+    bought: 0,
+    img: SanLuis,
   },
   {
     id: "surquillo",
     title: "Surquillo",
-    bought: 50,
-    img: Surquillo,
+    bought: 0,
+    img: SanLuis,
   },
   {
     id: "san-miguel",
     title: "San Miguel",
-    bought: 100,
-    img: SanMiguel,
+    bought: 0,
+    img: SanLuis,
   },
 ];
 
@@ -116,7 +116,7 @@ export default function Hero() {
               return (
                 <Link
                   key={card.id}
-                  href={`/protected/investments/${card.id}`}
+                  href={`/protected/proyectos`}
                   className="group block relative rounded-[30px] overflow-hidden shadow-lg ring-2 ring-transparent hover:ring-blue-500 transition"
                 >
                   <MasonryCard heightClass={heightClass} {...card} />

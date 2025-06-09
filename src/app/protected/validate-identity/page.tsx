@@ -283,41 +283,6 @@ export default function ValidateIdentityPage() {
               )}
             </div>
             <div>
-              <label
-                htmlFor="account_number"
-                className="block mb-1 font-medium"
-              >
-                Número de cuenta
-              </label>
-              <input
-                id="account_number"
-                type="text"
-                {...register("account_number")}
-                className="w-full border rounded px-3 py-2"
-              />
-              {errors.account_number && (
-                <span className="text-red-500 text-xs">
-                  {errors.account_number.message}
-                </span>
-              )}
-            </div>
-            <div>
-              <label htmlFor="cci" className="block mb-1 font-medium">
-                CCI
-              </label>
-              <input
-                id="cci"
-                type="text"
-                {...register("cci")}
-                className="w-full border rounded px-3 py-2"
-              />
-              {errors.cci && (
-                <span className="text-red-500 text-xs">
-                  {errors.cci.message}
-                </span>
-              )}
-            </div>
-            <div>
               <label htmlFor="front" className="block mb-1 font-medium">
                 Foto frontal del documento
               </label>
@@ -352,6 +317,51 @@ export default function ValidateIdentityPage() {
               )}
             </div>
           </div>
+
+          {/* Banking Information Section */}
+          <div className="w-full pt-6 mt-6 border-t border-gray-200">
+            <h3 className="text-lg font-semibold mb-4 text-gray-800">
+              Información Bancaria
+            </h3>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-2 w-full">
+              <div>
+                <label
+                  htmlFor="account_number"
+                  className="block mb-1 font-medium"
+                >
+                  Número de cuenta
+                </label>
+                <input
+                  id="account_number"
+                  type="text"
+                  {...register("account_number")}
+                  className="w-full border rounded px-3 py-2"
+                />
+                {errors.account_number && (
+                  <span className="text-red-500 text-xs">
+                    {errors.account_number.message}
+                  </span>
+                )}
+              </div>
+              <div>
+                <label htmlFor="cci" className="block mb-1 font-medium">
+                  CCI
+                </label>
+                <input
+                  id="cci"
+                  type="text"
+                  {...register("cci")}
+                  className="w-full border rounded px-3 py-2"
+                />
+                {errors.cci && (
+                  <span className="text-red-500 text-xs">
+                    {errors.cci.message}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
           <button
             type="submit"
             className="w-1/2 bg-primary text-white font-bold py-2 rounded mt-4 disabled:opacity-60 cursor-pointer transition-colors"
