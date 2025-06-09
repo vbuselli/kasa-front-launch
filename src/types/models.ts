@@ -26,6 +26,7 @@ export type Asset = {
   bank_name: string;
   bank_cci: string;
   bank_number_account: string;
+  proyect_provider: string; // todo cambiar a project provider
 };
 
 export type AssetToken = {

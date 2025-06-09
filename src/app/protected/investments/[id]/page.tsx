@@ -96,6 +96,7 @@ export default function ProjectPage() {
     rent_roi,
     total_shares,
     project_duration,
+    proyect_provider
   } = project;
 
   const addressDetails = highlights ? highlights.split(";") : [];
@@ -134,7 +135,7 @@ export default function ProjectPage() {
         <div className="space-y-8">
           {images.length > 0 && <ImageGallery images={images} />}
           <ProjectInfo
-            provider={spv_name}
+            provider={proyect_provider}
             address={address}
             addressDetails={addressDetails}
             details={details}

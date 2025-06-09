@@ -22,7 +22,7 @@ export default function ProjectInfo({
       <div className="flex items-center space-x-2">
         <Building2 size={20} className="text-green-400" />
         <span>
-          Respaldado por{" "}
+          Proveedor del proyecto{" "}
           <span className="text-white font-semibold">{provider}</span>
         </span>
       </div>
