@@ -166,13 +166,6 @@ export default function InvestmentCheckoutCard({
                 Declaro que la cuenta bancaria desde la cual realizaré la
                 transferencia me pertenece personalmente.
               </label>
-              <blockquote className="border-l-4 border-primary pl-4 text-sm text-gray-300 mt-2">
-                Al seleccionar esta opción, afirmo que soy el titular de la cuenta
-                bancaria desde la cual se transferirán los fondos para esta
-                inversión. Reconozco que Kasa podrá solicitar información adicional
-                en caso de que se detecten inconsistencias con los datos
-                proporcionados.
-              </blockquote>
             </div>
 
             <div>
@@ -188,11 +181,6 @@ export default function InvestmentCheckoutCard({
                 He leído y acepto los Términos y Condiciones, la Política de
                 Privacidad y la Política de Prevención de Lavado de Activos.
               </label>
-              <blockquote className="border-l-4 border-primary pl-4 text-sm text-gray-300 mt-2">
-                Al continuar, acepto los términos legales que regulan el uso de la
-                plataforma Kasa, incluyendo las condiciones aplicables a las
-                inversiones realizadas y el tratamiento de mis datos personales.
-              </blockquote>
             </div>
 
             <button
