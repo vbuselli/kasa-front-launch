@@ -35,10 +35,6 @@ export default function CheckoutPage() {
   const params = useParams();
   const router = useRouter();
   const id = params.id as string;
-  if (!id) {
-    router.push("/investments");
-    return null;
-  }
   const [assetToken, setAssetToken] = useState<AssetPopulated | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
