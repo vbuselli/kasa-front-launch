@@ -177,7 +177,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/protected/portfolio">Portafolio</Link>
+              <Link href="/protected/portfolio">Mi Portafolio</Link>
             </li>
           </ul>
 

@@ -47,7 +47,7 @@ export default function InvestmentsPage() {
             PROYECTOS PARA <span className="text-green-400">INVERTIR</span>
           </h2>
           <p className="text-gray-300 text-xl">
-            DESCUBRE TODAS LAS POSIBILIDADES DE INVERSIÓN
+            DESCUBRE TODAS LAS OPORTUNIDADES DE INVERSIÓN
           </p>
         </div>
 

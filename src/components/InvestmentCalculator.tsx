@@ -146,8 +146,8 @@ export default function InvestmentCalculator({
               <span className="text-sm">Anual</span>
             </div>
             <p className="text-sm font-semibold text-center">
-              Puedes recibir S/ {((rentGain * inputValue) / 1200).toFixed(2)}{" "}
-              mensual o solicitar reinvertirlo
+              Recibirás S/ {((rentGain * inputValue) / 1200).toFixed(2)}{" "}
+              mensual
             </p>
           </div>
           <div className="bg-primary text-foreground p-4 rounded-md">

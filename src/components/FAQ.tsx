@@ -10,32 +10,32 @@ import { link } from "fs";
 const faqs = [
   {
     id: "faq-1",
+    icon: House,
+    title: "Empezando en Kasa",
+    desc: "Paso a paso: desde registrarte hasta activar tu primera inversión",
+    link: "https://intercom.help/inviertekasa/es/collections/13211886-invirtiendo-en-kasa"
+  },
+  {
+    id: "faq-2",
     icon: Money,
     title: "Rentabilidad",
     desc: "Ingresos y seguimiento de tu inversión",
     link: "https://intercom.help/inviertekasa/es/collections/13211915-rentabilidad-e-ingresos"
   },
   {
-    id: "faq-2",
+    id: "faq-3",
     icon: Check,
     title: "Seguridad",
     desc: "Cómo protegemos tu inversión, legalmente y en la práctica",
     link: "https://intercom.help/inviertekasa/es/collections/13211892-seguridad"
   },
   {
-    id: "faq-3",
+    id: "faq-4",
     icon: Files,
     title: "Documentos e impuestos",
     desc: "Lo que necesitas saber sobre impuestos y declaraciones",
     link: "https://intercom.help/inviertekasa/es/collections/13211927-documentos-e-impuestos"
-  },
-  {
-    id: "faq-4",
-    icon: House,
-    title: "Empezando en Kasa",
-    desc: "Paso a paso: desde registrarte hasta activar tu primera inversión",
-    link: "https://intercom.help/inviertekasa/es/collections/13211886-invirtiendo-en-kasa"
-  },
+  }
 ];
 
 export default function FAQSection() {
@@ -51,16 +51,14 @@ export default function FAQSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
           {faqs.map((faq) => (
-            <div
+            <Link
               key={faq.id}
+              href={faq.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex-shrink-0 w-48 mx-auto bg-gray-900 text-white rounded-2xl p-6 shadow-hero flex flex-col items-center"
             >
-              <Link 
-                href={faq.link} 
-                  className="w-16 h-16 mb-4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >
+              <div className="w-16 h-16 mb-4">
                 <Image
                   src={faq.icon}
                   alt={faq.title}
@@ -68,12 +66,12 @@ export default function FAQSection() {
                   height={64}
                   className="object-contain filter brightness-0 invert"
                 />
-              </Link>
+              </div>
               <h3 className="text-center font-semibold mb-2 text-primary uppercase">
                 {faq.title}
               </h3>
               <p className="text-sm text-gray-300 text-center">{faq.desc}</p>
-            </div>
+            </Link>
           ))}
         </div>
 

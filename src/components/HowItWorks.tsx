@@ -63,7 +63,7 @@ export default function HowItWorksSection() {
                 {step.num === "2" ? (
                   <div className="flex items-start space-x-4 lg:w-[calc(100%+7rem)] lg:pl-10 lg:pr-20">
                     <div className="relative bg-primary p-14 lg:p-10 lg:rounded-tl-[30px] lg:rounded-bl-[30px] lg:-left-20 shadow-hero overflow-visible">
-                      <h3 className="text-2xl font-extrabold uppercase text-foreground mb-1">
+                      <h3 className="text-[24px] font-extrabold uppercase text-foreground mb-1">
                         {step.num}. {step.title}
                       </h3>
                       <p className="text-base text-foreground leading-normal">
@@ -74,7 +74,7 @@ export default function HowItWorksSection() {
                 ) : (
                   <div className="flex items-start space-x-4 p-14 pr-20">
                     <div>
-                      <h3 className="text-2xl font-extrabold uppercase text-white mb-1">
+                      <h3 className="text-[24px] font-extrabold uppercase text-white mb-1">
                         {step.num}. {step.title}
                       </h3>
                       <p className="text-base text-gray-300 leading-loose">

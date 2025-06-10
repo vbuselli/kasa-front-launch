@@ -141,7 +141,7 @@ export default function InvestmentDetails({
                 id="funds_origin"
                 type="text"
                 className="w-full border rounded px-3 py-2 text-white"
-                placeholder="Ingresa el origen de los fondos"
+                placeholder="Ahorros, salario, préstamo, otro (especificar)"
                 {...register("funds_origin")}
               />
               {errors.funds_origin && (

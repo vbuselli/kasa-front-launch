@@ -44,7 +44,7 @@ export default function InvestmentsCarousel() {
   return (
     <section className="py-8 px-12 bg-foreground relative overflow-hidden">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-white">
+        <h2 className="text-2xl lg:text-2xl font-bold mb-6 text-white">
           NOSOTROS BUSCAMOS <span className="text-primary">LO MEJOR</span>,
           <br />
           <span className="text-primary">TÚ ELIGES</span> EN QUÉ INVERTIR

@@ -34,7 +34,7 @@ export default function WhyKasaSection() {
   return (
     <section className="mt-10 py-16 bg-foreground text-white rounded-tr-[55px] rounded-tl-[55px]">
       <div className="container mx-auto px-6 text-center mb-12">
-        <h2 className="text-3xl font-bold uppercase">
+        <h2 className="text-2xl font-bold uppercase">
           ¿Por qué sí te puedes sentir como{" "}
           <span className="text-primary">en Kasa?</span>
         </h2>

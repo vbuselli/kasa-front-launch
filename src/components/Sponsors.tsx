@@ -6,6 +6,10 @@ import Innovaulima from "@/assets/sponsors/innovaulima.png";
 import StartGlobal from "@/assets/sponsors/startglobal.png";
 import HultPrize from "@/assets/sponsors/hultprize.png";
 import Emprendelatam from "@/assets/sponsors/emprendelatam.png";
+import Cip from "@/assets/sponsors/cip.png";
+import Produce from "@/assets/sponsors/produce.png";
+import StartupPeru from "@/assets/sponsors/startup-peru.png";
+import ProInovate from "@/assets/sponsors/logo-proinnovate.png";
 
 type Sponsor = {
   src: StaticImageData;
@@ -15,6 +19,7 @@ type Sponsor = {
 };
 
 const sponsors: Sponsor[] = [
+
   {
     src: EmprendeUp,
     alt: "Emprende Up",
@@ -51,6 +56,24 @@ const sponsors: Sponsor[] = [
     width: 150,
     height: 40,
   },
+  {
+    src: Produce,
+    alt: "Ministerio de la Producción",
+    width: 150,
+    height: 40,
+  },
+  {
+    src: StartupPeru,
+    alt: "Startup Perú",
+    width: 150,
+    height: 40,
+  },
+  {
+    src: ProInovate,
+    alt: "ProInovate",
+    width: 150,
+    height: 40,
+  },
 ];
 
 export default function Sponsors() {
@@ -65,13 +88,15 @@ export default function Sponsors() {
                 key={`first-${s.alt}-${index}`}
                 className="flex-shrink-0 mx-8 opacity-80"
               >
-                <Image
-                  src={s.src}
-                  alt={s.alt}
-                  width={s.width}
-                  height={s.height}
-                  className="object-contain filter brightness-0 saturate-100"
-                />
+                <div className="max-h-[40px]">
+                  <Image
+                    src={s.src}
+                    alt={s.alt}
+                    width={s.width}
+                    height={s.height}
+                    className="object-contain filter brightness-0 saturate-100"
+                  />
+                </div>
               </div>
             ))}
             {/* Duplicate set for seamless loop */}
@@ -92,7 +117,7 @@ export default function Sponsors() {
           </div>
         </div>
       </div>
-      
+
       <style jsx>{`
         @keyframes scroll {
           0% {

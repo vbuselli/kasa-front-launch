@@ -55,10 +55,10 @@ const imagesSizes: { [i: number]: string } = {
 
 export default function Hero() {
   return (
-    <section className="relative bg-foreground text-white px-8 pb-8 pt-8 lg:pt-0 rounded-bl-3xl overflow-hidden rounded-tl-[30px] rounded-br-[30px] shadow-hero">
-      <div className="container mx-auto grid grid-cols-1 gap-8 lg:grid-cols-[50%_50%] lg:gap-0 items-center pt-5 lg:pt-0">
-        <div className="space-y-6">
-          <p className="uppercase text-3xl font-bold text-white font-montserrat">
+    <section className="relative bg-foreground text-white px-8 pb-8 pt-4 lg:pt-0 rounded-bl-3xl overflow-hidden rounded-tl-[30px] rounded-br-[30px] shadow-hero">
+      <div className="container mx-auto grid grid-cols-1 gap-8 lg:grid-cols-[50%_50%] lg:gap-0 items-center pt-3 lg:pt-0">
+        <div className="space-y-6 pr-6">
+          <p className="uppercase text-2xl font-bold text-white font-montserrat">
             BIENVENIDO <br className="hidden lg:block" />{" "}
             <span
               className="text-green-400"
@@ -78,16 +78,16 @@ export default function Hero() {
         `}</style>
           </p>
           <div>
-            <h1 className="text-3xl font-extrabold leading-tight">
+            <h1 className="text-[48px] font-extrabold leading-tight">
               Invierte en inmuebles
               <br />
               desde S/2,000 <span>😎</span>
             </h1>
-            <p className="text-2xl text-gray-300">
+            <p className="text-[22px] text-gray-300">
               Fácil, sin bancos ni papeleos
             </p>
           </div>
-          <p className="text-base lg:text-2xl mb-2 lg:mb-6">
+          <p className="text-base lg:text-[22px] mb-2 lg:mb-6">
             Compra{" "}
             <span className="text-green-400 font-semibold">
               fracciones de propiedades
@@ -96,13 +96,13 @@ export default function Hero() {
             <span className="text-green-400 font-semibold">
               recibe ingresos cada mes
             </span>{" "}
-            por alquiler, mientras tu inversión crece con la valorización.
+            por alquiler, mientras tu inversión crece con la valorización del depa.
           </p>
           <Link
             href="/protected/investments"
             className="flex justify-center lg:justify-start"
           >
-            <button className="bg-secondary hover:bg-yellow-300 text-white text-sm uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
+            <button className="bg-secondary hover:bg-yellow-300 text-white text-[16px] uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
               Empieza hoy
             </button>
           </Link>

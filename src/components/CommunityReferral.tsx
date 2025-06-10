@@ -67,14 +67,11 @@ export default function CommunityReferralSection() {
             <p className="text-gray-300 mb-4">
               Pronto podrás recibir beneficios al invitar a tus amigos a invertir con Kasa.
             </p>
-            <Link
-              href={"/protected/investments"}
-              className="flex justify-center"
-            >
-              <button className="bg-primary hover:bg-green-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto">
-                Invertir
+            <div className="flex justify-center">
+              <button className="bg-gray-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto">
+                Proximamente
               </button>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

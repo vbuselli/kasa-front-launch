@@ -14,7 +14,7 @@ const features = [
   { name: "Inversión accesible", Icon: DollarSign },
   { name: "Poca volatilidad", Icon: ArrowUpDown },
   { name: "Proceso 100% online", Icon: Globe },
-  { name: "Respaldo físico", Icon: Building2 },
+  { name: "Activo Tangible", Icon: Building2 },
   { name: "Ingresos recurrentes", Icon: Repeat },
 ];
 
@@ -45,7 +45,7 @@ export default function ComparisonSection() {
       </button>
 
       <div className="inverted-radius-tl bg-background pt-8 pb-14 shadow-inset">
-        <h2 className="text-2xl lg:text-3xl font-extrabold uppercase text-foreground ml-[320px] mb-10 w-1/2">
+        <h2 className="text-2xl lg:text-1xl font-extrabold uppercase text-foreground ml-[320px] mb-10 w-1/3">
           Inversiones que sí puedes pagar y entender
         </h2>
         <div className="grid grid-cols-[250px_repeat(4,minmax(0,1fr))] gap-x-8 overflow-x-auto px-20 py-3">

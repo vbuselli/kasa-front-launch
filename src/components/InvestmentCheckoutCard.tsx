@@ -121,11 +121,19 @@ export default function InvestmentCheckoutCard({
 
         <div className="flex justify-between">
           <div>
-            <p className="text-sm font-medium mb-1">Gastos operativos:</p>
+            <p className="text-sm font-medium mb-1">Gastos operativos (obligación adicional):</p>
             <ul className="list-disc list-inside text-sm text-gray-400">
               <li>Gastos legales</li>
               <li>Gastos por transacción</li>
               <li>Gasto por servicio Kasa</li>
+              <li>
+                <a
+                  href="https://intercom.help/inviertekasa/es/collections/13211888-pagos-y-transferencias"
+                  className="underline hover:text-gray-300 transition-colors duration-200"
+                >
+                  Más información sobre los gastos operativos
+                </a>
+              </li>
             </ul>
           </div>
           <span className="font-bold">
@@ -134,7 +142,7 @@ export default function InvestmentCheckoutCard({
         </div>
 
         <div className="flex justify-between">
-          <span className="font-medium">Monto a pagar:</span>
+          <span className="font-medium">Monto total a pagar:</span>
           <span className="font-bold">
             {!commission ? (
               <LoaderSpinner />
@@ -261,7 +269,7 @@ export default function InvestmentCheckoutCard({
                     id="funds_origin"
                     type="text"
                     className="w-full border rounded px-3 py-2 text-white"
-                    placeholder="Ingresa el origen de los fondos"
+                    placeholder="Ahorros, salario, préstamo, otro (especificar)"
                     {...register("funds_origin")}
                   />
                   {errors.funds_origin && (
@@ -281,7 +289,7 @@ export default function InvestmentCheckoutCard({
                   className="w-full bg-primary hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-colors cursor-pointer disabled:opacity-60"
                   disabled={loading || isButtonDisabled}
                 >
-                  {loading ? "Procesando..." : "Invertir"}
+                  {loading ? "Procesando..." : "Enviar"}
                 </button>
               </div>
             )}
