@@ -45,7 +45,7 @@ export default function AssetCard({
   }, [id]);
 
   return (
-    <Link href={`/protected/investments/${id}`}>
+    <Link href={`/investments/${id}`}>
       <div className="relative rounded-xl overflow-hidden shadow-lg group h-100">
         {currentSrc && (
           <Image

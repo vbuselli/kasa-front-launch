@@ -77,7 +77,9 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
             Ingresar
           </Link>
         </p>
+         
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+          {/*
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -111,7 +113,9 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
           {passwordError && (
             <span className="text-red-500 text-xs">{passwordError}</span>
           )}
+            */}
           <div className="flex flex-col gap-1 mt-4">
+            {/* 
             <SubmitButton
               formAction={signUpAction}
               pendingText="Signing up..."
@@ -119,6 +123,7 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
             >
               Empezar Ahora
             </SubmitButton>
+            */}
             {searchParams && <FormMessage message={searchParams} />}
             {formError && (
               <span className="text-red-500 text-xs">{formError}</span>

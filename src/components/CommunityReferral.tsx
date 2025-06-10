@@ -50,7 +50,7 @@ export default function CommunityReferralSection() {
               ¡Estamos creando la primera comunidad de inversión colectiva en inmuebles en el Perú! ¿Te sumas?
             </p>
             <Link
-              href={"/protected/investments"}
+              href={"/investments"}
               className="flex justify-center"
             >
               <button className="bg-primary hover:bg-green-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto">

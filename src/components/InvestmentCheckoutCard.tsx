@@ -30,7 +30,7 @@ export default function InvestmentCheckoutCard({
 
   const {
     expires_at,
-    asset: { id, total_price, square_cm, rent_roi, apreciation_roi, name },
+    asset: { id, total_price, square_cm, rent_roi, apreciation_roi, name, spv_ruc, spv_name },
   } = asset_token;
 
   const [terms, setTerms] = useState(false);
@@ -63,7 +63,7 @@ export default function InvestmentCheckoutCard({
   }, [id, total_price, setPropertyValue]);
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center mx-auto w-3/4">
       <ReservationTimer endDate={expires_at} />
       <div className="w-full bg-transparent border text-white border-white rounded-lg shadow-lg p-6 space-y-4">
         <h2 className="text-xl font-semibold">Detalle de tu inversión</h2>
@@ -141,15 +141,15 @@ export default function InvestmentCheckoutCard({
           </span>
         </div>
 
-        <div className="flex justify-between">
-          <span className="font-medium">Monto total a pagar:</span>
-          <span className="font-bold">
+        <div className="">
+          <div className="text-primary text-center text-3xl">Monto total a pagar:</div>
+          <div className="text-center font-bold text-4xl">
             {!commission ? (
               <LoaderSpinner />
             ) : (
               formatCurrency(investmentAmount + commission)
             )}
-          </span>
+          </div>
         </div>
 
         <div className="text-gray-400 text-xs">
@@ -171,7 +171,7 @@ export default function InvestmentCheckoutCard({
                   checked={ownership}
                   onChange={(e) => setOwnership(e.target.checked)}
                 />
-                Declaro que la cuenta bancaria desde la cual realizaré la
+                Declaro ser mayor de 18 años y que la cuenta bancaria desde la cual realizaré la
                 transferencia me pertenece personalmente.
               </label>
             </div>
@@ -217,6 +217,14 @@ export default function InvestmentCheckoutCard({
                   <div className="py-2">
                     {asset_token.asset.bank_number_account}
                   </div>
+                </div>
+                <div>
+                  <span className="block text-sm font-medium mb-1">
+                    RUC: {spv_ruc}
+                  </span>
+                  <span className="block text-sm font-medium mb-1">
+                    Razón Social: {spv_name}
+                  </span>
                 </div>
                 <div>
                   <label
@@ -296,6 +304,6 @@ export default function InvestmentCheckoutCard({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

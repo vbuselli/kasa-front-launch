@@ -67,7 +67,7 @@ export default function WhyKasaSection() {
           </div>
         ))}
       </div>
-      <Link href="/protected/investments" className="flex justify-center mt-6">
+      <Link href="/investments" className="flex justify-center mt-6">
         <button className="bg-secondary hover:bg-yellow-300 text-white text-lg uppercase font-semibold px-12 py-2 rounded-[30px] mt-4 inline-block cursor-pointer">
           Empezar a invertir
         </button>

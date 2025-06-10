@@ -14,7 +14,9 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
           Empezar Ahora
         </Link>
       </p>
+
       <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+        {/*
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -39,11 +41,14 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
           className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
           required
         />
+        */}
         <div className="flex flex-col gap-1 mt-4">
+          {/*
           <SubmitButton pendingText="Signing In..." formAction={signInAction}>
             Ingresar
           </SubmitButton>
           <FormMessage message={searchParams} />
+          */}
           <button
             type="button"
             className="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-2 text-foreground hover:bg-gray-100 transition-colors cursor-pointer"
