@@ -102,7 +102,7 @@ export default function ProjectPage() {
   const addressDetails = highlights ? highlights.split(";") : [];
 
   const details = [
-    { label: "Área total", value: `${square_cm}` || "N/A" },
+    { label: "Área total", value: `${square_cm} cm² (${(square_cm / 10000).toFixed(2)} m²)`},
     { label: "Precio total", value: `S/ ${total_price || "N/A"}` },
     { label: "Dormitorios", value: `${bedrooms}` || "N/A" },
     { label: "Baños", value: `${bathrooms}` || "N/A" },

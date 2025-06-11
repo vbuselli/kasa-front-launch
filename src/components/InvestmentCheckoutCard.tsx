@@ -87,7 +87,7 @@ export default function InvestmentCheckoutCard({
         </div>
 
         <div className="flex justify-between">
-          <span className="font-medium">Área total:</span>
+          <span className="font-medium">Área por adquirir:</span>
           <span className="font-bold">
             {/*TODO: esto es un hack para calcular el área total en cm²*/}
             {(square_cm * ((investmentAmount / 100) / asset_token.asset.total_shares)).toFixed(2)} cm<sup>2</sup>

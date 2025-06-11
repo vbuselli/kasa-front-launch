@@ -30,7 +30,7 @@ export default function Navbar() {
 
       <div className="relative z-10 h-full flex justify-center items-center pb-3 lg:pb-5 w-6/12 sm:w-4/12 lg:w-3/12 rounded-br-[30px] bg-background">
         <Link href="/">
-          <div className="flex items-center w-full">
+          <div className="flex items-center md:w-[20px] lg:w-full">
             <Image
               src={Logo}
               alt="Kasa logo"
@@ -114,7 +114,7 @@ export default function Navbar() {
                   href="/protected/portfolio"
                   onClick={() => setOpen(false)}
                 >
-                  Portafolio
+                  Mi Portafolio
                 </Link>
               </li>
             </ul>

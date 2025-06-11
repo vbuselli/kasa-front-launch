@@ -106,7 +106,7 @@ export default function InvestmentCalculator({
           />
         </div>
       </div>
-
+      {/**
       <div className="flex gap-2">
         {presets.map((p) => (
           <button
@@ -123,6 +123,7 @@ export default function InvestmentCalculator({
           </button>
         ))}
       </div>
+       */}
 
       <div>
         <p className="text-gray-300 mb-1 font-semibold">
