@@ -93,7 +93,7 @@ export default function InvestmentsCarousel() {
                   />
                 </div>
                 <Link
-                  href="/investments"
+                  href="/protected/investments"
                   className="w-10/12 py-2 uppercase text-sm rounded-full font-semibold transition 
                   border border-primary text-primary
                   hover:bg-primary hover:text-white

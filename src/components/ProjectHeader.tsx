@@ -6,7 +6,7 @@ export default function ProjectHeader({ title }: { title: string }) {
   return (
     <div className="flex items-center text-white text-2xl font-bold mb-8">
       <Link
-        href="/investments"
+        href="/protected/investments"
         className="flex items-center hover:opacity-80"
       >
         <ArrowLeft size={24} className="mr-2" />

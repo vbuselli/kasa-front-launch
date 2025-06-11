@@ -106,7 +106,7 @@ export default function Hero() {
             por alquiler, mientras tu inversión crece con la valorización del depa.
           </p>
           <Link
-            href="/investments"
+            href="/protected/investments"
             className="flex justify-center lg:justify-start"
           >
             <button className="bg-secondary hover:bg-yellow-300 text-white text-[16px] uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
@@ -128,7 +128,7 @@ export default function Hero() {
               return (
                 <Link
                   key={card.id}
-                  href={`/investments`}
+                  href={`/protected/investments`}
                   className={`group block relative rounded-[30px] overflow-hidden shadow-lg ring-2 ring-transparent hover:ring-blue-500 transition ${
                     isBlurCard ? 'hidden lg:block' : ''
                   }`}
