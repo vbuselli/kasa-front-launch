@@ -42,7 +42,6 @@ export default function InvestmentCheckoutCard({
     formState: { errors },
   } = useFormContext();
 
-
   useEffect(() => {
     const imagesRequest = async () => {
       const imagesResponse = await fetch(
@@ -65,10 +64,11 @@ export default function InvestmentCheckoutCard({
   return (
     <div className="flex flex-col items-center justify-center mx-auto w-full md:w-3/4">
       <ReservationTimer endDate={expires_at} />
-      <div className="w-full bg-transparent border text-white border-white rounded-lg shadow-lg p-6 space-y-4">
-        <h2 className="text-xl font-semibold">Detalle de tu inversión</h2>
+      {/* Main container - no border/padding on mobile, border/padding on desktop */}
+      <div className="w-full bg-transparent border-0 md:border text-white md:border-white rounded-none md:rounded-lg shadow-none md:shadow-lg p-0 md:p-6 space-y-4">
+        <h2 className="text-xl font-semibold px-4 md:px-0">Detalle de tu inversión</h2>
 
-        <div className="flex flex-row items-start gap-4 border-b border-white pb-4">
+        <div className="flex flex-row items-start gap-4 border-b border-white pb-4 px-4 md:px-0">
           <div className="relative w-1/2 h-40 rounded-lg overflow-hidden mb-4">
             {imgSrc && (
               <Image
@@ -86,7 +86,7 @@ export default function InvestmentCheckoutCard({
           </div>
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between px-4 md:px-0">
           <span className="font-medium">Área por adquirir:</span>
           <span className="font-bold">
             {/*TODO: esto es un hack para calcular el área total en cm²*/}
@@ -94,7 +94,7 @@ export default function InvestmentCheckoutCard({
           </span>
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between px-4 md:px-0">
           <div>
             <p className="font-medium">Ganancia anual esperada:</p>
             <span className="text-sm text-gray-400">
@@ -108,7 +108,7 @@ export default function InvestmentCheckoutCard({
           </span>
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between px-4 md:px-0">
           <div>
             <p className="font-medium">Inversión efectiva:</p>
             <span className="text-sm text-gray-400">
@@ -120,7 +120,7 @@ export default function InvestmentCheckoutCard({
           </span>
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between px-4 md:px-0">
           <div>
             <p className="text-sm font-medium mb-1">Gastos operativos (obligación adicional):</p>
             <ul className="list-disc list-inside text-sm text-gray-400">
@@ -142,7 +142,7 @@ export default function InvestmentCheckoutCard({
           </span>
         </div>
 
-        <div className="">
+        <div className="px-4 md:px-0">
           <div className="text-primary text-center text-3xl">Monto total a pagar:</div>
           <div className="text-center font-bold text-4xl">
             {!commission ? (
@@ -153,13 +153,14 @@ export default function InvestmentCheckoutCard({
           </div>
         </div>
 
-        <div className="text-gray-400 text-xs">
+        <div className="text-gray-400 text-xs px-4 md:px-0">
           <sup>*</sup>Recuerda que recibirás tus ganancias por alquiler
           mensualmente y la ganancia por apreciación cuando se venda el
           inmueble.
         </div>
 
-        <div className="mb-0 lg:mb-8 bg-transparent rounded-md border border-white text-white p-6">
+        {/* Transfer data section - no border/padding on mobile */}
+        <div className="mb-0 lg:mb-8 bg-transparent rounded-none md:rounded-md border-0 md:border md:border-white text-white p-4 md:p-6">
           <h2 className="text-xl font-semibold mb-4">Datos para transferencia</h2>
           <div className="space-y-4">
             <div>
