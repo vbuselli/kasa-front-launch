@@ -30,14 +30,14 @@ export default function Navbar() {
 
       <div className="relative z-10 h-full flex justify-center items-center pb-3 lg:pb-5 w-6/12 sm:w-4/12 lg:w-3/12 rounded-br-[30px] bg-background">
         <Link href="/">
-          <div className="flex items-center md:w-[20px] lg:w-full">
+          <div className="flex items-center lg:w-full">
             <Image
               src={Logo}
               alt="Kasa logo"
               width={180}
               height={53}
-              sizes="(max-width: 640px) 120px, (max-width: 1024px) 150px, 180px"
-              className="w-[160px] lg:w-[180px] h-auto"
+              sizes="(max-width: 640px) 100px, (max-width: 1024px) 140px, 180px"
+              className="w-[120px] sm:w-[140px] lg:w-[180px] h-auto"
               priority
             />
           </div>

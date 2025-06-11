@@ -58,7 +58,7 @@ export default function Hero() {
     <section className="relative bg-foreground text-white px-8 pb-8 pt-4 lg:pt-0 rounded-bl-3xl overflow-hidden rounded-tl-[30px] rounded-br-[30px] shadow-hero">
       <div className="container mx-auto grid grid-cols-1 gap-8 lg:grid-cols-[50%_50%] lg:gap-0 items-center pt-3 lg:pt-0">
         <div className="space-y-6 pr-6">
-          <p className="uppercase text-2xl font-bold text-white font-montserrat">
+          <p className="uppercase text-[20px] lg:text-2xl font-bold text-white font-montserrat">
             BIENVENIDO <br className="hidden lg:block" />{" "}
             <span
               className="text-green-400"
@@ -78,10 +78,17 @@ export default function Hero() {
         `}</style>
           </p>
           <div>
-            <h1 className="text-[48px] font-extrabold leading-tight">
-              Invierte en inmuebles
-              <br />
-              desde S/2,000 <span>😎</span>
+            <h1 className="text-[35px] lg:text-[48px] font-extrabold leading-tight">
+              <span className="lg:hidden">
+                Invierte en inmuebles <span>😎</span>
+                <br />
+                desde S/2,000
+              </span>
+              <span className="hidden lg:block">
+                Invierte en inmuebles
+                <br />
+                desde S/2,000 <span>😎</span>
+              </span>
             </h1>
             <p className="text-[22px] text-gray-300">
               Fácil, sin bancos ni papeleos
@@ -114,13 +121,17 @@ export default function Hero() {
             columnClassName="my-masonry-grid_column"
             breakpointCols={breakpointColumnsObj}
           >
+            {/* Show all cards but hide blur cards on mobile with CSS */}
             {cards.map((card, i) => {
               const heightClass = imagesSizes[i];
+              const isBlurCard = card.title.includes("Proximamente");
               return (
                 <Link
                   key={card.id}
                   href={`/investments`}
-                  className="group block relative rounded-[30px] overflow-hidden shadow-lg ring-2 ring-transparent hover:ring-blue-500 transition"
+                  className={`group block relative rounded-[30px] overflow-hidden shadow-lg ring-2 ring-transparent hover:ring-blue-500 transition ${
+                    isBlurCard ? 'hidden lg:block' : ''
+                  }`}
                 >
                   <MasonryCard heightClass={heightClass} {...card} />
                 </Link>

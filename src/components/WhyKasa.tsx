@@ -34,15 +34,15 @@ export default function WhyKasaSection() {
   return (
     <section className="mt-10 py-16 bg-foreground text-white rounded-tr-[55px] rounded-tl-[55px]">
       <div className="container mx-auto px-6 text-center mb-12">
-        <h2 className="text-2xl font-bold uppercase">
+        <h2 className="text-2xl md:text-2xl text-[20px] font-bold uppercase">
           ¿Por qué sí te puedes sentir como{" "}
           <span className="text-primary">en Kasa?</span>
         </h2>
-        <p className="text-white-400 mt-2 text-lg">
+        <p className="text-white-400 mt-2 text-lg md:text-lg text-[16px]">
           Inversiones simples, accesibles y sin miedo a endeudarte
         </p>
       </div>
-      <div className="container mx-auto px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-12 md:px-12 px-6 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-8 gap-4">
         {features.map(({ Icon, title, desc }) => (
           <div
             key={title}
@@ -55,20 +55,20 @@ export default function WhyKasaSection() {
                 alt={title}
                 width={100}
                 height={100}
-                className="mx-auto"
+                className="mx-auto md:w-[100px] md:h-[100px] w-[60px] h-[60px]"
               />
             </div>
             <div className="flex-none h-fit">
-              <h3 className="text-base leading-5 uppercase font-bold mb-2">
+              <h3 className="text-base leading-5 uppercase font-bold mb-2 md:text-base text-xs">
                 {title}
               </h3>
-              <p className="text-sm leading-snug">{desc}</p>
+              <p className="text-sm leading-snug hidden md:block">{desc}</p>
             </div>
           </div>
         ))}
       </div>
       <Link href="/investments" className="flex justify-center mt-6">
-        <button className="bg-secondary hover:bg-yellow-300 text-white text-lg uppercase font-semibold px-12 py-2 rounded-[30px] mt-4 inline-block cursor-pointer">
+        <button className="bg-secondary hover:bg-yellow-300 text-white text-lg md:text-lg text-[16px] uppercase font-semibold px-12 py-2 rounded-[30px] mt-4 inline-block cursor-pointer">
           Empezar a invertir
         </button>
       </Link>

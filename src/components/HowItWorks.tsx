@@ -52,9 +52,9 @@ export default function HowItWorksSection() {
   return (
     <section className="py-5 md:px-5" id="how-it-works">
       <div className="container mx-auto md:px-6">
-        <h2 className="text-center text-4xl italic font-bold mb-8">
-          “La nueva forma de invertir en inmuebles{" "}
-          <span className="text-primary">sin papeleos”</span>
+        <h2 className="text-center text-[20px] md:text-4xl italic font-bold mb-4 md:mb-8 leading-tight md:leading-normal">
+          "La nueva forma de invertir en inmuebles{" "}
+          <span className="text-primary">sin papeleos"</span>
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-[55%_50%] items-center overflow-visible">
           <div className="bg-foreground rounded-3xl shadow-button order-2 lg:order-1 mt-5 lg:mt-0">
@@ -62,22 +62,22 @@ export default function HowItWorksSection() {
               <React.Fragment key={step.num}>
                 {step.num === "2" ? (
                   <div className="flex items-start space-x-4 lg:w-[calc(100%+7rem)] lg:pl-10 lg:pr-20">
-                    <div className="relative bg-primary p-14 lg:p-10 lg:rounded-tl-[30px] lg:rounded-bl-[30px] lg:-left-20 shadow-hero overflow-visible">
-                      <h3 className="text-[24px] font-extrabold uppercase text-foreground mb-1">
+                    <div className="relative bg-primary p-6 md:p-14 lg:p-10 lg:rounded-tl-[30px] lg:rounded-bl-[30px] lg:-left-20 shadow-hero overflow-visible">
+                      <h3 className="text-[19px] md:text-[24px] font-extrabold uppercase text-foreground mb-1">
                         {step.num}. {step.title}
                       </h3>
-                      <p className="text-base text-foreground leading-normal">
+                      <p className="text-[15px] md:text-base text-foreground leading-normal">
                         {step.desc}
                       </p>
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-start space-x-4 p-14 pr-20">
+                  <div className="flex items-start space-x-4 p-6 pr-8 md:p-14 md:pr-20">
                     <div>
-                      <h3 className="text-[24px] font-extrabold uppercase text-white mb-1">
+                      <h3 className="text-[19px] md:text-[24px] font-extrabold uppercase text-white mb-1">
                         {step.num}. {step.title}
                       </h3>
-                      <p className="text-base text-gray-300 leading-loose">
+                      <p className="text-[15px] md:text-base text-gray-300 leading-loose">
                         {step.desc}
                       </p>
                     </div>
@@ -87,7 +87,7 @@ export default function HowItWorksSection() {
             ))}
           </div>
 
-          <div className="relative overflow-visible h-full lg:-left-12 order-1 lg:order-2">
+          <div className="relative overflow-visible h-full lg:-left-12 order-1 lg:order-2 hidden md:block">
             <Image
               src={HowItWorks}
               alt="Ilustración Cómo funciona"
@@ -95,7 +95,7 @@ export default function HowItWorksSection() {
               height={400}
               className="object-cover w-full h-full rounded-3xl inverted-radius-tr shadow-alt"
             />
-            <div className="absolute top-0 right-0 pl-3 pb-3 bg-background rounded-bl-[30px] overflow-visible">
+            <div className="absolute top-0 right-0 pl-3 pb-3 bg-background rounded-bl-[30px] overflow-visible hidden md:block">
               <button className="bg-green-500 hover:bg-green-400 text-white font-semibold px-5 py-3 rounded-[30px] text-lg uppercase shadow-button transition cursor-pointer relative">
                 ¿Cómo funciona? 👀
               </button>
