@@ -53,8 +53,8 @@ export default function HowItWorksSection() {
     <section className="py-5 md:px-5" id="how-it-works">
       <div className="container mx-auto md:px-6">
         <h2 className="text-center text-[20px] md:text-4xl italic font-bold mb-4 md:mb-8 leading-tight md:leading-normal">
-          "La nueva forma de invertir en inmuebles{" "}
-          <span className="text-primary">sin papeleos"</span>
+          &quot;La nueva forma de invertir en inmuebles{" "}
+          <span className="text-primary">sin papeleos&quot;</span>
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-[55%_50%] items-center overflow-visible">
           <div className="bg-foreground rounded-3xl shadow-button order-2 lg:order-1 mt-5 lg:mt-0">
