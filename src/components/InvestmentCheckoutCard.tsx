@@ -203,7 +203,7 @@ export default function InvestmentCheckoutCard({
             </button>
 
             {terms && ownership && showAccount && (
-              <div className="space-y-4 mt-6 border border-white rounded-lg">
+              <div className="space-y-4 mt-6"> 
                 <div>
                   <span className="block text-sm font-medium mb-1">Banco</span>
                   <div className="py-2">{asset_token.asset.bank_name}</div>
