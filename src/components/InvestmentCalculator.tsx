@@ -61,7 +61,7 @@ export default function InvestmentCalculator({
       router.push("/protected/checkout/" + responseData.id);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      setToast(err.message || "Ocurrió un error al pasar al checkout.");
+      router.push("/sign-in"); // TODO: esto es un hack para redirigir a login si no hay sesión
     } finally {
       setLoading(false);
     }
