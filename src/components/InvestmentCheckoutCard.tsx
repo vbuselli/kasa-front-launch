@@ -137,7 +137,7 @@ export default function InvestmentCheckoutCard({
               </li>
             </ul>
           </div>
-          <span className="font-bold">
+          <span className="font-bold text-nowrap flex-shrink-0">
             {!commission ? <LoaderSpinner /> : formatCurrency(commission)}
           </span>
         </div>
@@ -164,7 +164,7 @@ export default function InvestmentCheckoutCard({
           <h2 className="text-xl font-semibold mb-4">Datos para transferencia</h2>
           <div className="space-y-4">
             <div>
-              <label className="inline-flex items-start">
+              <label className="inline-flex items-start text-xs sm:text-sm">
                 <input
                   type="checkbox"
                   name="ownership"
@@ -179,7 +179,7 @@ export default function InvestmentCheckoutCard({
             </div>
 
             <div>
-              <label className="inline-flex items-start">
+              <label className="inline-flex items-start text-xs sm:text-sm">
                 <input
                   type="checkbox"
                   name="terms"
@@ -203,7 +203,7 @@ export default function InvestmentCheckoutCard({
             </button>
 
             {terms && ownership && showAccount && (
-              <div className="space-y-4 mt-6">
+              <div className="space-y-4 mt-6 border border-white rounded-lg">
                 <div>
                   <span className="block text-sm font-medium mb-1">Banco</span>
                   <div className="py-2">{asset_token.asset.bank_name}</div>

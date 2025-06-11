@@ -153,7 +153,7 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
                   />
                 </g>
               </svg>
-              Ingresar con Google
+              Regístrate con Google
             </button>
           </div>
         </div>
