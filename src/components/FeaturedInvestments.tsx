@@ -41,44 +41,33 @@ export default function InvestmentsCarousel() {
     setActive((i) => (i - 1 + projects.length) % projects.length);
   const next = () => setActive((i) => (i + 1) % projects.length);
 
+  // On mobile, only show the middle project (index 1)
+  const displayProjects = projects;
+
   return (
     <section className="py-8 px-12 bg-foreground relative overflow-hidden">
       <div className="container mx-auto text-center">
-        <h2 className="text-2xl lg:text-2xl font-bold mb-6 text-white">
-          NOSOTROS BUSCAMOS <span className="text-primary">LO MEJOR</span>,
-          <br />
-          <span className="text-primary">TÚ ELIGES</span> EN QUÉ INVERTIR
+        <h2 className="text-2xl lg:text-2xl font-bold mb-6 text-white md:text-[20px] md:leading-tight">
+          <span className="md:whitespace-nowrap">
+            NOSOTROS BUSCAMOS <span className="text-primary">LO MEJOR</span>,
+            <span className="hidden md:inline"> </span>
+            <span className="md:hidden"><br /></span>
+            <span className="text-primary">TÚ ELIGES</span> EN QUÉ INVERTIR
+          </span>
         </h2>
 
         <div className="relative flex items-center justify-center pt-6">
-          <button
-            className="absolute left-0 z-10 p-2 shadow-none rounded-full"
-            aria-label="Anterior"
-          >
-            <Play
-              className="transform scale-x-[-1]"
-              color="var(--color-primary)"
-              fill="var(--color-primary)"
-              size={36}
-            />
-          </button>
-
-          <button
-            className="absolute right-0 z-10 p-2 shadow-none rounded-full"
-            aria-label="Siguiente"
-          >
-            <Play
-              color="var(--color-primary)"
-              fill="var(--color-primary)"
-              size={36}
-            />
-          </button>
-
-          <div className="flex overflow-hidden space-x-6 max-w-4xl">
-            {projects.map((proj, idx) => (
+          <div className="flex overflow-hidden space-x-6 max-w-4xl md:justify-center">
+            {/* Show all projects on desktop, only middle project on mobile */}
+            {displayProjects.map((proj, idx) => (
               <div
                 key={"featured" + proj.id}
-                className="flex flex-col items-center space-y-4"
+                className={`flex flex-col items-center space-y-4 ${
+                  // Hide first and last projects on mobile
+                  projects.indexOf(proj) === 0 ? 'hidden md:flex' :
+                  projects.indexOf(proj) === 2 ? 'hidden md:flex' : 
+                  'flex'
+                }`}
               >
                 <div
                   className={`flex-shrink-0 w-70 rounded-[30px] overflow-hidden relative 

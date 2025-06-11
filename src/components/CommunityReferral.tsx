@@ -24,7 +24,8 @@ export default function CommunityReferralSection() {
         </button>
 
         <div className="lg:w-1/2">
-          <div className="relative mb-8 overflow-hidden inverted-radius-br">
+          {/* Image hidden on mobile */}
+          <div className="relative mb-8 overflow-hidden inverted-radius-br hidden md:block">
             <Image
               src={SanMiguel}
               alt="Proyecto detalle"
@@ -34,7 +35,7 @@ export default function CommunityReferralSection() {
             />
           </div>
           <blockquote className="text-gray-200 text-2xl">
-            “Elegimos proyecto de calidad y accesibles para inversionistas”
+            "Elegimos proyecto de calidad y accesibles para inversionistas"
           </blockquote>
           <p className="mt-4 text-gray-400 leading-relaxed mb-5 lg:mb-0">
             Trabajamos con especialistas en la búsqueda y análisis de oportunidades de inversión inmobiliaria para ofrecerte las mejores oportunidades de inversión.
@@ -42,7 +43,8 @@ export default function CommunityReferralSection() {
         </div>
 
         <div className="lg:w-1/2 space-y-8">
-          <div className="border border-primary rounded-[30px] p-6 flex flex-col">
+          {/* Community section hidden on mobile */}
+          <div className="border border-primary rounded-[30px] p-6 flex-col hidden md:flex">
             <h3 className="text-xl font-semibold mb-2 pb-3 border-b-1 border-white">
               COMUNIDAD
             </h3>
@@ -68,8 +70,8 @@ export default function CommunityReferralSection() {
               Pronto podrás recibir beneficios al invitar a tus amigos a invertir con Kasa.
             </p>
             <div className="flex justify-center">
-              <button className="bg-gray-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto">
-                Proximamente
+              <button className="bg-gray-400 text-white font-semibold px-6 py-2 rounded-full transition w-8/12 mx-auto md:text-base text-base">
+                <span className="md:text-base text-base">Pronto 👀</span>
               </button>
             </div>
           </div>
