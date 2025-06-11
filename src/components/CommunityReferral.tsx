@@ -35,7 +35,7 @@ export default function CommunityReferralSection() {
             />
           </div>
           <blockquote className="text-gray-200 text-2xl">
-            "Elegimos proyecto de calidad y accesibles para inversionistas"
+            &quot;Elegimos proyecto de calidad y accesibles para inversionistas&quot;
           </blockquote>
           <p className="mt-4 text-gray-400 leading-relaxed mb-5 lg:mb-0">
             Trabajamos con especialistas en la búsqueda y análisis de oportunidades de inversión inmobiliaria para ofrecerte las mejores oportunidades de inversión.
