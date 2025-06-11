@@ -63,7 +63,7 @@ export default function InvestmentCheckoutCard({
   }, [id, total_price, setPropertyValue]);
 
   return (
-    <div className="flex flex-col items-center justify-center mx-auto w-3/4">
+    <div className="flex flex-col items-center justify-center mx-auto w-full md:w-3/4">
       <ReservationTimer endDate={expires_at} />
       <div className="w-full bg-transparent border text-white border-white rounded-lg shadow-lg p-6 space-y-4">
         <h2 className="text-xl font-semibold">Detalle de tu inversión</h2>
