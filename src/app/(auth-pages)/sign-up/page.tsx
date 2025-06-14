@@ -71,14 +71,9 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
         action={signUpAction}
       >
         <h1 className="text-2xl font-medium">Empezar Ahora</h1>
-        <p className="text-sm text">
-          Ya tienes una cuenta?{" "}
-          <Link className="text-primary font-medium underline" href="/sign-in">
-            Ingresar
-          </Link>
-        </p>
+    
          
-        <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+        <div className="flex flex-col">
           {/*
           <label htmlFor="email">Email</label>
           <input
@@ -157,6 +152,12 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
             </button>
           </div>
         </div>
+        <p className="text-sm text">
+          Ya tienes una cuenta?{" "}
+          <Link className="text-primary font-medium underline" href="/sign-in">
+            Ingresar
+          </Link>
+        </p>
       </form>
     </>
   );

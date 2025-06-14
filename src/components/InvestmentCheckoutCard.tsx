@@ -191,8 +191,8 @@ export default function InvestmentCheckoutCard({
             </div>
             <span className="font-bold text-nowrap">
               {formatCurrency(
-                (rent_roi * project_duration * investmentAmount) +
-                (Math.pow((1 + apreciation_roi), project_duration) - 1) * investmentAmount
+                ((rent_roi / 100) * project_duration * investmentAmount) +
+                (Math.pow((1 + apreciation_roi / 100), project_duration) - 1) * investmentAmount
               )}
             </span>
           </div>
