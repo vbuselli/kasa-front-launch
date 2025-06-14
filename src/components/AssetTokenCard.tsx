@@ -85,7 +85,7 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
             <button
               className="bg-yellow-400 mt-3 hover:bg-yellow-500 text-foreground font-semibold py-2 px-6 rounded-lg shadow-lg cursor-pointer transition-colors"
               onClick={() => {
-                if (state !== "pre-funding") {
+                if (state !== "pending") {
                   openDrawer(assetToken);
                   return;
                 }

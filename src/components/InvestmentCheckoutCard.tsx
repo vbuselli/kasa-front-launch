@@ -159,6 +159,7 @@ export default function InvestmentCheckoutCard({
             <div className="w-1/2 flex flex-col justify-center">
               <h3 className="text-xl font-semibold">{name}</h3>
               <p className="text-base text-gray-300">Lima</p>
+              <p className="text-base text-gray-300">Duración del proyecto: {project_duration} años</p>
             </div>
           </div>
 
@@ -186,7 +187,7 @@ export default function InvestmentCheckoutCard({
             <div>
               <p className="font-medium">Ganancia total estimada:</p>
               <span className="text-sm text-gray-400">
-                ganancia total en {project_duration} años
+                alquiler + apreciación
               </span>
             </div>
             <span className="font-bold text-nowrap">
