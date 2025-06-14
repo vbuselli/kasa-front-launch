@@ -25,10 +25,10 @@ export default function Navbar() {
   });
 
   return (
-    <header className="relative h-20 lg:h-24 mt-4 lg:mt-7">
-      <div className="absolute w-6/12 sm:w-4/12 lg:w-3/12 h-full bg-foreground" />
+    <header className="relative h-16 sm:h-20 lg:h-24 mt-2 sm:mt-4 lg:mt-7">
+      <div className="absolute w-5/12 sm:w-4/12 lg:w-3/12 h-full bg-foreground" />
 
-      <div className="relative z-10 h-full flex justify-center items-center pb-3 lg:pb-5 w-6/12 sm:w-4/12 lg:w-3/12 rounded-br-[30px] bg-background">
+      <div className="relative z-10 h-full flex justify-center items-center pb-1 sm:pb-3 lg:pb-5 w-5/12 sm:w-4/12 lg:w-3/12 rounded-br-[30px] bg-background">
         <Link href="/">
           <div className="flex items-center lg:w-full">
             <Image
@@ -37,7 +37,7 @@ export default function Navbar() {
               width={180}
               height={53}
               sizes="(max-width: 640px) 100px, (max-width: 1024px) 140px, 180px"
-              className="w-[120px] sm:w-[140px] lg:w-[180px] h-auto"
+              className="w-[100px] sm:w-[140px] lg:w-[180px] h-auto"
               priority
             />
           </div>
@@ -126,7 +126,7 @@ export default function Navbar() {
         className="
           absolute top-0 right-0
           h-full
-          w-6/12
+          w-7/12
           sm:w-8/12
           lg:w-9/12
           bg-foreground
@@ -165,7 +165,7 @@ export default function Navbar() {
                 href="https://intercom.help/inviertekasa/es/"
                 target="_blank"
                 rel="noopener noreferrer">
-                  Blog
+                Blog
               </Link>
             </li>
             <li>

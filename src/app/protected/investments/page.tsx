@@ -43,10 +43,10 @@ export default function InvestmentsPage() {
     <section className="relative py-16 bg-foreground text-white px-16 rounded-tl-[30px] flex-1 flex flex-col">
       <div className="container mx-auto flex-1 flex flex-col">
         <div className="flex flex-col items-center justify-center mb-8 w-full">
-          <h2 className="text-4xl font-bold">
+          <h2 className="text-4xl font-bold text-xl md:text-4xl">
             PROYECTOS PARA <span className="text-green-400">INVERTIR</span>
           </h2>
-          <p className="text-gray-300 text-xl">
+          <p className="text-gray-300 text-xl text-base md:text-xl">
             DESCUBRE TODAS LAS OPORTUNIDADES DE INVERSIÓN
           </p>
         </div>
