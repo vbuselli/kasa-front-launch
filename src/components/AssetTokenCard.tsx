@@ -3,6 +3,7 @@ import { AssetPopulated } from "types/models";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useDrawer } from "context/DrawerContext";
+import { useRouter } from "next/navigation";
 
 export type AssetTokenCardProps = AssetPopulated;
 
@@ -28,6 +29,7 @@ const stateDescriptions: Record<string, string> = {
 export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
   const [currentSrc, setCurrentSrc] = useState<string>();
   const { openDrawer } = useDrawer();
+  const router = useRouter();
 
   const {
     state,
@@ -82,7 +84,15 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
             </div>
             <button
               className="bg-yellow-400 mt-3 hover:bg-yellow-500 text-foreground font-semibold py-2 px-6 rounded-lg shadow-lg cursor-pointer transition-colors"
-              onClick={() => openDrawer(assetToken)}
+              onClick={() => {
+                if (state !== "pre-funding") {
+                  openDrawer(assetToken);
+                  return;
+                }
+                router.push(
+                  `/protected/checkout`
+                );
+              }}
             >
               Completar Inversión
             </button>

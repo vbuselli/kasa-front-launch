@@ -110,7 +110,7 @@ export default function Hero() {
             className="flex justify-center lg:justify-start"
           >
             <button className="bg-secondary hover:bg-yellow-300 text-white text-[16px] uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
-              Empieza hoy
+              EMPEZAR AHORA
             </button>
           </Link>
         </div>

@@ -21,6 +21,22 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
   );
   const [user, setUser] = useState<User>();
 
+  // Add this state to track validation click
+  const [hasClickedValidation, setHasClickedValidation] = useState(false);
+
+  useEffect(() => {
+    const validationClicked = localStorage.getItem(`validation_clicked_${assetToken.id}`);
+    if (validationClicked) {
+      setHasClickedValidation(true);
+    }
+  }, [assetToken.id]);
+
+  const handleValidationClick = () => {
+    localStorage.setItem(`validation_clicked_${assetToken.id}`, 'true');
+    setHasClickedValidation(true);
+    closeDrawer();
+  };
+
   // const { isVerified } = useUserVerification();
 
   // const isKycRequired =
@@ -45,7 +61,7 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
         const data = await res.json();
         setUser(data);
       }
-    } catch {}
+    } catch { }
   };
 
   useEffect(() => {
@@ -63,16 +79,14 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
             onClick={() => !tab.disabled && setActiveTab(tab.key)}
             className={`
                 px-3 py-1 rounded-full text-xs font-semibold
-                ${
-                  activeTab === tab.key
-                    ? "bg-primary text-foreground"
-                    : "bg-gray-700 text-gray-300"
-                }
-                ${
-                  tab.disabled
-                    ? "opacity-50 cursor-not-allowed"
-                    : "cursor-pointer"
-                }
+                ${activeTab === tab.key
+                ? "bg-primary text-foreground"
+                : "bg-gray-700 text-gray-300"
+              }
+                ${tab.disabled
+                ? "opacity-50 cursor-not-allowed"
+                : "cursor-pointer"
+              }
                 transition
               `}
           >
@@ -225,18 +239,26 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
               <h3 className="text-lg font-semibold mb-1">
                 Validación de identidad
               </h3>
-              <p className="mb-2">
-                Aquí debes validar tu identidad para cumplir con la normativa
-                peruana contra lavado de activos.
-              </p>
-              <Link href="/protected/validate-identity/">
-                <button
-                  onClick={closeDrawer}
-                  className="bg-primary text-white px-4 py-2 rounded mb-4 w-full cursor-pointer"
-                >
-                  Iniciar validación
-                </button>
-              </Link>
+              {hasClickedValidation ? (
+                <p className="mb-2 text-yellow-400">
+                  Validando tu identidad...
+                </p>
+              ) : (
+                <>
+                  <p className="mb-2">
+                    Aquí debes validar tu identidad para cumplir con la normativa
+                    peruana contra lavado de activos.
+                  </p>
+                  <Link href="/protected/validate-identity/">
+                    <button
+                      onClick={handleValidationClick}
+                      className="bg-primary text-white px-4 py-2 rounded mb-4 w-full cursor-pointer"
+                    >
+                      Iniciar validación
+                    </button>
+                  </Link>
+                </>
+              )}
             </div>
           )}
 
@@ -250,7 +272,7 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
                   Cómo último paso para completar tu inversión debes firmar tu
                   contrato que respaldará tu inversión.
                 </p>
-                <Link 
+                <Link
                   href={assetToken.document_sign_url}
                   target="_blank"
                   rel="noopener noreferrer"

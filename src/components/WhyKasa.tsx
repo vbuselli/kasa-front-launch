@@ -42,7 +42,35 @@ export default function WhyKasaSection() {
           Inversiones simples, accesibles y sin miedo a endeudarte
         </p>
       </div>
-      <div className="container mx-auto px-12 md:px-12 px-6 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-8 gap-4">
+      
+      {/* Mobile Layout - Vertical Stack */}
+      <div className="container mx-auto px-6 flex flex-col gap-6 sm:hidden">
+        {features.map(({ Icon, title, desc }) => (
+          <div
+            key={title}
+            className="flex flex-col items-center text-center gap-4"
+          >
+            <div>
+              <Image
+                src={Icon}
+                alt={title}
+                width={60}
+                height={60}
+                className="w-[60px] h-[60px]"
+              />
+            </div>
+            <div>
+              <h3 className="text-xs uppercase font-bold mb-2 text-white">
+                {title}
+              </h3>
+              <p className="text-sm leading-snug text-white-400">{desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop Layout - Grid */}
+      <div className="container mx-auto px-12 hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-8">
         {features.map(({ Icon, title, desc }) => (
           <div
             key={title}
@@ -55,18 +83,19 @@ export default function WhyKasaSection() {
                 alt={title}
                 width={100}
                 height={100}
-                className="mx-auto md:w-[100px] md:h-[100px] w-[60px] h-[60px]"
+                className="mx-auto w-[100px] h-[100px]"
               />
             </div>
             <div className="flex-none h-fit">
-              <h3 className="text-base leading-5 uppercase font-bold mb-2 md:text-base text-xs">
+              <h3 className="text-base leading-5 uppercase font-bold mb-2">
                 {title}
               </h3>
-              <p className="text-sm leading-snug hidden md:block">{desc}</p>
+              <p className="text-sm leading-snug">{desc}</p>
             </div>
           </div>
         ))}
       </div>
+
       <Link href="/protected/investments" className="flex justify-center mt-6">
         <button className="bg-secondary hover:bg-yellow-300 text-white text-lg md:text-lg text-[16px] uppercase font-semibold px-12 py-2 rounded-[30px] mt-4 inline-block cursor-pointer">
           Empezar a invertir

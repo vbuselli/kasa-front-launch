@@ -43,7 +43,7 @@ export default function FAQSection() {
     <section className="px-12 relative bg-foreground">
       <div className="container mx-auto px-6 bg-primary py-8 rounded-tr-[30px] rounded-tl-[30px] shadow-inset-full">
         <h2 className="text-center text-3xl font-extrabold text-foreground">
-          ¿TIENES PREGUNTAS?
+          PREGUNTAS FRECUENTES
         </h2>
         <p className="text-center text-foreground mb-6 text-lg font-semibold">
           NOSOTROS TE AYUDAMOS
