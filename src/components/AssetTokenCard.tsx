@@ -90,7 +90,7 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
                   return;
                 }
                 router.push(
-                  `/protected/checkout`
+                  `/protected/checkout/${assetToken.id}`
                 );
               }}
             >
