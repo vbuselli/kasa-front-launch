@@ -132,7 +132,7 @@ export default function ProjectPage() {
       <ProjectHeader title={name} />
 
       <div className="grid lg:grid-cols-2 gap-12">
-        <div className="space-y-8">
+        <div className="space-y-8 overflow-hidden">
           {images.length > 0 && <ImageGallery images={images} />}
           <ProjectInfo
             provider={proyect_provider}
