@@ -1,8 +1,10 @@
+// Updated InvestmentsPage.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { Asset } from "types/models";
 import AssetCard from "@/components/AssetCard";
+import TestAssetCard from "@/components/TestAssetCard";
 import Loader from "@/components/ui/Loader";
 
 export default function InvestmentsPage() {
@@ -62,6 +64,20 @@ export default function InvestmentsPage() {
             {sortedAssets.map((proj) => (
               <AssetCard key={proj.id} {...proj} />
             ))}
+            
+            {/* Test cards - only shown on non-mobile */}
+            <TestAssetCard 
+              name="Torre Ejecutiva"
+              address="Polanco, CDMX"
+            />
+            <TestAssetCard 
+              name="Complejo Residencial"
+              address="Santa Fe, CDMX"
+            />
+            <TestAssetCard 
+              name="Centro Comercial"
+              address="Condesa, CDMX"
+            />
           </div>
         )}
       </div>
