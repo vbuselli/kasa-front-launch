@@ -282,7 +282,7 @@ export default function InvestmentCheckoutCard({
 
               {terms && ownership && showAccount && (
                 <div className="space-y-4 mt-6">
-                  <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 md:border-b-0 md:pb-0">
+                  <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 md:border-b md:border-b-white md:pb-0">
                     <div className="flex justify-between items-center min-h-0">
                       <span className="text-sm font-medium flex-shrink-0 mr-2">Banco</span>
                       <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
