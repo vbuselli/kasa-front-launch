@@ -10,7 +10,7 @@ export default function ImageGallery({
   const [main, setMain] = useState(images[0]);
 
   return (
-    <div className="w-full max-w-full">
+    <div className="w-full max-w-full border-rounded-lgborder-gray-200 bg-white p-4 shadow-md">
       <div className="relative w-full h-80 rounded-lg overflow-hidden mb-4">
         <Image src={main} alt="Proyecto" fill className="object-contain" />
       </div>
