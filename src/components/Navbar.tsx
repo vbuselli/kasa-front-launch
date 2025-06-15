@@ -100,12 +100,16 @@ export default function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link href="/" onClick={() => setOpen(false)}>
+                <Link href="https://intercom.help/inviertekasa/es/" onClick={() => setOpen(false)}
+                  target="_blank"
+                  rel="noopener noreferrer">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/" onClick={() => setOpen(false)}>
+                <Link href="https://intercom.help/inviertekasa/es/" onClick={() => setOpen(false)}
+                  target="_blank"
+                  rel="noopener noreferrer">
                   Ayuda
                 </Link>
               </li>
