@@ -283,13 +283,15 @@ export default function InvestmentCheckoutCard({
               {terms && ownership && showAccount && (
                 <div className="space-y-4 mt-6">
                   <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 pb-2 md:border-b-0 md:pb-0">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">Banco</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold">{asset_token.asset.bank_name}</span>
+                    <div className="flex justify-between items-center min-h-0">
+                      <span className="text-sm font-medium flex-shrink-0 mr-2">Banco</span>
+                      <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
+                        <span className="text-sm font-bold break-words text-right max-w-full overflow-hidden">
+                          {asset_token.asset.bank_name}
+                        </span>
                         <button
                           onClick={() => navigator.clipboard.writeText(asset_token.asset.bank_name)}
-                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400"
+                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400 flex-shrink-0"
                           title="Copiar"
                         >
                           ⧉
@@ -299,13 +301,15 @@ export default function InvestmentCheckoutCard({
                   </div>
                   
                   <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 pb-2 md:border-b-0 md:pb-0">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">CCI</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold">{asset_token.asset.bank_cci}</span>
+                    <div className="flex justify-between items-center min-h-0">
+                      <span className="text-sm font-medium flex-shrink-0 mr-2">CCI</span>
+                      <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
+                        <span className="text-sm font-bold break-all text-right max-w-full overflow-hidden font-mono">
+                          {asset_token.asset.bank_cci}
+                        </span>
                         <button
                           onClick={() => navigator.clipboard.writeText(asset_token.asset.bank_cci)}
-                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400"
+                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400 flex-shrink-0"
                           title="Copiar"
                         >
                           ⧉
@@ -315,13 +319,15 @@ export default function InvestmentCheckoutCard({
                   </div>
                   
                   <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 pb-2 md:border-b-0 md:pb-0">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">Número de cuenta</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold">{asset_token.asset.bank_number_account}</span>
+                    <div className="flex justify-between items-center min-h-0">
+                      <span className="text-sm font-medium flex-shrink-0 mr-2">Número de cuenta</span>
+                      <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
+                        <span className="text-sm font-bold break-all text-right max-w-full overflow-hidden font-mono">
+                          {asset_token.asset.bank_number_account}
+                        </span>
                         <button
                           onClick={() => navigator.clipboard.writeText(asset_token.asset.bank_number_account)}
-                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400"
+                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400 flex-shrink-0"
                           title="Copiar"
                         >
                           ⧉
@@ -331,30 +337,36 @@ export default function InvestmentCheckoutCard({
                   </div>
                   
                   <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 pb-2 md:border-b-0 md:pb-0">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium">RUC</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold">{spv_ruc}</span>
-                        <button
-                          onClick={() => navigator.clipboard.writeText(spv_ruc)}
-                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400"
-                          title="Copiar"
-                        >
-                          ⧉
-                        </button>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center min-h-0">
+                        <span className="text-sm font-medium flex-shrink-0 mr-2">RUC</span>
+                        <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
+                          <span className="text-sm font-bold break-all text-right max-w-full overflow-hidden font-mono">
+                            {spv_ruc}
+                          </span>
+                          <button
+                            onClick={() => navigator.clipboard.writeText(spv_ruc)}
+                            className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400 flex-shrink-0"
+                            title="Copiar"
+                          >
+                            ⧉
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">Razón Social</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold">{spv_name}</span>
-                        <button
-                          onClick={() => navigator.clipboard.writeText(spv_name)}
-                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400"
-                          title="Copiar"
-                        >
-                          ⧉
-                        </button>
+                      <div className="flex justify-between items-center min-h-0">
+                        <span className="text-sm font-medium flex-shrink-0 mr-2">Razón Social</span>
+                        <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
+                          <span className="text-sm font-bold break-words text-right max-w-full overflow-hidden">
+                            {spv_name}
+                          </span>
+                          <button
+                            onClick={() => navigator.clipboard.writeText(spv_name)}
+                            className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400 flex-shrink-0"
+                            title="Copiar"
+                          >
+                            ⧉
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
