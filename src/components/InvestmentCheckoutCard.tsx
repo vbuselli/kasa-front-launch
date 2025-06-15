@@ -287,13 +287,13 @@ export default function InvestmentCheckoutCard({
                       <span className="text-sm font-medium">Banco</span>
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold">{asset_token.asset.bank_name}</span>
-                        <span
+                        <button
                           onClick={() => navigator.clipboard.writeText(asset_token.asset.bank_name)}
                           className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400"
                           title="Copiar"
                         >
                           ⧉
-                        </span>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -303,13 +303,13 @@ export default function InvestmentCheckoutCard({
                       <span className="text-sm font-medium">CCI</span>
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold">{asset_token.asset.bank_cci}</span>
-                        <span
+                        <button
                           onClick={() => navigator.clipboard.writeText(asset_token.asset.bank_cci)}
                           className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400"
                           title="Copiar"
                         >
                           ⧉
-                        </span>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -319,13 +319,13 @@ export default function InvestmentCheckoutCard({
                       <span className="text-sm font-medium">Número de cuenta</span>
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold">{asset_token.asset.bank_number_account}</span>
-                        <span
+                        <button
                           onClick={() => navigator.clipboard.writeText(asset_token.asset.bank_number_account)}
                           className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400"
                           title="Copiar"
                         >
                           ⧉
-                        </span>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -335,26 +335,26 @@ export default function InvestmentCheckoutCard({
                       <span className="text-sm font-medium">RUC</span>
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold">{spv_ruc}</span>
-                        <span
+                        <button
                           onClick={() => navigator.clipboard.writeText(spv_ruc)}
                           className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400"
                           title="Copiar"
                         >
                           ⧉
-                        </span>
+                        </button>
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium">Razón Social</span>
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold">{spv_name}</span>
-                        <span
+                        <button
                           onClick={() => navigator.clipboard.writeText(spv_name)}
                           className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400"
                           title="Copiar"
                         >
                           ⧉
-                        </span>
+                        </button>
                       </div>
                     </div>
                   </div>
