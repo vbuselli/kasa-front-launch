@@ -25,7 +25,7 @@ export default function CommunityReferralSection() {
 
         <div className="lg:w-1/2">
           {/* Image hidden on mobile */}
-          <div className="relative mb-8 overflow-hidden hidden md:block">
+          <div className="relative mb-8 overflow-hidden">
             <Link href="/">
               <div className="flex items-center lg:w-full">
                 <div className="w-full h-auto aspect-video rounded overflow-hidden">
