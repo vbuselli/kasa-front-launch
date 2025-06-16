@@ -431,6 +431,26 @@ export default function InvestmentCheckoutCard({
                       </span>
                     )}
                   </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-2"
+                      htmlFor="referral_code"
+                    >
+                      Código de referencia (opcional)
+                    </label>
+                    <input
+                      id="referral_code"
+                      type="text"
+                      className="w-full border border-gray-600 bg-gray-800 rounded px-3 py-2 text-white focus:outline-none focus:border-green-500"
+                      placeholder="Ingresa tu código de referencia"
+                      {...register("referral_code")}
+                    />
+                    {errors.referral_code && (
+                      <span className="text-red-400 text-xs">
+                        {errors.referral_code.message as string}
+                      </span>
+                    )}
+                  </div>
                   {toast && (
                     <div className="bg-red-600 text-white px-4 py-2 rounded mb-2 text-center max-w-2xs mx-auto">
                       {toast}
