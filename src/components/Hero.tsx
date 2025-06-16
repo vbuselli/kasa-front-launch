@@ -11,6 +11,7 @@ import Surquillo from "@/assets/projects/surquillo.png";
 import PuebloLibre from "@/assets/projects/pueblo-libre.png";
 import Masonry from "react-masonry-css";
 import MasonryCard from "./MasonryCard";
+import { useState } from "react";
 
 const cards = [
   {
@@ -54,6 +55,8 @@ const imagesSizes: { [i: number]: string } = {
 };
 
 export default function Hero() {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <section className="relative bg-foreground text-white px-8 pb-8 pt-4 lg:pt-0 rounded-bl-3xl overflow-hidden rounded-tl-[30px] rounded-br-[30px] shadow-hero">
       <div className="container mx-auto grid grid-cols-1 gap-8 lg:grid-cols-[50%_50%] lg:gap-0 items-center pt-3 lg:pt-0">
@@ -63,8 +66,8 @@ export default function Hero() {
             <span
               className="text-green-400"
               style={{
-                animation: 'fadeInOut 3s ease-in-out infinite',
-                animationName: 'fadeInOut'
+                animation: "fadeInOut 3s ease-in-out infinite",
+                animationName: "fadeInOut",
               }}
             >
               A KASA
@@ -103,7 +106,8 @@ export default function Hero() {
             <span className="text-green-400 font-semibold">
               recibe ingresos cada mes
             </span>{" "}
-            por alquiler, mientras tu inversión crece con la valorización del depa.
+            por alquiler, mientras tu inversión crece con la valorización del
+            depa.
           </p>
           <Link
             href="/protected/investments"
@@ -130,7 +134,7 @@ export default function Hero() {
                   key={card.id}
                   href={`/protected/investments`}
                   className={`group block relative rounded-[30px] overflow-hidden shadow-lg ring-2 ring-transparent hover:ring-blue-500 transition ${
-                    isBlurCard ? 'hidden lg:block' : ''
+                    isBlurCard ? "hidden lg:block" : ""
                   }`}
                 >
                   <MasonryCard heightClass={heightClass} {...card} />
@@ -139,20 +143,49 @@ export default function Hero() {
             })}
           </Masonry>
 
+          {/* Modal Trigger Button */}
           <button
-            className="absolute top-0 right-0 lg:top-1/2 lg:left-0 lg:right-auto lg:-translate-x-1/2 -translate-y-1/2 bg-green-400 hover:bg-green-300 rounded-full shadow-xl flex items-center justify-center transition"
+            className="absolute top-0 right-0 lg:top-1/2 lg:left-0 lg:right-auto lg:-translate-x-1/2 -translate-y-1/2 bg-green-400 hover:bg-green-300 rounded-full shadow-xl flex items-center justify-center transition cursor-pointer"
             aria-label="Cómo funciona"
+            onClick={() => setShowModal(true)}
           >
-            {
-              /* <Image
-                src={HowItWorks}
-                alt={"Cómo funciona Kasa"}
-                className="text-white"
-                width={80}
-                height={80}
-              /> */
-            }
+            <Image
+              src={HowItWorks}
+              alt={"Cómo funciona Kasa"}
+              className="text-white"
+              width={80}
+              height={80}
+            />
           </button>
+
+          {/* Modal */}
+          {showModal && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+            >
+              <div className="rounded-2xl p-4 max-w-3xl w-full relative">
+                <button
+                  className="absolute top-0 right-1 lg:-top-1 lg:-right-1 text-black hover:text-black text-3xl cursor-pointer bg-white rounded-full w-8 h-8 flex items-center justify-center transition-colors duration-300"
+                  onClick={() => setShowModal(false)}
+                  aria-label="Cerrar modal"
+                >
+                  &times;
+                </button>
+                <div className="w-full h-auto aspect-video rounded overflow-hidden">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/JXJLn48urXY"
+                    title="Cómo funciona Kasa"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
