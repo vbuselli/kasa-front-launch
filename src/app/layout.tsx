@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FAQSection from "@/components/FAQ";
 import { CartProvider } from "context/CartContext";
+import WhatsappButton from "@/components/WhatsappButton";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function RootLayout({
         <CartProvider>
           <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col">
             <Navbar />
+            <WhatsappButton />
             <main className="flex-1 flex flex-col">{children}</main>
             <FAQSection />
             <Footer />

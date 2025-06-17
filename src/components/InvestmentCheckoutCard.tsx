@@ -282,30 +282,95 @@ export default function InvestmentCheckoutCard({
 
               {terms && ownership && showAccount && (
                 <div className="space-y-4 mt-6">
-                  <div>
-                    <span className="block text-sm font-medium mb-1">Banco</span>
-                    <div className="py-2">{asset_token.asset.bank_name}</div>
-                  </div>
-                  <div>
-                    <span className="block text-sm font-medium mb-1">CCI</span>
-                    <div className="py-2">{asset_token.asset.bank_cci}</div>
-                  </div>
-                  <div>
-                    <span className="block text-sm font-medium mb-1">
-                      Número de cuenta
-                    </span>
-                    <div className="py-2">
-                      {asset_token.asset.bank_number_account}
+                  <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 md:border-b md:border-b-white md:pb-0 pb-2">
+                    <div className="flex justify-between items-center min-h-0">
+                      <span className="text-sm font-medium flex-shrink-0 mr-2">Banco</span>
+                      <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
+                        <span className="text-sm font-bold break-words text-right max-w-full overflow-hidden">
+                          {asset_token.asset.bank_name}
+                        </span>
+                        <button
+                          onClick={() => navigator.clipboard.writeText(asset_token.asset.bank_name)}
+                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400 flex-shrink-0"
+                          title="Copiar"
+                        >
+                          ⧉
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <span className="block text-sm font-medium mb-1">
-                      RUC: {spv_ruc}
-                    </span>
-                    <span className="block text-sm font-medium mb-1">
-                      Razón Social: {spv_name}
-                    </span>
+                  
+                  <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 md:border-b md:border-b-white md:pb-0 pb-2">
+                    <div className="flex justify-between items-center min-h-0">
+                      <span className="text-sm font-medium flex-shrink-0 mr-2">CCI</span>
+                      <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
+                        <span className="text-sm font-bold break-all text-right max-w-full overflow-hidden font-mono">
+                          {asset_token.asset.bank_cci}
+                        </span>
+                        <button
+                          onClick={() => navigator.clipboard.writeText(asset_token.asset.bank_cci)}
+                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400 flex-shrink-0"
+                          title="Copiar"
+                        >
+                          ⧉
+                        </button>
+                      </div>
+                    </div>
                   </div>
+                  
+                  <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 md:border-b md:border-b-white md:pb-0 pb-2">
+                    <div className="flex justify-between items-center min-h-0">
+                      <span className="text-sm font-medium flex-shrink-0 mr-2">Número de cuenta</span>
+                      <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
+                        <span className="text-sm font-bold break-all text-right max-w-full overflow-hidden font-mono">
+                          {asset_token.asset.bank_number_account}
+                        </span>
+                        <button
+                          onClick={() => navigator.clipboard.writeText(asset_token.asset.bank_number_account)}
+                          className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400 flex-shrink-0"
+                          title="Copiar"
+                        >
+                          ⧉
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 md:border-b md:border-b-white md:pb-0 pb-2">
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center min-h-0">
+                        <span className="text-sm font-medium flex-shrink-0 mr-2">RUC</span>
+                        <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
+                          <span className="text-sm font-bold break-all text-right max-w-full overflow-hidden font-mono">
+                            {spv_ruc}
+                          </span>
+                          <button
+                            onClick={() => navigator.clipboard.writeText(spv_ruc)}
+                            className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400 flex-shrink-0"
+                            title="Copiar"
+                          >
+                            ⧉
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center min-h-0">
+                        <span className="text-sm font-medium flex-shrink-0 mr-2">Razón Social</span>
+                        <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
+                          <span className="text-sm font-bold break-words text-right max-w-full overflow-hidden">
+                            {spv_name}
+                          </span>
+                          <button
+                            onClick={() => navigator.clipboard.writeText(spv_name)}
+                            className="cursor-pointer hover:opacity-70 transition-opacity text-gray-400 flex-shrink-0"
+                            title="Copiar"
+                          >
+                            ⧉
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <div>
                     <label
                       className="block text-sm font-medium mb-2"
@@ -316,7 +381,7 @@ export default function InvestmentCheckoutCard({
                     <input
                       id="transaction_number"
                       type="text"
-                      className="w-full border rounded px-3 py-2 text-white"
+                      className="w-full border border-gray-600 bg-gray-800 rounded px-3 py-2 text-white focus:outline-none focus:border-green-500"
                       placeholder="Ingresa el número de transacción"
                       {...register("transaction_number")}
                     />
@@ -337,7 +402,7 @@ export default function InvestmentCheckoutCard({
                       id="voucherImage"
                       type="file"
                       accept="image/*"
-                      className="w-full border rounded px-3 py-2 text-white"
+                      className="w-full border border-gray-600 bg-gray-800 rounded px-3 py-2 text-white file:mr-4 file:py-1 file:px-2 file:rounded file:border-0 file:text-sm file:bg-green-600 file:text-white hover:file:bg-green-700"
                       {...register("voucherImage")}
                     />
                     {errors.voucherImage && (
@@ -356,13 +421,33 @@ export default function InvestmentCheckoutCard({
                     <input
                       id="funds_origin"
                       type="text"
-                      className="w-full border rounded px-3 py-2 text-white"
+                      className="w-full border border-gray-600 bg-gray-800 rounded px-3 py-2 text-white focus:outline-none focus:border-green-500"
                       placeholder="Ahorros, salario, préstamo, otro (especificar)"
                       {...register("funds_origin")}
                     />
                     {errors.funds_origin && (
                       <span className="text-red-400 text-xs">
                         {errors.funds_origin.message as string}
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-2"
+                      htmlFor="referral_code"
+                    >
+                      Código de referencia (opcional)
+                    </label>
+                    <input
+                      id="referral_code"
+                      type="text"
+                      className="w-full border border-gray-600 bg-gray-800 rounded px-3 py-2 text-white focus:outline-none focus:border-green-500"
+                      placeholder="Ingresa tu código de referencia"
+                      {...register("referral_code")}
+                    />
+                    {errors.referral_code && (
+                      <span className="text-red-400 text-xs">
+                        {errors.referral_code.message as string}
                       </span>
                     )}
                   </div>
@@ -374,7 +459,7 @@ export default function InvestmentCheckoutCard({
 
                   <button
                     type="submit"
-                    className="w-full bg-primary hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-colors cursor-pointer disabled:opacity-60"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors cursor-pointer disabled:opacity-60"
                     disabled={loading || isButtonDisabled}
                   >
                     {loading ? "Procesando..." : "Enviar"}

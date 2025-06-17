@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { ReactNode } from "react";
-import HowItWorks from "@/assets/how-it-works/how-it-works.png";
+import HowItWorks from "@/assets/how-it-works/how-it-works.jpg";
 
 const steps: {
   num: string;

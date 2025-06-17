@@ -9,10 +9,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useParams, useRouter } from "next/navigation";
 import Loader from "@/components/ui/Loader";
 
-const schema = yup.object().shape({
+export interface InvestmentFormValues {
+  transaction_number: string;
+  voucherImage: FileList;
+  funds_origin: string;
+  referral_code?: string;
+}
+
+const schema: yup.ObjectSchema<InvestmentFormValues> = yup.object({
   transaction_number: yup.string().required("Transaction Number requerido"),
   voucherImage: yup
-    .mixed()
+    .mixed<FileList>()
     .required("Voucher requerido")
     .test("fileType", "Solo se permiten imágenes (jpg, jpeg, png)", (value) => {
       if (!value) return false;
@@ -27,9 +34,8 @@ const schema = yup.object().shape({
       return file && file.size <= 5 * 1024 * 1024;
     }),
   funds_origin: yup.string().required("Origen de los fondos requerido"),
+  referral_code: yup.string().optional(),
 });
-
-export type InvestmentFormValues = yup.InferType<typeof schema>;
 
 export default function CheckoutPage() {
   const params = useParams();
@@ -88,6 +94,11 @@ export default function CheckoutPage() {
         "voucherImage",
         (data.voucherImage as FileList)[0] as File
       );
+      
+      // Add referral code if provided
+      if (data.referral_code && data.referral_code.trim()) {
+        formData.append("referral_code", data.referral_code.trim());
+      }
 
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_APP_URL}/api/create-transaction`,
