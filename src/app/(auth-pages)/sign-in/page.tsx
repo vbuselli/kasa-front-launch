@@ -10,6 +10,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
       <h1 className="text-2xl font-medium">Ingresar</h1>
 
 
+
       <div className="flex flex-col">
         {/*
         <label htmlFor="email">Email</label>

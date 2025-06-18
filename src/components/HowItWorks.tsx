@@ -38,7 +38,7 @@ const steps: {
     title: "Recibes tus ganancias",
     desc: (
       <>
-        Cobras renta mes a mes, y cuando se vende el inmueble, ganas por su
+        Recibes tus ganancias mes a mes, y cuando se vende el inmueble, ganas por su
         valorización. {""}
         <span className="font-bold">
           Tu plata trabaja por ti, tú ni te mueves.
