@@ -158,6 +158,9 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
             Ingresar
           </Link>
         </p>
+        <p className="text-xs text-gray-500 text-center mt-2">
+          Al continuar declaras estar de acuerdo con los T&C y política de privacidad
+        </p>
       </form>
     </>
   );

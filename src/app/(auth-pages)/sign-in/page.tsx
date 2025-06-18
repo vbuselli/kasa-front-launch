@@ -8,7 +8,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
   return (
     <form className="flex-1 flex flex-col min-w-64">
       <h1 className="text-2xl font-medium">Ingresar</h1>
-      
+
 
       <div className="flex flex-col">
         {/*
@@ -78,6 +78,9 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
         <Link className="font-medium underline" href="/sign-up">
           Empezar Ahora
         </Link>
+      </p>
+      <p className="text-xs text-gray-500 text-center mt-2">
+        Al continuar declaras estar de acuerdo con los T&C y política de privacidad
       </p>
     </form>
   );

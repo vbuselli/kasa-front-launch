@@ -12,28 +12,28 @@ const faqs = [
     id: "faq-1",
     icon: House,
     title: "Empezando en Kasa",
-    desc: "Paso a paso: desde registrarte hasta activar tu primera inversión",
+    desc: "Conoce el paso a paso para invertir por primera vez en Kasa.",
     link: "https://intercom.help/inviertekasa/es/collections/13211886-invirtiendo-en-kasa"
   },
   {
     id: "faq-2",
     icon: Money,
     title: "Rentabilidad",
-    desc: "Ingresos y seguimiento de tu inversión",
+    desc: "Descubre cómo ganas dinero y haces seguimiento a tus inversiones.",
     link: "https://intercom.help/inviertekasa/es/collections/13211915-rentabilidad-e-ingresos"
   },
   {
     id: "faq-3",
     icon: Check,
     title: "Seguridad",
-    desc: "Cómo protegemos tu inversión, legalmente y en la práctica",
+    desc: "Conoce cómo protegemos tu inversión con respaldo legal y seguridad.",
     link: "https://intercom.help/inviertekasa/es/collections/13211892-seguridad"
   },
   {
     id: "faq-4",
     icon: Files,
     title: "Documentos e impuestos",
-    desc: "Lo que necesitas saber sobre impuestos y declaraciones",
+    desc: "Todo lo que necesitas saber sobre impuestos y declaraciones.",
     link: "https://intercom.help/inviertekasa/es/collections/13211927-documentos-e-impuestos"
   }
 ];
