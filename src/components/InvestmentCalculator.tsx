@@ -225,7 +225,7 @@ export default function InvestmentCalculator({
           className="text-xs text-gray-100 font-semibold ml-1"
         >
           Estoy de acuerdo en continuar con la inversión según los{" "}
-          <a href="/terms" className="underline text-gray-100 font-bold">
+          <a href="https://drive.google.com/file/d/1HSf3dvCssOkjMe48U90r7tPRzvScWevE/view?usp=drive_link" className="underline text-gray-100 font-bold">
             Términos y Condiciones
           </a>
         </label>

@@ -1,16 +1,31 @@
 import { FormMessage, Message } from "@/components/ui/FormMessage";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 import { signInAction, signInWithGoogle } from "@/lib/actions";
+import Image from "next/image";
 import Link from "next/link";
+import LOGO from "@/assets/logo-kasa-blanco.png";
 
 export default async function Login(props: { searchParams: Promise<Message> }) {
   const searchParams = await props.searchParams;
   return (
     <form className="flex-1 flex flex-col min-w-64">
-      <h1 className="text-2xl font-medium">Ingresar</h1>
+      {/* Logo */}
+      <div className="flex justify-center mb-6">
+        <Image
+          src={LOGO}
+          alt="KASA Logo"
+          width={120}
+          height={60}
+          className="object-contain"
+        />
+      </div>
 
-
-
+      <div className="text-center mb-6">
+        <h1 className="text-2xl font-medium">Ingresar a KASA 👋</h1>
+        <p className="text-sm text-white-600 mt-2">
+          Aquí todos podemos ser propietarios de una fracción
+        </p>
+      </div>
       <div className="flex flex-col">
         {/*
         <label htmlFor="email">Email</label>
@@ -81,8 +96,25 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
         </Link>
       </p>
       <p className="text-xs text-gray-500 text-center mt-2">
-        Al continuar declaras estar de acuerdo con los T&C y política de privacidad
-      </p>
+          Al continuar declaras estar de acuerdo con los{" "}
+          <a
+            href="https://drive.google.com/file/d/1HSf3dvCssOkjMe48U90r7tPRzvScWevE/view?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-500 underline hover:no-underline"
+          >
+            Términos y Condiciones
+          </a>
+          {" "}y la{" "}
+          <a
+            href="https://drive.google.com/file/d/1jPHNTb5T7633Kfb9s-BX7iSZEXuB6wGT/view?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-500 underline hover:no-underline"
+          >
+            Política de Privacidad
+          </a>
+        </p>
     </form>
   );
 }
