@@ -164,7 +164,7 @@ export default function InvestmentCalculator({
             </p>
           </div>
         </div>
-        <p className="text-gray-300 mb-1 font-semibold">
+        <p className="text-gray-300 mb-1 mt-1 font-semibold">
           Tu ganancia estimada sería:
         </p>
         <div className="bg-primary text-foreground p-4 rounded-md">
