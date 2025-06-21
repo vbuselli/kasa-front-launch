@@ -18,15 +18,15 @@ const faqs = [
   {
     id: "faq-2",
     icon: Money,
-    title: "Rentabilidad",
+    title: "RENTABILIDAD Y PAGOS",
     desc: "Descubre cómo ganas dinero y haces seguimiento a tus inversiones.",
     link: "https://intercom.help/inviertekasa/es/collections/13211915-rentabilidad-e-ingresos"
   },
   {
     id: "faq-3",
     icon: Check,
-    title: "Seguridad",
-    desc: "Conoce cómo protegemos tu inversión con respaldo legal y seguridad.",
+    title: "SEGURIDAD Y REGISTROS",
+    desc: "CConoce cómo protegemos tu inversión con respaldo legal.",
     link: "https://intercom.help/inviertekasa/es/collections/13211892-seguridad"
   },
   {
