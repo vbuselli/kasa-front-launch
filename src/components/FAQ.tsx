@@ -26,7 +26,7 @@ const faqs = [
     id: "faq-3",
     icon: Check,
     title: "SEGURIDAD Y REGISTROS",
-    desc: "CConoce cómo protegemos tu inversión con respaldo legal.",
+    desc: "Conoce cómo protegemos tu inversión con respaldo legal.",
     link: "https://intercom.help/inviertekasa/es/collections/13211892-seguridad"
   },
   {

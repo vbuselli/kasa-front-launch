@@ -19,7 +19,6 @@ type Sponsor = {
 };
 
 const sponsors: Sponsor[] = [
-
   {
     src: EmprendeUp,
     alt: "Emprende Up",
@@ -81,36 +80,34 @@ export default function Sponsors() {
     <section className="py-8 mt-3 -mx-4 md:-mx-6 lg:-mx-8 xl:-mx-12">
       <div className="w-full max-w-[100vw] relative overflow-hidden">
         <div className="relative overflow-hidden">
-          <div className="flex animate-scroll">
+          <div className="flex animate-scroll items-center">
             {/* First set of sponsors */}
             {sponsors.map((s, index) => (
               <div
                 key={`first-${s.alt}-${index}`}
-                className="flex-shrink-0 mx-8 opacity-80"
-              >
-                <div className="max-h-[40px] px-auto">
-                  <Image
-                    src={s.src}
-                    alt={s.alt}
-                    width={s.width}
-                    height={s.height}
-                    className="object-contain filter brightness-0 saturate-100"
-                  />
-                </div>
-              </div>
-            ))}
-            {/* Duplicate set for seamless loop */}
-            {sponsors.map((s, index) => (
-              <div
-                key={`second-${s.alt}-${index}`}
-                className="flex-shrink-0 mx-8 opacity-80"
+                className="flex-shrink-0 mx-8 opacity-80 flex items-center justify-center h-16"
               >
                 <Image
                   src={s.src}
                   alt={s.alt}
                   width={s.width}
                   height={s.height}
-                  className="object-contain filter brightness-0 saturate-100"
+                  className="object-contain filter brightness-0 saturate-100 max-h-full"
+                />
+              </div>
+            ))}
+            {/* Duplicate set for seamless loop */}
+            {sponsors.map((s, index) => (
+              <div
+                key={`second-${s.alt}-${index}`}
+                className="flex-shrink-0 mx-8 opacity-80 flex items-center justify-center h-16"
+              >
+                <Image
+                  src={s.src}
+                  alt={s.alt}
+                  width={s.width}
+                  height={s.height}
+                  className="object-contain filter brightness-0 saturate-100 max-h-full"
                 />
               </div>
             ))}
