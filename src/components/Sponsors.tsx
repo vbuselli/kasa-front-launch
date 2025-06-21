@@ -88,7 +88,7 @@ export default function Sponsors() {
                 key={`first-${s.alt}-${index}`}
                 className="flex-shrink-0 mx-8 opacity-80"
               >
-                <div className="max-h-[40px]">
+                <div className="max-h-[40px] px-auto">
                   <Image
                     src={s.src}
                     alt={s.alt}
