@@ -10,6 +10,7 @@ export default function InvestmentCalculator({
   rentGain,
   appGain,
   totalShares,
+  projectDuration,
 }: {
   id: string;
   minimumInvestment: number;
@@ -17,6 +18,7 @@ export default function InvestmentCalculator({
   rentGain: number;
   appGain: number;
   totalShares: number;
+  projectDuration: number;
 }) {
   const presets = [minimumInvestment, 5000, 10000];
   const [investment, setInvestment] = useState(minimumInvestment);
@@ -137,25 +139,25 @@ export default function InvestmentCalculator({
 
       <div>
         <p className="text-gray-300 mb-1 font-semibold">
-          Tus ganancias serían:
+          Tu ganancia estimada sería:
         </p>
         <div className="space-y-3">
           <div className="bg-primary text-foreground p-4 rounded-md">
             <div className="text-sm font-semibold">De alquiler:</div>
             <div className="text-3xl font-bold text-center my-2">
-              S/{((rentGain * inputValue) / 100).toFixed(2)}{" "}
-              <span className="text-sm">Anual</span>
+              S/{(projectDuration * (rentGain * inputValue) / 100).toFixed(2)}{" "}
+              <span className="text-sm">Total</span>
             </div>
             <p className="text-sm font-semibold text-center">
               Recibirás S/ {((rentGain * inputValue) / 1200).toFixed(2)}{" "}
-              mensual
+              mensual (monto antes de impuestos)
             </p>
           </div>
           <div className="bg-primary text-foreground p-4 rounded-md">
             <div className="text-sm font-semibold">De apreciación:</div>
             <div className="text-3xl font-bold text-center my-2">
-              S/{((appGain * inputValue) / 100).toFixed(2)}{" "}
-              <span className="text-sm">Anual</span>
+              S/{(projectDuration * (appGain * inputValue) / 100).toFixed(2)}{" "}
+              <span className="text-sm">Total</span>
             </div>
             <p className="text-sm font-semibold text-center">
               Se recibe al vender la propiedad o vender tus fracciones.
@@ -238,6 +240,13 @@ export default function InvestmentCalculator({
       )}
 
       <div className="flex justify-center">
+        <p>
+          Las ganancias estimadas son antes de impuestos. 
+          Nos esforzamos para que la propiedad se alquile 
+          la mayor parte del tiempo, pero no podemos garantizar 
+          que esté ocupada todos los meses ni que su valor 
+          aumente de forma exacta.
+        </p>
         <button
           disabled={!terms || loading}
           onClick={() => createAssetToken()}

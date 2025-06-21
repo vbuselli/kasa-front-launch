@@ -152,6 +152,7 @@ export default function ProjectPage() {
             rentGain={rent_roi}
             appGain={apreciation_roi}
             minimumInvestment={minimum_investment}
+            projectDuration={project_duration}
           />
           <MapEmbed src={project.address} />
         </div>
