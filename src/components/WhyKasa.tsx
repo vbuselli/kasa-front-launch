@@ -20,7 +20,7 @@ const features = [
   },
   {
     Icon: backup,
-    title: "Respaldo legal",
+    title: "INVERSIÓN CON RESPALDO LEGAL",
     desc: "Tu inversión cuenta con marco jurídico que protege tus derechos.",
   },
   {

@@ -165,7 +165,7 @@ export default function InvestmentCalculator({
           </div>
         </div>
         <p className="text-gray-300 mb-1 mt-1 font-semibold">
-          Tu ganancia estimada sería:
+          Total estimado al final del proyecto:
         </p>
         <div className="bg-primary text-foreground p-4 rounded-md">
           <div className="text-3xl font-bold text-center my-2">
