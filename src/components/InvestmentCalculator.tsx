@@ -156,7 +156,19 @@ export default function InvestmentCalculator({
           <div className="bg-primary text-foreground p-4 rounded-md">
             <div className="text-sm font-semibold">De apreciación:</div>
             <div className="text-3xl font-bold text-center my-2">
-              S/{(projectDuration * (appGain * inputValue) / 100).toFixed(2)}{" "}
+              S/{(((Math.pow(1+appGain, projectDuration)-1) * inputValue) / 100).toFixed(2)}{" "}
+              <span className="text-sm">Total</span>
+            </div>
+            <p className="text-sm font-semibold text-center">
+              Se recibe al vender la propiedad o vender tus fracciones.
+            </p>
+          </div>
+          <div className="bg-primary text-foreground p-4 rounded-md">
+            <div className="text-sm font-semibold">Al final del proyecto tendrás:</div>
+            <div className="text-3xl font-bold text-center my-2">
+              S/{(
+                ((Math.pow(1+appGain, projectDuration)-1) * inputValue) / 100 + 
+                projectDuration * (rentGain * inputValue) / 100).toFixed(2)}{" "}
               <span className="text-sm">Total</span>
             </div>
             <p className="text-sm font-semibold text-center">
@@ -187,10 +199,11 @@ export default function InvestmentCalculator({
           </svg>
         </div>
         <div className="text-xs text-gray-800 font-semibold">
-          Recuerda que estas ganancias son estimadas. Nos esforzamos para que la
-          propiedad se alquile la mayor parte del tiempo, pero no podemos
-          garantizar que se alquile todos los meses o que su valor suba de forma
-          exacta.
+          Las ganancias estimadas son antes de impuestos.
+          Nos esforzamos para que la propiedad se alquile
+          la mayor parte del tiempo, pero no podemos garantizar
+          que esté ocupada todos los meses ni que su valor
+          aumente de forma exacta.
         </div>
       </div>
 
@@ -238,13 +251,6 @@ export default function InvestmentCalculator({
           {toast}
         </div>
       )}
-      <p>
-        Las ganancias estimadas son antes de impuestos.
-        Nos esforzamos para que la propiedad se alquile
-        la mayor parte del tiempo, pero no podemos garantizar
-        que esté ocupada todos los meses ni que su valor
-        aumente de forma exacta.
-      </p>
       <div className="flex justify-center">
         <button
           disabled={!terms || loading}
