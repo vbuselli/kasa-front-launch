@@ -238,15 +238,14 @@ export default function InvestmentCalculator({
           {toast}
         </div>
       )}
-
+      <p>
+        Las ganancias estimadas son antes de impuestos.
+        Nos esforzamos para que la propiedad se alquile
+        la mayor parte del tiempo, pero no podemos garantizar
+        que esté ocupada todos los meses ni que su valor
+        aumente de forma exacta.
+      </p>
       <div className="flex justify-center">
-        <p>
-          Las ganancias estimadas son antes de impuestos. 
-          Nos esforzamos para que la propiedad se alquile 
-          la mayor parte del tiempo, pero no podemos garantizar 
-          que esté ocupada todos los meses ni que su valor 
-          aumente de forma exacta.
-        </p>
         <button
           disabled={!terms || loading}
           onClick={() => createAssetToken()}
