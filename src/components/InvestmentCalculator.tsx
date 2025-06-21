@@ -156,7 +156,7 @@ export default function InvestmentCalculator({
           <div className="bg-primary text-foreground p-4 rounded-md">
             <div className="text-sm font-semibold">De apreciación:</div>
             <div className="text-3xl font-bold text-center my-2">
-              S/{(((Math.pow(1 + appGain/100, projectDuration) - 1) * inputValue) / 100).toFixed(2)}{" "}
+              S/{(((Math.pow(1 + appGain/100, projectDuration) - 1) * inputValue)).toFixed(2)}{" "}
               <span className="text-sm">Total</span>
             </div>
             <p className="text-sm font-semibold text-center">
@@ -171,7 +171,7 @@ export default function InvestmentCalculator({
           <div className="text-3xl font-bold text-center my-2">
             
             S/{(
-              ((Math.pow(1 + appGain/100, projectDuration) - 1) * inputValue) / 100 +
+              ((Math.pow(1 + appGain/100, projectDuration) - 1) * inputValue) +
               projectDuration * (rentGain * inputValue) / 100).toFixed(2)}{" "}
             <span className="text-sm">Total</span>
           </div>
