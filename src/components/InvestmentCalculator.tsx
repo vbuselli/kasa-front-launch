@@ -172,11 +172,12 @@ export default function InvestmentCalculator({
             
             S/{(
               ((Math.pow(1 + appGain/100, projectDuration) - 1) * inputValue) +
-              projectDuration * (rentGain * inputValue) / 100).toFixed(2)}{" "}
+              projectDuration * (rentGain * inputValue) / 100 +
+              inputValue).toFixed(2)}{" "}
             <span className="text-sm">Total</span>
           </div>
           <p className="text-sm font-semibold text-center">
-            Se recibe al vender la propiedad o vender tus fracciones.
+            Cálculo estimado con una rentabilidad de 8.26% anual.
           </p>
         </div>
       </div>
