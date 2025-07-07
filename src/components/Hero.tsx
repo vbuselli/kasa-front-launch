@@ -57,6 +57,7 @@ const imagesSizes: { [i: number]: string } = {
 export default function Hero() {
   const [showModal, setShowModal] = useState(false);
 
+
   return (
     <section className="relative bg-foreground text-white px-8 pb-8 pt-4 lg:pt-0 rounded-bl-3xl overflow-hidden rounded-tl-[30px] rounded-br-[30px] shadow-hero">
       <div className="container mx-auto grid grid-cols-1 gap-8 lg:grid-cols-[50%_50%] lg:gap-0 items-center pt-3 lg:pt-0">
@@ -109,14 +110,37 @@ export default function Hero() {
             por alquiler, mientras tu inversión crece con la valorización del
             depa.
           </p>
-          <Link
-            href="/protected/investments"
-            className="flex justify-center lg:justify-start"
-          >
-            <button className="bg-secondary hover:bg-yellow-300 text-white text-[16px] uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
-              EMPEZAR AHORA
+          <div className="flex justify-center lg:justify-start gap-4">
+            <Link href="/protected/investments">
+              <button className="bg-secondary hover:bg-yellow-300 text-white text-[16px] uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
+                EMPEZAR AHORA
+              </button>
+            </Link>
+
+            {/* Botón externo a YouTube */}
+
+            <button className="border border-green-500 hover:bg-green-500 text-white text-[16px] uppercase font-semibold px-6 py-3 rounded-[20px] mt-4 inline-flex items-center gap-2 cursor-pointer" onClick={() => setShowModal(true)}>
+              ¿CÓMO FUNCIONA?
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="white"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="white"
+                  strokeWidth="2"
+                  fill="none"
+                />
+                <polygon points="10,8 16,12 10,16" fill="white" />
+              </svg>
             </button>
-          </Link>
+          </div>
+
         </div>
 
         <div className="relative mt-2">
@@ -133,9 +157,8 @@ export default function Hero() {
                 <Link
                   key={card.id}
                   href={`/protected/investments`}
-                  className={`group block relative rounded-[30px] overflow-hidden shadow-lg ring-2 ring-transparent hover:ring-blue-500 transition ${
-                    isBlurCard ? "hidden lg:block" : ""
-                  }`}
+                  className={`group block relative rounded-[30px] overflow-hidden shadow-lg ring-2 ring-transparent hover:ring-blue-500 transition ${isBlurCard ? "hidden lg:block" : ""
+                    }`}
                 >
                   <MasonryCard heightClass={heightClass} {...card} />
                 </Link>
@@ -144,7 +167,7 @@ export default function Hero() {
           </Masonry>
 
           {/* Modal Trigger Button */}
-          <button
+          {/* <button
             className="absolute top-0 right-0 lg:top-1/2 lg:left-0 lg:right-auto lg:-translate-x-1/2 -translate-y-1/2 bg-green-400 hover:bg-green-300 rounded-full shadow-xl flex items-center justify-center transition cursor-pointer"
             aria-label="Cómo funciona"
             onClick={() => setShowModal(true)}
@@ -156,7 +179,7 @@ export default function Hero() {
               width={80}
               height={80}
             />
-          </button>
+          </button> */}
 
           {/* Modal */}
           {showModal && (
