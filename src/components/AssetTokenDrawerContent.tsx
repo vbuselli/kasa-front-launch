@@ -2,6 +2,7 @@ import { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { AssetPopulated } from "types/models";
+import { track } from "@/lib/gtag";
 
 type Props = {
   assetToken: AssetPopulated;
@@ -37,6 +38,17 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
     closeDrawer();
   };
 
+  useEffect(() => {
+    if (assetToken.state === "pre-funding") {
+      track("pago_completo", {
+        proyecto_id: assetToken.asset.id,
+        monto: assetToken.num_shares * 100,
+        user_id: user?.id,
+      });
+    }
+  }, [assetToken.state, assetToken.asset.id, assetToken.num_shares, user?.id]);
+
+
   // const { isVerified } = useUserVerification();
 
   // const isKycRequired =
@@ -67,6 +79,14 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
   useEffect(() => {
     fetchUser();
   }, []);
+  useEffect(() => {
+    if (assetToken.state === "documents_pending") {
+      track("kyc_completo", {
+        proyecto_id: assetToken.asset.id,
+        user_id: user?.id,
+      });
+    }
+  }, [assetToken.state, assetToken.asset.id, user?.id]);
 
   return (
     <div className="text-white mt-6 flex flex-col space-y-6 p-3">
@@ -251,7 +271,13 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
                   </p>
                   <Link href="/protected/validate-identity/">
                     <button
-                      onClick={handleValidationClick}
+                      onClick={() => {
+                        track("inicio_kyc", {
+                          proyecto_id: assetToken.asset.id,
+                          user_id: user?.id,
+                        });
+                        handleValidationClick
+                      }}
                       className="bg-primary text-white px-4 py-2 rounded mb-4 w-full cursor-pointer"
                     >
                       Iniciar validación
@@ -278,7 +304,13 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
                   rel="noopener noreferrer"
                 >
                   <button
-                    onClick={closeDrawer}
+                    onClick={() => {
+                      track("firma_contrato", {
+                        proyecto_id: assetToken.asset.id,
+                        user_id: user?.id,
+                      });
+                      closeDrawer();
+                    }}
                     className="bg-primary text-white px-4 py-2 rounded w-full cursor-pointer"
                   >
                     Ir a firmar contrato

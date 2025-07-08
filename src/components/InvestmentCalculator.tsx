@@ -1,4 +1,5 @@
 "use client";
+import { track } from "@/lib/gtag";
 import { useInvestmentShare } from "context/InvestmentContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -34,11 +35,44 @@ export default function InvestmentCalculator({
     setInputValue(val);
   };
 
+  const simuladorTrackRef = useRef(false);
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    debounceRef.current = setTimeout(() => {
+      let value = Number(inputValue);
+      if (isNaN(value) || value < 2000) value = 2000;
+      value = Math.floor(value / 100) * 100;
+      setInputValue(value);
+      const floored = Math.floor(value / 100);
+      setInvestment(floored);
+
+      // ✅ TRACKING: solo una vez por sesión de uso
+      if (!simuladorTrackRef.current) {
+        track("uso_simulador", {
+          monto: value,
+          proyecto_id: id,
+        });
+        simuladorTrackRef.current = true;
+      }
+    }, 1000);
+
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [inputValue]);
+
+
   const createAssetToken = async () => {
     setInvestmentAmount(inputValue);
     setLoading(true);
     setToast(null);
     try {
+      track("inicio_ticket", {
+        monto: inputValue,
+        cuotas: investment,
+        proyecto_id: id,
+      });
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_APP_URL}/api/asset_tokens`,
         {
@@ -69,22 +103,7 @@ export default function InvestmentCalculator({
     }
   };
 
-  useEffect(() => {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
 
-    debounceRef.current = setTimeout(() => {
-      let value = Number(inputValue);
-      if (isNaN(value) || value < 2000) value = 2000;
-      value = Math.floor(value / 100) * 100;
-      setInputValue(value);
-      const floored = Math.floor(value / 100);
-      setInvestment(floored);
-    }, 1000);
-
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, [inputValue]);
 
   return (
     <div className="bg-foreground p-6 rounded-lg border border-white space-y-4">
@@ -156,7 +175,7 @@ export default function InvestmentCalculator({
           <div className="bg-primary text-foreground p-4 rounded-md">
             <div className="text-sm font-semibold">De apreciación:</div>
             <div className="text-3xl font-bold text-center my-2">
-              S/{(((Math.pow(1 + appGain/100, projectDuration) - 1) * inputValue)).toFixed(2)}{" "}
+              S/{(((Math.pow(1 + appGain / 100, projectDuration) - 1) * inputValue)).toFixed(2)}{" "}
               <span className="text-sm">Total</span>
             </div>
             <p className="text-sm font-semibold text-center">
@@ -169,9 +188,9 @@ export default function InvestmentCalculator({
         </p>
         <div className="bg-primary text-foreground p-4 rounded-md">
           <div className="text-3xl font-bold text-center my-2">
-            
+
             S/{(
-              ((Math.pow(1 + appGain/100, projectDuration) - 1) * inputValue) +
+              ((Math.pow(1 + appGain / 100, projectDuration) - 1) * inputValue) +
               projectDuration * (rentGain * inputValue) / 100 +
               inputValue).toFixed(2)}{" "}
             <span className="text-sm">Total</span>

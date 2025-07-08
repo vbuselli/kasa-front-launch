@@ -1,4 +1,5 @@
 "use client";
+import { track } from "@/lib/gtag";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AssetPopulated } from "types/models";
@@ -57,16 +58,16 @@ function ExpirationModal({
           </button>
           <p className="text-sm text-gray-600 text-center mt-2">
             <strong>¿Tienes dudas?</strong> Visita nuestro{" "}
-            <a 
-              href="https://intercom.help/inviertekasa" 
-              target="_blank" 
+            <a
+              href="https://intercom.help/inviertekasa"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:text-green-600 underline transition-colors"
             >
               Centro de Ayuda
             </a>{" "}
             o escríbenos a{" "}
-            <a 
+            <a
               href="mailto:soporte@inviertekasa.com"
               className="text-primary hover:text-green-600 underline transition-colors"
             >
@@ -299,7 +300,7 @@ export default function InvestmentCheckoutCard({
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 md:border-b md:border-b-white md:pb-0 pb-2">
                     <div className="flex justify-between items-center min-h-0">
                       <span className="text-sm font-medium flex-shrink-0 mr-2">CCI</span>
@@ -317,7 +318,7 @@ export default function InvestmentCheckoutCard({
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 md:border-b md:border-b-white md:pb-0 pb-2">
                     <div className="flex justify-between items-center min-h-0">
                       <span className="text-sm font-medium flex-shrink-0 mr-2">Número de cuenta</span>
@@ -335,7 +336,7 @@ export default function InvestmentCheckoutCard({
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="md:border md:border-white md:rounded-lg md:p-4 border-b border-gray-600 md:border-b md:border-b-white md:pb-0 pb-2">
                     <div className="space-y-2">
                       <div className="flex justify-between items-center min-h-0">
@@ -370,7 +371,7 @@ export default function InvestmentCheckoutCard({
                       </div>
                     </div>
                   </div>
-                  
+
                   <div>
                     <label
                       className="block text-sm font-medium mb-2"
@@ -461,6 +462,13 @@ export default function InvestmentCheckoutCard({
                     type="submit"
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors cursor-pointer disabled:opacity-60"
                     disabled={loading || isButtonDisabled}
+                    onClick={() => {
+                      track("inicio_pago", {
+                        monto: investmentAmount,
+                        proyecto_id: asset_token.asset.id,
+                        spv: asset_token.asset.spv_name,
+                      });
+                    }}
                   >
                     {loading ? "Procesando..." : "Enviar"}
                   </button>
