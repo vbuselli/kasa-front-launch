@@ -25,7 +25,6 @@ export const event = (
 
   window.gtag('event', action, {
     ...params,
-    env: process.env.NODE_ENV,
   });
 };
 
