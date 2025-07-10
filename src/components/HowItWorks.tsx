@@ -23,10 +23,10 @@ const steps: {
   },
   {
     num: "2",
-    title: "Te haces accionista",
+    title: "Te haces propietario",
     desc: (
       <>
-        Creamos una Sociedad Anónima y tú formas parte como inversionista legal.{" "}
+        Creamos una Sociedad Anónima y tú formas parte como socio legal.{" "}
         <span className="font-bold">
           Todo 100% seguro, digital y con respaldo legal.
         </span>

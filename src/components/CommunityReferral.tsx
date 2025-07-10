@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function CommunityReferralSection() {
   return (
     <section
-      className="py-20 bg-foreground text-white px-12"
+      className="py-20 bg-foreground text-white"
       id="community-referral"
     >
       <div className="container mx-auto px-6 lg:flex lg:items-start lg:gap-12 relative">
