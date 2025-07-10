@@ -112,6 +112,15 @@ export default function Navbar() {
                   rel="noopener noreferrer">
                   Ayuda
                 </Link>
+
+              </li>
+              <li>
+                <Link
+                  href="/about-us"
+                  onClick={() => setOpen(false)}
+                >
+                  Nosotros
+                </Link>
               </li>
               <li>
                 <Link
@@ -179,6 +188,9 @@ export default function Navbar() {
                 rel="noopener noreferrer">
                 Ayuda
               </Link>
+            </li>
+            <li>
+              <Link href="/about-us">Nosotros</Link>
             </li>
             <li>
               <Link href="/protected/portfolio">Mi Portafolio</Link>
