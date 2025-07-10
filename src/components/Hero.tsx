@@ -110,34 +110,26 @@ export default function Hero() {
             por alquiler, mientras tu inversión crece con la valorización del
             depa.
           </p>
-          <div className="flex justify-center lg:justify-start gap-4">
+          <div className="flex flex-col sm:flex-row sm:justify-center sm:w-full gap-4">
             <Link href="/protected/investments">
-              <button className="bg-secondary hover:bg-yellow-300 text-white text-[16px] uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer">
+              <button className="bg-secondary hover:bg-yellow-300 text-white text-[16px] uppercase font-semibold px-10 py-3 rounded-[20px] mt-4 inline-block cursor-pointer w-full sm:w-auto">
                 EMPEZAR AHORA
               </button>
             </Link>
 
-            {/* Botón externo a YouTube */}
+            <button
+              className="border border-green-500 hover:bg-green-500 text-white text-[16px] uppercase font-semibold px-6 py-3 rounded-[20px] justify-center mt-4 inline-flex items-center gap-2 cursor-pointer w-full sm:w-auto"
+              onClick={() => setShowModal(true)}
+            >
 
-            <button className="border border-green-500 hover:bg-green-500 text-white text-[16px] uppercase font-semibold px-6 py-3 rounded-[20px] mt-4 inline-flex items-center gap-2 cursor-pointer" onClick={() => setShowModal(true)}>
-              ¿CÓMO FUNCIONA?
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                fill="white"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="white"
-                  strokeWidth="2"
-                  fill="none"
-                />
-                <polygon points="10,8 16,12 10,16" fill="white" />
-              </svg>
+              <p>¿CÓMO FUNCIONA?</p>
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="2" fill="none" />
+                  <polygon points="10,8 16,12 10,16" fill="white" />
+                </svg>
+
+              </div>
             </button>
           </div>
 
