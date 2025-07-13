@@ -11,6 +11,8 @@ import f1 from "./utils/f1.jpeg";
 import f2 from "./utils/f2.jpeg";
 import f3 from "./utils/f3.jpeg";
 import kasa from "./utils/casa.png"
+import Breadcrumb from "@/components/Breadcrumb";
+import { link } from "fs";
 // --- DATA ---
 const timeline = [
   {
@@ -62,30 +64,33 @@ const team = [
     name: "Cristhian Agüero",
     role: "Co‑Founder & CEO",
     img: cristhian,
+    link: "https://www.linkedin.com/in/cristhianagueroh/"
   },
   {
     name: "Cristina Vereau",
     role: "Head of Growth",
     img: cristina,
+    link: "https://www.linkedin.com/in/cristinavereau/"
   }
 ];
 
 export default function AboutUsPage() {
   return (
-    <section className="w-full overflow-hidden bg-[#111729] text-white rounded-tl-[40px]">
-
+    <section className="w-full overflow-hidden bg-foreground text-white rounded-tl-[40px]">
+      <Breadcrumb current="Nosotros" />
       {/* HERO */}
 
-      <div className="relative isolate flex flex-col items-center justify-center gap-4 px-6 pt-24 text-center pb-12">
-        <h1 className="flex flex-row text-4xl font-extrabold tracking-tight sm:text-6xl text-white gap-4">
+      <div className="relative isolate flex flex-col items-center justify-center gap-4 px-6 pt-4 text-center pb-12">
+        <h1 className="flex flex-row text-4xl font-extrabold tracking-tight sm:text-5xl text-white gap-4">
+
+          <p className="pt-[5px]">Somos Kasa</p>
           <Image
             src={kasa}  // Usa la imagen importada
             alt="Kasa logo"
-            width={50}   // Ajusta el tamaño que necesites
+            width={60}   // Ajusta el tamaño que necesites
             height={50}  // Ajusta el tamaño que necesites
             className="inline-block"  // Si quieres que se muestre en línea con el texto
           />
-          <p>Somos Kasa</p>
         </h1>
       </div>
 
@@ -187,7 +192,10 @@ export default function AboutUsPage() {
           <h2 className="mb-10 text-center text-3xl font-bold text-white">Conoce al equipo</h2>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
             {team.map((member, idx) => (
-              <div key={idx} className="flex flex-col items-center rounded-2xl bg-white p-6 shadow-lg backdrop-blur-sm">
+              <div
+                key={idx}
+                className="flex flex-col items-center rounded-2xl bg-white p-6 shadow-lg backdrop-blur-sm"
+              >
                 <Image
                   src={member.img}
                   alt={member.name}
@@ -197,8 +205,18 @@ export default function AboutUsPage() {
                 />
                 <h3 className="mt-4 text-lg font-semibold text-slate-800">{member.name}</h3>
                 <p className="text-sm text-slate-800">{member.role}</p>
+
+                <a
+                  href={member.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-[16px] bg-transparent hover:bg-[#0e76a8] text-[#0e76a8] font-semibold hover:text-white py-2 px-4 border border-[#0e76a8] hover:border-transparent rounded"
+                >
+                  LinkedIn
+                </a>
               </div>
             ))}
+
           </div>
         </div>
       </div>
