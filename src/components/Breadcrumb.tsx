@@ -14,7 +14,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
   backLabel = "Inicio",
 }) => {
   return (
-    <div className="flex items-center justify-center gap-2 text-sm text-white bg-transparent px-4 py-3 pt-14">
+    <div className="flex items-center justify-center gap-2 text-sm text-white bg-transparent px-4 py-3 pt-12">
       <Link
         href={backHref}
         className="flex items-center gap-1 font-bold hover:underline"

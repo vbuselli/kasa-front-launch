@@ -76,7 +76,7 @@ const team = [
 
 export default function AboutUsPage() {
   return (
-    <section className="w-full overflow-hidden bg-[#111729] text-white rounded-tl-[40px] border">
+    <section className="w-full overflow-hidden bg-foreground text-white rounded-tl-[40px]">
       <Breadcrumb current="Nosotros" />
       {/* HERO */}
 
