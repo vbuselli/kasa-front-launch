@@ -187,7 +187,7 @@ export default function AboutUsPage() {
       </div> */}
 
       {/* TEAM */}
-      <div className="bg-[#111729] py-16 ">
+      <div className="bg-foreground py-16 ">
         <div className="mx-auto max-w-5xl px-6">
           <h2 className="mb-10 text-center text-3xl font-bold text-white">Conoce al equipo</h2>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
