@@ -1,11 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FormMessage, Message } from "@/components/ui/FormMessage";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 import Image from "next/image";
 import LOGO from "@/assets/logo-kasa-blanco.png";
 import Link from "next/link";
 import { signInWithGoogle, signUpAction } from "@/lib/actions";
+import { track } from "@/lib/gtag";
+
 
 export default function Signup(props: { searchParams: Promise<Message> }) {
   const [password, setPassword] = useState("");
@@ -13,6 +15,7 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [searchParams, setSearchParams] = useState<Message | null>(null);
+const eventSentRef = useRef(false);
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -51,9 +54,18 @@ export default function Signup(props: { searchParams: Promise<Message> }) {
     form.submit();
   };
 
+
   useEffect(() => {
     if (!searchParams && props.searchParams) {
-      props.searchParams.then(setSearchParams);
+      props.searchParams.then((result) => {
+        setSearchParams(result);
+
+        // Se registra el evento si el registro fue exitoso
+        if ("success" in result && !eventSentRef.current) {
+          track("registro_cuenta", { method: "google" });
+          eventSentRef.current = true;
+        }
+      });
     }
   }, [props.searchParams]);
 

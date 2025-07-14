@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import FAQSection from "@/components/FAQ";
 import { CartProvider } from "context/CartContext";
 import WhatsappButton from "@/components/WhatsappButton";
+import Script from "next/script";
+
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -51,7 +53,21 @@ export default function RootLayout({
             <Footer />
           </div>
         </CartProvider>
+
       </body>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+  `}
+      </Script>
+
     </html>
   );
 }

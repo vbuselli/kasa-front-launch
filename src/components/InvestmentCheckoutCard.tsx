@@ -1,4 +1,5 @@
 "use client";
+import { track } from "@/lib/gtag";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AssetPopulated } from "types/models";
@@ -464,6 +465,13 @@ export default function InvestmentCheckoutCard({
                     type="submit"
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors cursor-pointer disabled:opacity-60"
                     disabled={loading || isButtonDisabled}
+                    onClick={() => {
+                      track("inicio_pago", {
+                        monto: investmentAmount,
+                        proyecto_id: asset_token.asset.id,
+                        spv: asset_token.asset.spv_name,
+                      });
+                    }}
                   >
                     {loading ? "Procesando..." : "Enviar"}
                   </button>
