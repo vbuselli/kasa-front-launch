@@ -2,16 +2,9 @@
 import { useInvestmentShare } from "context/InvestmentContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
-export default function InvestmentCalculator({
-  id,
-  minimumInvestment,
-  area,
-  rentGain,
-  appGain,
-  totalShares,
-  projectDuration,
-}: {
+type Props = {
   id: string;
   minimumInvestment: number;
   area: number;
@@ -19,251 +12,263 @@ export default function InvestmentCalculator({
   appGain: number;
   totalShares: number;
   projectDuration: number;
-}) {
-  const presets = [minimumInvestment, 5000, 10000];
-  const [investment, setInvestment] = useState(minimumInvestment);
-  const [terms, setTerms] = useState(false);
+  address: string;
+};
+
+export default function InvestmentCalculator(props: Props) {
+  const {
+    id,
+    minimumInvestment,
+    rentGain,
+    appGain,
+    totalShares,
+    projectDuration,
+    address,
+  } = props;
+
+  /* ------------------ estado ------------------ */
+  const [amount, setAmount] = useState(minimumInvestment);
+  const [shares, setShares] = useState(minimumInvestment / 100);
+  const [year, setYear] = useState(projectDuration);
+  const [agree, setAgree] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState<string | null>(null);
-  const [inputValue, setInputValue] = useState(minimumInvestment);
-  const debounceRef = useRef<NodeJS.Timeout | null>(null);
   const { setInvestmentAmount } = useInvestmentShare();
   const router = useRouter();
 
-  const handlePreset = (val: number) => {
-    setInputValue(val);
+  /* ------------ helpers ------------- */
+  const sharePrice = 100;
+  const format = (v: number) => v.toLocaleString("es-PE");
+
+  /** Normaliza solo cuando final=true (blur) */
+  const syncAmount = (v: number, final = false) => {
+    const raw = isNaN(v) ? 0 : v;                  // permite campo vacío
+    const aligned = final
+      ? Math.max(minimumInvestment, Math.floor(raw / 100) * 100)
+      : raw;                                       // sin forzar mientras escribe
+    setAmount(aligned);
+    setShares(aligned / sharePrice);
   };
 
-  const createAssetToken = async () => {
-    setInvestmentAmount(inputValue);
+
+
+  const rentProfit = (rentGain / 100) * amount * year;
+  const apprProfit = amount * (Math.pow(1 + appGain / 100, year) - 1);
+
+  /* ------------------ submit ------------------ */
+  const createToken = async () => {
+    setInvestmentAmount(amount);
     setLoading(true);
-    setToast(null);
     try {
-      const response = await fetch(
+      const res = await fetch(
         `${process.env.NEXT_PUBLIC_APP_URL}/api/asset_tokens`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            asset_id: id,
-            num_shares: investment,
-          }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ asset_id: id, num_shares: shares }),
         }
       );
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || "Failed to create asset token");
-      }
-
-      const responseData = await response.json();
-
-      router.push("/protected/checkout/" + responseData.id);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      router.push("/sign-in"); // TODO: esto es un hack para redirigir a login si no hay sesión
+      const { id: tokenId } = await res.json();
+      router.push(`/protected/checkout/${tokenId}`);
+    } catch {
+      router.push("/sign-in");
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
+  const totalGain = (rentProfit + apprProfit);     // ganancia total
+  const grandTotal = (amount + totalGain);          // inversión + ganancia
 
-    debounceRef.current = setTimeout(() => {
-      let value = Number(inputValue);
-      if (isNaN(value) || value < 2000) value = 2000;
-      value = Math.floor(value / 100) * 100;
-      setInputValue(value);
-      const floored = Math.floor(value / 100);
-      setInvestment(floored);
-    }, 1000);
 
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, [inputValue]);
-
+  /* ------------------ UI ------------------ */
   return (
-    <div className="bg-foreground p-6 rounded-lg border border-white space-y-4">
-      <h2 className="text-xl font-bold text-white">Calculadora de Inversión</h2>
+    <div className="rounded-xl border border-white/40 bg-[#0c1b2b] p-4 sm:p-6 space-y-8">
+      {/* Encabezado */}
+      <header className="space-y-1">
+        <h2 className="text-xl font-extrabold sm:text-2xl">Depa San Miguel</h2>
+        <p className="text-xs sm:text-sm text-gray-400">{address}</p>
+      </header>
 
-      <div>
-        <div className="text-gray-300 mb-1 font-semibold">
-          ¿Cuánto deseas invertir?
+      {/* Sobre el proyecto */}
+      <section>
+        <h3 className="text-base font-bold mb-4">
+          Sobre el proyecto
+        </h3>
+        <div className="grid grid-cols-3 gap-2 text-center text-[13px] pl-6">
+          <InfoBox label="Precio total" value={`S/ ${format(totalShares * 100)}`} />
+          <InfoBox label="Fracciones" value={format(totalShares)} />
+          <InfoBox label="Inv. mínima" value={`S/ ${format(minimumInvestment)}`} />
         </div>
+      </section>
 
-        <div className="relative text-3xl font-semibold text-center">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground pointer-events-none">
-            S/
-          </span>
-          <input
-            type="number"
-            value={inputValue}
-            onChange={(e) => setInputValue(Number(e.target.value))}
-            className="w-full pl-14 pr-4 py-3 rounded-md bg-white text-foreground text-center"
-            min={minimumInvestment}
+      {/* Sobre la inversión */}
+      <section>
+        <h3 className="text-base font-bold mb-4">
+          Sobre la inversión
+        </h3>
+        <div className="flex flex-wrap gap-4 text-[13px] justify-around">
+          <InfoPair label="Rentabilidad" value={`${(rentGain + appGain).toFixed(2)}% /año`} />
+          <InfoPair label="Duración" value={`${projectDuration} años`} />
+        </div>
+      </section>
+
+      {/* Simulador */}
+      <section className="space-y-6 ">
+        <h3 className="text-base font-bold">¡Simula tu inversión!</h3>
+
+        {/* Inputs */}
+        <div className="flex flex-col gap-4 sm:flex-row px-8">
+          <NumInput
+            label="Monto a invertir"
+            prefix="S/"
+            value={amount}
+            onChange={(v) => syncAmount(v)}         // solo actualiza
+            onBlur={(v) => syncAmount(v, true)}     // ahora sí normaliza
+          />
+
+          <NumInput
+            label="Fracciones a comprar"
+            prefix="#"
+            value={shares}
+            onChange={(v) => syncAmount(v * sharePrice)}
+            min={minimumInvestment / 100}
           />
         </div>
+
+        <p className="text-center text-[11px] text-gray-400">
+          Ingrese múltiplos de S/ 100 (2 200, 2 300…)
+        </p>
+
+        {/* Slider */}
+        <div className="space-y-2 flex flex-col justify-center items-center ">
+          <label className="text-center block text-sm font-semibold">
+            Rentabilidad al año <span className="font-bold text-white">{year}</span>
+          </label>
+          <input
+            type="range"
+            min={1}
+            max={projectDuration}
+            value={year}
+            onChange={(e) => setYear(+e.target.value)}
+            className="w-[50%] accent-green-500"
+          />
+          <div className="flex justify-between text-[10px] text-white-400 w-[50%]">
+            {Array.from({ length: projectDuration }, (_, i) => (
+              <span key={i}>{i + 1}</span>
+            ))}
+          </div>
+
+        </div>
+        {/* Ganancias */}
+        <div className="flex gap-4 px-8">
+          <GainBox label="Por alquiler" value={rentProfit} />
+          <GainBox label="Por apreciación" value={apprProfit} />
+        </div>
+      </section>
+      {/* ─── Total inversión + ganancia ─── */}
+      <div className="space-y-2 text-center">
+        <h3 className="text-base font-bold">Tu inversión + tu ganancia</h3>
+
+        <div className=" mx-auto w-full max-w-sm rounded-md border-1 border-green-500 py-4 px-6 text-lg font-bold flex justify-center gap-2 flex-wrap ">
+          <span className="whitespace-nowrap">S/ {format(amount)}</span>
+          <span>+</span>
+          <span className="whitespace-nowrap">{(totalGain.toFixed(2))}</span>
+          <span>=</span>
+          <span className="whitespace-nowrap">{(grandTotal.toFixed(2))}</span>
+        </div>
       </div>
-      {/**
-      <div className="flex gap-2">
-        {presets.map((p) => (
-          <button
-            key={p}
-            type="button"
-            onClick={() => handlePreset(p)}
-            className={`flex-1 py-0 border rounded-md transition-colors font-semibold ${
-              inputValue === p
-                ? "bg-yellow-400 text-gray-900 border-yellow-400"
-                : "bg-transparent border-primary text-primary hover:bg-yellow-100"
-            }`}
+      {/* Disclaimer */}
+      <p className="rounded-md bg-white/90 p-4 text-center text-[11px] font-medium text-gray-800">
+        Las ganancias estimadas son antes de impuestos. Procuramos que la propiedad se
+        alquile la mayor parte del tiempo, pero no podemos garantizar ocupación ni
+        apreciación exacta.
+      </p>
+
+      {/* T&C + botón */}
+      <div className="space-y-4">
+        <label className="flex items-center gap-2 text-xs font-semibold">
+          <input
+            type="checkbox"
+            checked={agree}
+            onChange={() => setAgree(!agree)}
+            className="h-4 w-4 accent-green-600"
+          />
+          Acepto los&nbsp;
+          <a
+            href="https://drive.google.com/file/d/1HSf3dvCssOkjMe48U90r7tPRzvScWevE/view"
+            target="_blank"
+            className="underline"
           >
-            S/ {p.toLocaleString()}
-          </button>
-        ))}
-      </div>
-       */}
-
-      <div>
-        <p className="text-gray-300 mb-1 font-semibold">
-          Con esa inversión podrás adquirir:
-        </p>
-        <p className="text-foreground font-bold flex-1 py-4 bg-primary hover:bg-green-500 rounded-md text-center text-3xl">
-          {((area * Math.floor(inputValue / 100)) / totalShares).toFixed(2)} cm
-          <sup className="text-sm align-super">2</sup>
-        </p>
-      </div>
-
-      <div>
-        <p className="text-gray-300 mb-1 font-semibold">
-          Tu ganancia estimada sería:
-        </p>
-        <div className="space-y-3">
-          <div className="bg-primary text-foreground p-4 rounded-md">
-            <div className="text-sm font-semibold">De alquiler:</div>
-            <div className="text-3xl font-bold text-center my-2">
-              S/{(projectDuration * (rentGain * inputValue) / 100).toFixed(2)}{" "}
-              <span className="text-sm">Total</span>
-            </div>
-            <p className="text-sm font-semibold text-center">
-              Recibirás S/ {((rentGain * inputValue) / 1200).toFixed(2)}{" "}
-              mensual (monto antes de impuestos)
-            </p>
-          </div>
-          <div className="bg-primary text-foreground p-4 rounded-md">
-            <div className="text-sm font-semibold">De apreciación:</div>
-            <div className="text-3xl font-bold text-center my-2">
-              S/{(((Math.pow(1 + appGain/100, projectDuration) - 1) * inputValue)).toFixed(2)}{" "}
-              <span className="text-sm">Total</span>
-            </div>
-            <p className="text-sm font-semibold text-center">
-              Se recibe al vender la propiedad o vender tus fracciones.
-            </p>
-          </div>
-        </div>
-        <p className="text-gray-300 mb-1 mt-1 font-semibold">
-          Total estimado al final del proyecto:
-        </p>
-        <div className="bg-primary text-foreground p-4 rounded-md">
-          <div className="text-3xl font-bold text-center my-2">
-            
-            S/{(
-              ((Math.pow(1 + appGain/100, projectDuration) - 1) * inputValue) +
-              projectDuration * (rentGain * inputValue) / 100 +
-              inputValue).toFixed(2)}{" "}
-            <span className="text-sm">Total</span>
-          </div>
-          <p className="text-sm font-semibold text-center">
-            Cálculo estimado con una rentabilidad de 8.26% anual.
-          </p>
-        </div>
-      </div>
-
-      <div className="bg-gray-100 rounded-md p-4 flex items-center gap-3">
-        <div className="mt-1 text-gray-500">
-          <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="var(--foreground)"
-              strokeWidth="3"
-              fill="none"
-            />
-            <path
-              d="M12 8v4m0 4h.01"
-              stroke="var(--foreground)"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-        <div className="text-xs text-gray-800 font-semibold">
-          Las ganancias estimadas son antes de impuestos.
-          Nos esforzamos para que la propiedad se alquile
-          la mayor parte del tiempo, pero no podemos garantizar
-          que esté ocupada todos los meses ni que su valor
-          aumente de forma exacta.
-        </div>
-      </div>
-
-      <div className="flex items-center mt-4 relative">
-        <input
-          type="checkbox"
-          id="terms"
-          checked={terms}
-          onChange={() => setTerms(!terms)}
-          className="appearance-none w-5 h-5 rounded bg-gray-800 border-2 border-gray-600 checked:bg-blue-600 checked:border-blue-600 flex-shrink-0 mr-2 relative transition-colors duration-150"
-          style={{ outline: "none" }}
-        />
-        {terms && (
-          <svg
-            className="absolute ml-2 pointer-events-none"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            style={{ left: -8, top: 6, pointerEvents: "none" }}
-          >
-            <rect width="20" height="20" rx="4" fill="#2563eb" />
-            <path
-              d="M6 10.5L9 13.5L14 8.5"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
-        <label
-          htmlFor="terms"
-          className="text-xs text-gray-100 font-semibold ml-1"
-        >
-          Estoy de acuerdo en continuar con la inversión según los{" "}
-          <a href="https://drive.google.com/file/d/1HSf3dvCssOkjMe48U90r7tPRzvScWevE/view?usp=drive_link" className="underline text-gray-100 font-bold">
             Términos y Condiciones
           </a>
         </label>
-      </div>
 
-      {toast && (
-        <div className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded text-center">
-          {toast}
-        </div>
-      )}
-      <div className="flex justify-center">
         <button
-          disabled={!terms || loading}
-          onClick={() => createAssetToken()}
-          className="w-3/4 py-3 bg-yellow-400 hover:bg-yellow-300 text-white font-semibold rounded-3xl disabled:opacity-50 cursor-pointer mt-2"
+          onClick={createToken}
+          disabled={!agree || loading}
+          className="w-full rounded-md bg-green-500 py-3 text-sm font-bold disabled:opacity-50"
         >
-          {loading ? "Procesando..." : "INVERTIR"}
+          {loading ? "Procesando…" : "¡Continuar!"}
         </button>
       </div>
     </div>
   );
 }
+
+/* ---------- helpers UI ---------- */
+const InfoBox = ({ label, value }: { label: string; value: string }) => (
+  <div className="flex flex-col justify-center rounded-md bg-[#0A6140]/80 py-2 px-1 border border-[#087347]">
+    <span className="text-[10px] font-semibold uppercase tracking-wide text-white/70">
+      {label}
+    </span>
+    <span className="text-sm font-bold">{value}</span>
+  </div>
+);
+
+const InfoPair = ({ label, value }: { label: string; value: string }) => (
+  <div>
+    <p className="text-[10px] font-semibold uppercase tracking-wide text-gray-400">
+      {label}
+    </p>
+    <p className="text-sm font-bold">{value}</p>
+  </div>
+);
+
+const GainBox = ({ label, value }: { label: string; value: number }) => (
+  <div className="flex-1 rounded-md border border-white bg-[#03AE5B]/90 py-2 text-center">
+    <p className="text-xs font-semibold text-gray-200">{label}</p>
+    <p className="text-lg font-bold text-white">S/ {value.toFixed(2)}</p>
+  </div>
+);
+
+const NumInput = ({
+  label,
+  prefix,
+  value,
+  onChange,
+  onBlur,
+  min,
+}: {
+  label: string;
+  prefix: string;
+  value: number;
+  onChange: (v: number) => void;
+  onBlur?:   (v: number) => void;
+  min: number;
+}) => (
+  <div className="flex-1 space-y-1">
+    <label className="block text-xs font-semibold text-gray-300">{label}</label>
+    <div className="relative">
+      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-bold">
+        {prefix}
+      </span>
+      <input
+        type="number"
+        value={value === 0 ? "" : value}      // muestra vacío mientras escribes
+        onChange={(e) => onChange(+e.target.value)}
+        onBlur={(e) => onBlur(+e.target.value)}
+        className="h-12 w-full bg-gray-600/70 py-1 pl-10 pr-2 text-center text-lg font-semibold focus:outline-none"
+      />
+    </div>
+  </div>
+);

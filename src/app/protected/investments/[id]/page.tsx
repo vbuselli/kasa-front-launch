@@ -102,7 +102,7 @@ export default function ProjectPage() {
   const addressDetails = highlights ? highlights.split(";") : [];
 
   const details = [
-    { label: "Área total", value: `${square_cm} cm² (${(square_cm / 10000).toFixed(2)} m²)`},
+    { label: "Área total", value: `${square_cm} cm² (${(square_cm / 10000).toFixed(2)} m²)` },
     { label: "Precio total", value: `S/ ${total_price || "N/A"}` },
     { label: "Dormitorios", value: `${bedrooms}` || "N/A" },
     { label: "Baños", value: `${bathrooms}` || "N/A" },
@@ -128,11 +128,25 @@ export default function ProjectPage() {
   ];
 
   return (
-    <section className="bg-foreground text-white px-8 py-12 rounded-tl-[30px] flex-1">
+    <section className="
+  bg-foreground text-white
+  px-4               /* ✅ 1 rem en mobile */
+  sm:px-6
+  lg:px-8
+  py-12
+  rounded-tl-[30px] flex-1
+  overflow-x-hidden  /* corta cualquier sobrante imprevisto */
+">
       <ProjectHeader title={name} />
 
       <div className="grid lg:grid-cols-2 gap-12">
-        <div className="space-y-8 overflow-hidden">
+        <div className="space-y-8 ">
+          <div>
+            <span className="bg-green-400/70 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-400/70 dark:text-white">Surquillo</span>
+            <span className="bg-[#9AD28E]/70 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-[#9AD28E]/70 dark:text-white">Departamento</span>
+            <span className="bg-[#FFAA00]/70 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-[#FFAA00]/70 dark:text-white">Construido</span>
+          </div>
+
           {images.length > 0 && <ImageGallery images={images} />}
           <ProjectInfo
             provider={proyect_provider}
@@ -140,13 +154,17 @@ export default function ProjectPage() {
             addressDetails={addressDetails}
             details={details}
             profitability={rent_roi + apreciation_roi}
-            breakdown={breakdown}
           />
+          <div className="hidden lg:block">
+            <MapEmbed src={project.address} />
+          </div>
+
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-8 sticky top-8">
           <InvestmentCalculator
             id={id}
+            address={address}
             totalShares={total_shares}
             area={square_cm}
             rentGain={rent_roi}
@@ -154,7 +172,9 @@ export default function ProjectPage() {
             minimumInvestment={minimum_investment}
             projectDuration={project_duration}
           />
-          <MapEmbed src={project.address} />
+        </div>
+        <div className="lg:hidden">
+          <MapEmbed src={address} />
         </div>
       </div>
     </section>
