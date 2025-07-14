@@ -1,5 +1,4 @@
 "use client";
-import { track } from "@/lib/gtag";
 import { useInvestmentShare } from "context/InvestmentContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -62,11 +61,6 @@ export default function InvestmentCalculator(props: Props) {
     setInvestmentAmount(amount);
     setLoading(true);
     try {
-      track("inicio_ticket", {
-        monto: inputValue,
-        cuotas: investment,
-        proyecto_id: id,
-      });
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_APP_URL}/api/asset_tokens`,
         {
