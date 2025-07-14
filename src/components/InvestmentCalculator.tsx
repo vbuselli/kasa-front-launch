@@ -3,6 +3,7 @@ import { useInvestmentShare } from "context/InvestmentContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { track } from "@/lib/gtag";
 
 type Props = {
   id: string;
@@ -13,7 +14,7 @@ type Props = {
   totalShares: number;
   projectDuration: number;
   address: string;
-  name:string;
+  name: string;
 };
 
 export default function InvestmentCalculator(props: Props) {
@@ -51,6 +52,27 @@ export default function InvestmentCalculator(props: Props) {
     setShares(aligned / sharePrice);
   };
 
+  /* ------------------ TRACKING: uso_simulador ------------------ */
+  const simuladorTrackRef = useRef(false);
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    debounceRef.current = setTimeout(() => {
+      if (!simuladorTrackRef.current) {
+        track("uso_simulador", {
+          monto: amount,
+          proyecto_id: id,
+        });
+        simuladorTrackRef.current = true;
+      }
+    }, 1000);
+
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [amount, id]);
 
 
   const rentProfit = (rentGain / 100) * amount * year;
@@ -60,6 +82,13 @@ export default function InvestmentCalculator(props: Props) {
   const createToken = async () => {
     setInvestmentAmount(amount);
     setLoading(true);
+    // ✅ TRACKING: inicio_ticket
+    track("inicio_ticket", {
+      monto: amount,
+      cuotas: shares,
+      proyecto_id: id,
+    });
+
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_APP_URL}/api/asset_tokens`,
@@ -281,4 +310,7 @@ const NumInput = ({
     </div>
   </div>
 );
+
+
+
 
