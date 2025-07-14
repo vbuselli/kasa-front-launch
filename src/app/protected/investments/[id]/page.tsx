@@ -163,6 +163,7 @@ export default function ProjectPage() {
 
         <div className="space-y-8 sticky top-8">
           <InvestmentCalculator
+          name={name}
             id={id}
             address={address}
             totalShares={total_shares}

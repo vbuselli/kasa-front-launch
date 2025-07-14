@@ -13,6 +13,7 @@ type Props = {
   totalShares: number;
   projectDuration: number;
   address: string;
+  name:string;
 };
 
 export default function InvestmentCalculator(props: Props) {
@@ -24,11 +25,12 @@ export default function InvestmentCalculator(props: Props) {
     totalShares,
     projectDuration,
     address,
+    name
   } = props;
 
   /* ------------------ estado ------------------ */
-  const [amount, setAmount] = useState(minimumInvestment);
-  const [shares, setShares] = useState(minimumInvestment / 100);
+  const [amount, setAmount] = useState(4000);
+  const [shares, setShares] = useState(4000 / 100);
   const [year, setYear] = useState(projectDuration);
   const [agree, setAgree] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -85,7 +87,7 @@ export default function InvestmentCalculator(props: Props) {
     <div className="rounded-xl border border-white/40 bg-[#0c1b2b] p-4 sm:p-6 space-y-8">
       {/* Encabezado */}
       <header className="space-y-1">
-        <h2 className="text-xl font-extrabold sm:text-2xl">Depa San Miguel</h2>
+        <h2 className="text-xl font-extrabold sm:text-2xl">{name}</h2>
         <p className="text-xs sm:text-sm text-gray-400">{address}</p>
       </header>
 
@@ -172,9 +174,9 @@ export default function InvestmentCalculator(props: Props) {
         <div className=" mx-auto w-full max-w-sm rounded-md border-1 border-green-500 py-4 px-6 text-lg font-bold flex justify-center gap-2 flex-wrap ">
           <span className="whitespace-nowrap">S/ {format(amount)}</span>
           <span>+</span>
-          <span className="whitespace-nowrap">{(totalGain.toFixed(2))}</span>
+          <span className="whitespace-nowrap">S/ {(totalGain.toFixed(2))}</span>
           <span>=</span>
-          <span className="whitespace-nowrap">{(grandTotal.toFixed(2))}</span>
+          <span className="whitespace-nowrap">S/ {(grandTotal.toFixed(2))}</span>
         </div>
       </div>
       {/* Disclaimer */}

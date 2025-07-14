@@ -5,21 +5,19 @@ import { useEffect, useRef, useState } from "react";
 type Props = { images: (string | StaticImageData)[] };
 
 export default function ImageGallery({ images }: Props) {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent]   = useState(0);
+  const [showAll, setShowAll]   = useState(false);
+  const [capacity, setCapacity] = useState(3);
+  const rowRef = useRef<HTMLDivElement>(null);
 
-  /* refs y medida de fila */
-  const rowRef = useRef<HTMLDivElement | null>(null);
-  const [capacity, setCapacity] = useState(3);  // nº de miniaturas que caben
+  /* 80 px thumb + 12 px gap */
+  const ITEM = 80, GAP = 12;
 
-  /*  thumb = 96 px   gap = 12 px  */
-  const ITEM = 96;
-  const GAP  = 12;
-
+  /* cuántas miniaturas caben por fila */
   useEffect(() => {
     if (!rowRef.current) return;
-
     const calc = () => {
-      const w = rowRef.current!.clientWidth;
+      const w   = rowRef.current!.clientWidth;
       const fit = Math.max(1, Math.floor((w + GAP) / (ITEM + GAP)));
       setCapacity(fit);
     };
@@ -29,31 +27,35 @@ export default function ImageGallery({ images }: Props) {
     return () => ro.disconnect();
   }, []);
 
-  /* overlay y thumbnails */
-  const [showAll, setShowAll] = useState(false);
-  const hasExtra = images.length > capacity;
-  const visible  = !showAll && hasExtra ? capacity - 1 : capacity;
-  const thumbs   = showAll || !hasExtra ? images : images.slice(0, visible);
+  /* lógica thumbnails */
+  const hasExtra     = images.length > capacity;
+  const thumbsToShow = showAll || !hasExtra ? images.length : capacity - 1;   // 👈 deja hueco para “+N”
+  const thumbs       = images.slice(0, thumbsToShow);
 
-  /* estilo base */
+  /* clases */
   const thumbBase =
-    "relative flex-none h-24 w-24 overflow-hidden rounded-lg ring-2 transition";
+    "relative h-20 w-20 flex-none overflow-hidden rounded-lg ring-2 transition";
 
+  const rowClass = `
+    flex gap-3 px-3 py-2
+    ${showAll ? "flex-wrap justify-center lg:flex-nowrap" : "flex-nowrap"}
+    scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-transparent
+    [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-thumb]:rounded-full
+  `;
+
+  const wrapperClass = showAll ? "lg:overflow-x-auto" : "overflow-x-auto";
+
+  /* ---------- UI ---------- */
   return (
-    <div className="w-full mt-3 overflow-x-hidden">
+    <div className="w-full mt-4 overflow-x-hidden">
       {/* imagen principal */}
-      <div className="relative mb-4 h-96 w-full max-w-full overflow-hidden rounded-xl">
-        <Image src={images[current]} alt="" fill className="object-cover" priority />
+      <div className="relative mb-4 h-[70vw] max-h-96 w-[90%] sm:w-full mx-auto overflow-hidden rounded-xl">
+        <Image src={images[current]} alt={`Imagen ${current + 1}`} fill className="object-cover" priority />
       </div>
 
-      {/* carrusel */}
-      <div className="overflow-x-auto">
-        <div
-          ref={rowRef}
-          className="flex flex-nowrap gap-3 px-3 pt-2 pb-2
-                     scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-transparent
-                     [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-thumb]:rounded-full"
-        >
+      {/* carrusel / grid thumbnails */}
+      <div className={wrapperClass}>
+        <div ref={rowRef} className={rowClass}>
           {thumbs.map((src, i) => (
             <button
               key={i}
@@ -62,21 +64,23 @@ export default function ImageGallery({ images }: Props) {
                 current === i ? "ring-green-500" : "ring-transparent hover:ring-green-400"
               }`}
             >
-              <Image src={src} alt="" fill className="object-cover" />
+              <Image src={src} alt={`Miniatura ${i + 1}`} fill className="object-cover" />
             </button>
           ))}
 
           {!showAll && hasExtra && (
-            <button onClick={() => setShowAll(true)} className={`${thumbBase}`}>
+            <button
+              onClick={() => setShowAll(true)}
+              className={thumbBase}
+            >
               <Image
-                src={images[visible]}
-                alt=""
+                src={images[capacity - 1]}
+                alt="Ver más miniaturas"
                 fill
                 className="object-cover blur-[2px] brightness-75"
-                  sizes="(max-width: 640px) calc(100vw - 2rem), 640px"
               />
               <span className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-white">
-                +{images.length - visible}
+                +{images.length - (capacity - 1)}
               </span>
             </button>
           )}
