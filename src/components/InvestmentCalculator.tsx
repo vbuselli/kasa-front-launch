@@ -246,29 +246,37 @@ const NumInput = ({
   prefix,
   value,
   onChange,
-  onBlur,
+  onBlur,        // ← opcional
   min,
 }: {
   label: string;
   prefix: string;
   value: number;
   onChange: (v: number) => void;
-  onBlur?:   (v: number) => void;
-  min: number;
+  onBlur?: (v: number) => void;   // opcional
+  min?: number;
 }) => (
   <div className="flex-1 space-y-1">
-    <label className="block text-xs font-semibold text-gray-300">{label}</label>
+    <label className="block text-xs font-semibold text-gray-300">
+      {label}
+    </label>
+
     <div className="relative">
       <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-bold">
         {prefix}
       </span>
+
       <input
         type="number"
-        value={value === 0 ? "" : value}      // muestra vacío mientras escribes
+        value={value === 0 ? "" : value}
         onChange={(e) => onChange(+e.target.value)}
-        onBlur={(e) => onBlur(+e.target.value)}
-        className="h-12 w-full bg-gray-600/70 py-1 pl-10 pr-2 text-center text-lg font-semibold focus:outline-none"
+        /* ✔️ se invoca solo si existe */
+        onBlur={(e) => onBlur?.(+e.target.value)}
+        min={min}
+        className="h-12 w-full bg-gray-600/70 py-1 pl-10 pr-2
+                   text-center text-lg font-semibold focus:outline-none"
       />
     </div>
   </div>
 );
+
