@@ -2,8 +2,10 @@
 import { useInvestmentShare } from "context/InvestmentContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { track } from "@/lib/gtag";
 import * as Tooltip from '@radix-ui/react-tooltip';
+import { InfoIcon } from "lucide-react";
 
 type Props = {
   id: string;
@@ -346,7 +348,7 @@ const NumInput = ({
         type="number"
         value={value === 0 ? "" : value}
         onChange={(e) => onChange(+e.target.value)}
-        /* ✔️ se invoca solo si existe */
+        /* se invoca solo si existe */
         onBlur={(e) => onBlur?.(+e.target.value)}
         min={min}
         className="h-12 w-full bg-gray-600/70 py-1 pl-10 pr-2
