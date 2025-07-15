@@ -2,10 +2,8 @@
 import { useInvestmentShare } from "context/InvestmentContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { track } from "@/lib/gtag";
 import * as Tooltip from '@radix-ui/react-tooltip';
-import { InfoIcon } from "lucide-react";
 
 type Props = {
   id: string;
