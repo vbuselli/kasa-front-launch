@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { track } from "@/lib/gtag";
+import * as Tooltip from '@radix-ui/react-tooltip';
+import { InfoIcon } from "lucide-react";
 
 type Props = {
   id: string;
@@ -125,7 +127,7 @@ export default function InvestmentCalculator(props: Props) {
         <h3 className="text-base font-bold mb-4">
           Sobre el proyecto
         </h3>
-        <div className="grid grid-cols-3 gap-2 text-center text-[13px] pl-6">
+        <div className="grid grid-cols-3 gap-2 text-center text-[13px] pl-6 max-[400px]:pl-1">
           <InfoBox label="Precio total" value={`S/ ${format(totalShares * 100)}`} />
           <InfoBox label="Fracciones" value={format(totalShares)} />
           <InfoBox label="Inv. mínima" value={`S/ ${format(minimumInvestment)}`} />
@@ -134,12 +136,27 @@ export default function InvestmentCalculator(props: Props) {
 
       {/* Sobre la inversión */}
       <section>
-        <h3 className="text-base font-bold mb-4">
-          Sobre la inversión
-        </h3>
+        <h3 className="text-base font-bold mb-4">Sobre la inversión</h3>
         <div className="flex flex-wrap gap-4 text-[13px] justify-around">
-          <InfoPair label="Rentabilidad" value={`${(rentGain + appGain).toFixed(2)}% /año`} />
-          <InfoPair label="Duración" value={`${projectDuration} años`} />
+          {/* Tooltips para Rentabilidad y Duración ahora están en InfoPair */}
+          <InfoPair
+            label="Rentabilidad"
+            value={`${(rentGain + appGain).toFixed(2)}% /año`}
+            tooltip={
+              <><p>Incluye:</p>
+                <li>5.26% anual por alquileres distribuidos mensualmente</li>
+                <li>3% anual compuesto proyectado por valorización del inmueble</li>
+                <div className="mt-1 text-xxs italic">
+                  La plusvalía se recibe solo al vender el inmueble.
+                </div>
+              </>
+            }
+          />
+          <InfoPair
+            label="Duración"
+            value={`${projectDuration} años`}
+            tooltip="Puedes vender tus fracciones antes a otros inversionistas, no hay tiempo mínimo de permanencia."
+          />
         </div>
       </section>
 
@@ -256,14 +273,44 @@ const InfoBox = ({ label, value }: { label: string; value: string }) => (
   </div>
 );
 
-const InfoPair = ({ label, value }: { label: string; value: string }) => (
-  <div>
-    <p className="text-[10px] font-semibold uppercase tracking-wide text-gray-400">
-      {label}
-    </p>
+const InfoPair = ({
+  label,
+  value,
+  tooltip,
+}: {
+  label: string;
+  value: string;
+  tooltip?: React.ReactNode;
+}) => (
+  <div className="flex flex-col items-start gap-1">
+    <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-gray-400">
+      <span>{label}</span>
+      {tooltip && (
+        <Tooltip.Provider>
+          <Tooltip.Root delayDuration={100}>
+            <Tooltip.Trigger asChild>
+              <button className="w-4 h-4 rounded-full bg-gray-300 text-gray-800 text-[10px] font-bold flex items-center justify-center cursor-pointer">
+                ?
+              </button>
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content
+                side="top"
+                align="center"
+                className="bg-white text-black border border-gray-300 shadow-lg rounded p-3 max-w-xs text-[11px] leading-snug z-50"
+              >
+                {tooltip}
+                <Tooltip.Arrow className="fill-white" />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      )}
+    </div>
     <p className="text-sm font-bold">{value}</p>
   </div>
 );
+
 
 const GainBox = ({ label, value }: { label: string; value: number }) => (
   <div className="flex-1 rounded-md border border-white bg-[#03AE5B]/90 py-2 text-center">
