@@ -1,11 +1,28 @@
 "use client";
+
+import { useUserVerification } from "context/UserVerificationContext";
+import TransferSuccessScreen from "@/components/TransferSuccessScreen";
 import Image from "next/image";
 import Link from "next/link";
 import Character from "@/assets/Character.png";
 
 export default function PaymentSuccess() {
+  const { isVerified, loading } = useUserVerification();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-white">
+        Cargando...
+      </div>
+    );
+  }
+
+  if (isVerified === false) {
+    return <TransferSuccessScreen />;
+  }
+
   return (
-    <section className="bg-foreground text-white py-16 px-8 rounded-tl-[30px] flex-1">
+        <section className="bg-foreground text-white py-16 px-8 rounded-tl-[30px] flex-1">
       <div className="container mx-auto text-center space-y-6">
         <h1 className="text-4xl font-extrabold">¡Listo! Estás a punto de convertirte en inversionista inmobiliario 🏠</h1>
         <div className="mx-auto w-48 h-48 relative">

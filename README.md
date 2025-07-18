@@ -38,3 +38,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 
+Simulados check
+Enviar la transferencia check (Ocurre un Internal error server a veces al enviar la transferencia)
+Administrador puede validar transferencia check
+Revisar si se están cambiando correctamente los estados del assets
+Una vez la transferencia se realiza, los usuarios deben enviar sus datos
+
+IMPORTANTE Hay errores al hacer el get de los assets (Inversiones) en los usarios
+Error get Assets (Parece un error de next js)
