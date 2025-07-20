@@ -35,11 +35,11 @@ const steps: Step[] = [
 ];
 
 type Props = {
-  currentStepIndex: number;
+  currentStepIndex?: number;
   completedSteps: number[];
 };
 
-export default function     InvestmentSteps({
+export default function InvestmentSteps({
   currentStepIndex,
   completedSteps,
 }: Props) {

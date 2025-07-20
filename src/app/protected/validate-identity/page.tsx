@@ -4,6 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUserVerification } from "context/UserVerificationContext";
+import { useEffect } from "react";
 
 const schema = yup.object().shape({
   document_type: yup.string().required("Tipo de documento requerido"),
@@ -56,6 +58,21 @@ export default function ValidateIdentityPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const router = useRouter();
+  const { isVerified, loading: verificationLoading } = useUserVerification();
+
+
+
+  useEffect(() => {
+    if (verificationLoading) return;
+
+    if (isVerified === "pending") {
+      router.replace("/protected/success");
+    }
+
+    if (isVerified === true) {
+      router.replace("/protected/success");
+    }
+  }, [isVerified, verificationLoading, router]);
 
   const methods = useForm<FormValues>({
     resolver: yupResolver(schema),

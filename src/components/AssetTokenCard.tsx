@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useDrawer } from "context/DrawerContext";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 export type AssetTokenCardProps = AssetPopulated;
 
 const stateTitles: Record<string, string> = {
@@ -82,20 +82,14 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
                 {stateDescriptions[state]}
               </div>
             </div>
-            <button
-              className="bg-yellow-400 mt-3 hover:bg-yellow-500 text-foreground font-semibold py-2 px-6 rounded-lg shadow-lg cursor-pointer transition-colors"
-              onClick={() => {
-                if (state !== "pending") {
-                  openDrawer(assetToken);
-                  return;
-                }
-                router.push(
-                  `/protected/checkout/${assetToken.id}`
-                );
-              }}
-            >
-              Completar Inversión
-            </button>
+            <Link
+          href="/protected/success"
+          className="bg-yellow-400 mt-3 hover:bg-yellow-500 text-foreground font-semibold py-2 px-6 rounded-lg shadow-lg cursor-pointer transition-colors"
+        >
+          Completar Inversión
+        </Link>
+
+            
           </div>
         </>
       )}

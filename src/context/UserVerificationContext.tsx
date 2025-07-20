@@ -8,7 +8,7 @@ import {
 } from "react";
 
 type UserVerificationContextType = {
-  isVerified: boolean | null;
+  isVerified: boolean | null | string;
   refresh: () => void;
   loading: boolean;
 };
