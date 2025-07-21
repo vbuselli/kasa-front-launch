@@ -66,7 +66,7 @@ export default function ValidateIdentityPage() {
     if (verificationLoading) return;
 
     if (isVerified === "pending") {
-      router.replace("/protected/success");
+      router.replace("/protected/ ");
     }
 
     if (isVerified === true) {
