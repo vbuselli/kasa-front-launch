@@ -58,7 +58,7 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
           const images: string[] = await imagesResponse.json();
           setCurrentSrc(images[0]);
         }
-      } catch {}
+      } catch { }
     };
 
     fetchImage();
@@ -83,13 +83,16 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
               </div>
             </div>
             <Link
-          href="/protected/success"
-          className="bg-yellow-400 mt-3 hover:bg-yellow-500 text-foreground font-semibold py-2 px-6 rounded-lg shadow-lg cursor-pointer transition-colors"
-        >
-          Completar Inversión
-        </Link>
+              className="bg-yellow-400 mt-3 hover:bg-yellow-500 text-foreground font-semibold py-2 px-6 rounded-lg shadow-lg cursor-pointer transition-colors"
+              href="/protected/success"
+              onClick={() => {
+                localStorage.setItem("active_token_id", assetToken.id); // <- esto sí guarda el token en DrawerContext
+              }}
+            >
+              Completar Inversión
+            </Link>
 
-            
+
           </div>
         </>
       )}
@@ -108,9 +111,8 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
         <p className="text-sm text-gray-300">{address}</p>
         <div className="mt-2 h-3 bg-black/60 rounded-full overflow-hidden">
           <div
-            className={`h-full rounded-full ${
-              completed ? "bg-primary" : "bg-yellow-400"
-            }`}
+            className={`h-full rounded-full ${completed ? "bg-primary" : "bg-yellow-400"
+              }`}
             style={{ width: `${Math.min(boughtPercent, 100)}%` }}
           />
         </div>

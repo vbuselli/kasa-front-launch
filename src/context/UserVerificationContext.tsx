@@ -8,7 +8,7 @@ import {
 } from "react";
 
 type UserVerificationContextType = {
-  isVerified: boolean | null | string;
+  isVerified: string | null;
   refresh: () => void;
   loading: boolean;
 };
@@ -31,7 +31,7 @@ export function UserVerificationProvider({
 }: {
   children: ReactNode;
 }) {
-  const [isVerified, setIsVerified] = useState<boolean | null>(null);
+  const [isVerified, setIsVerified] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const fetchVerification = async () => {
@@ -40,7 +40,7 @@ export function UserVerificationProvider({
       const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/kyc`);
       if (res.ok) {
         const { is_verified } = await res.json();
-        setIsVerified(!!is_verified);
+        setIsVerified(is_verified); 
       } else {
         setIsVerified(null);
       }

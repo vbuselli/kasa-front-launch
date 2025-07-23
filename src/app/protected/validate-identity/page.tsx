@@ -64,12 +64,12 @@ export default function ValidateIdentityPage() {
 
   useEffect(() => {
     if (verificationLoading) return;
-
-    if (isVerified === "pending") {
-      router.replace("/protected/ ");
+    console.log(isVerified)
+    if (isVerified === "not_verified") {
+      router.replace("/protected/validate-identity");
     }
 
-    if (isVerified === true) {
+    else {
       router.replace("/protected/success");
     }
   }, [isVerified, verificationLoading, router]);
