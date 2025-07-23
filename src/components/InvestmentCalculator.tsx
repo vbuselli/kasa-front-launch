@@ -4,8 +4,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { track } from "@/lib/gtag";
-import * as Tooltip from '@radix-ui/react-tooltip';
 import { InfoIcon } from "lucide-react";
+import * as Popover from '@radix-ui/react-popover';
+
 
 type Props = {
   id: string;
@@ -31,7 +32,6 @@ export default function InvestmentCalculator(props: Props) {
     name
   } = props;
 
-  /* ------------------ estado ------------------ */
   const [amount, setAmount] = useState(4000);
   const [shares, setShares] = useState(4000 / 100);
   const [year, setYear] = useState(projectDuration);
@@ -40,21 +40,18 @@ export default function InvestmentCalculator(props: Props) {
   const { setInvestmentAmount } = useInvestmentShare();
   const router = useRouter();
 
-  /* ------------ helpers ------------- */
   const sharePrice = 100;
   const format = (v: number) => v.toLocaleString("es-PE");
 
-  /** Normaliza solo cuando final=true (blur) */
   const syncAmount = (v: number, final = false) => {
-    const raw = isNaN(v) ? 0 : v;                  // permite campo vacío
+    const raw = isNaN(v) ? 0 : v;
     const aligned = final
       ? Math.max(minimumInvestment, Math.floor(raw / 100) * 100)
-      : raw;                                       // sin forzar mientras escribe
+      : raw;
     setAmount(aligned);
     setShares(aligned / sharePrice);
   };
 
-  /* ------------------ TRACKING: uso_simulador ------------------ */
   const simuladorTrackRef = useRef(false);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -76,15 +73,14 @@ export default function InvestmentCalculator(props: Props) {
     };
   }, [amount, id]);
 
-
   const rentProfit = (rentGain / 100) * amount * year;
   const apprProfit = amount * (Math.pow(1 + appGain / 100, year) - 1);
+  const totalGain = rentProfit + apprProfit;
+  const grandTotal = amount + totalGain;
 
-  /* ------------------ submit ------------------ */
   const createToken = async () => {
     setInvestmentAmount(amount);
     setLoading(true);
-    // ✅ TRACKING: inicio_ticket
     track("inicio_ticket", {
       monto: amount,
       cuotas: shares,
@@ -109,24 +105,15 @@ export default function InvestmentCalculator(props: Props) {
     }
   };
 
-  const totalGain = (rentProfit + apprProfit);     // ganancia total
-  const grandTotal = (amount + totalGain);          // inversión + ganancia
-
-
-  /* ------------------ UI ------------------ */
   return (
     <div className="rounded-xl border border-white/40 bg-[#0c1b2b] p-4 sm:p-6 space-y-8">
-      {/* Encabezado */}
       <header className="space-y-1">
         <h2 className="text-xl font-extrabold sm:text-2xl">{name}</h2>
         <p className="text-xs sm:text-sm text-gray-400">{address}</p>
       </header>
 
-      {/* Sobre el proyecto */}
       <section>
-        <h3 className="text-base font-bold mb-4">
-          Sobre el proyecto
-        </h3>
+        <h3 className="text-base font-bold mb-4">Sobre el proyecto</h3>
         <div className="grid grid-cols-3 gap-2 text-center text-[13px] pl-6 max-[400px]:pl-1">
           <InfoBox label="Precio total" value={`S/ ${format(totalShares * 100)}`} />
           <InfoBox label="Fracciones" value={format(totalShares)} />
@@ -134,16 +121,15 @@ export default function InvestmentCalculator(props: Props) {
         </div>
       </section>
 
-      {/* Sobre la inversión */}
       <section>
         <h3 className="text-base font-bold mb-4">Sobre la inversión</h3>
         <div className="flex flex-wrap gap-4 text-[13px] justify-around">
-          {/* Tooltips para Rentabilidad y Duración ahora están en InfoPair */}
           <InfoPair
             label="Rentabilidad"
             value={`${(rentGain + appGain).toFixed(2)}% /año`}
             tooltip={
-              <><p>Incluye:</p>
+              <>
+                <p>Incluye:</p>
                 <li>5.26% anual por alquileres distribuidos mensualmente</li>
                 <li>3% anual compuesto proyectado por valorización del inmueble</li>
                 <div className="mt-1 text-xxs italic">
@@ -160,20 +146,18 @@ export default function InvestmentCalculator(props: Props) {
         </div>
       </section>
 
-      {/* Simulador */}
-      <section className="space-y-6 ">
+      <section className="space-y-6">
         <h3 className="text-base font-bold">¡Simula tu inversión!</h3>
 
-        {/* Inputs */}
         <div className="flex flex-col gap-4 sm:flex-row px-8">
           <NumInput
             label="Monto a invertir"
             prefix="S/"
             value={amount}
-            onChange={(v) => syncAmount(v)}         // solo actualiza
-            onBlur={(v) => syncAmount(v, true)}     // ahora sí normaliza
+            onChange={(v) => syncAmount(v)}
+            onBlur={(v) => syncAmount(v, true)}
+            min={minimumInvestment}
           />
-
           <NumInput
             label="Fracciones a comprar"
             prefix="#"
@@ -187,8 +171,7 @@ export default function InvestmentCalculator(props: Props) {
           Ingrese múltiplos de S/ 100 (2 200, 2 300…)
         </p>
 
-        {/* Slider */}
-        <div className="space-y-2 flex flex-col justify-center items-center ">
+        <div className="space-y-2 flex flex-col justify-center items-center">
           <label className="text-center block text-sm font-semibold">
             Rentabilidad al año <span className="font-bold text-white">{year}</span>
           </label>
@@ -205,34 +188,31 @@ export default function InvestmentCalculator(props: Props) {
               <span key={i}>{i + 1}</span>
             ))}
           </div>
-
         </div>
-        {/* Ganancias */}
+
         <div className="flex gap-4 px-8">
           <GainBox label="Por alquiler" value={rentProfit} />
           <GainBox label="Por apreciación" value={apprProfit} />
         </div>
       </section>
-      {/* ─── Total inversión + ganancia ─── */}
+
       <div className="space-y-2 text-center">
         <h3 className="text-base font-bold">Tu inversión + tu ganancia</h3>
-
-        <div className=" mx-auto w-full max-w-sm rounded-md border-1 border-green-500 py-4 px-6 text-lg font-bold flex justify-center gap-2 flex-wrap ">
+        <div className="mx-auto w-full max-w-sm rounded-md border-1 border-green-500 py-4 px-6 text-lg font-bold flex justify-center gap-2 flex-wrap">
           <span className="whitespace-nowrap">S/ {format(amount)}</span>
           <span>+</span>
-          <span className="whitespace-nowrap">S/ {(totalGain.toFixed(2))}</span>
+          <span className="whitespace-nowrap">S/ {totalGain.toFixed(2)}</span>
           <span>=</span>
-          <span className="whitespace-nowrap">S/ {(grandTotal.toFixed(2))}</span>
+          <span className="whitespace-nowrap">S/ {grandTotal.toFixed(2)}</span>
         </div>
       </div>
-      {/* Disclaimer */}
+
       <p className="rounded-md bg-white/90 p-4 text-center text-[11px] font-medium text-gray-800">
         Las ganancias estimadas son antes de impuestos. Procuramos que la propiedad se
         alquile la mayor parte del tiempo, pero no podemos garantizar ocupación ni
         apreciación exacta.
       </p>
 
-      {/* T&C + botón */}
       <div className="space-y-4">
         <label className="flex items-center gap-2 text-xs font-semibold">
           <input
@@ -286,31 +266,32 @@ const InfoPair = ({
     <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-gray-400">
       <span>{label}</span>
       {tooltip && (
-        <Tooltip.Provider>
-          <Tooltip.Root delayDuration={100}>
-            <Tooltip.Trigger asChild>
-              <button className="w-4 h-4 rounded-full bg-gray-300 text-gray-800 text-[10px] font-bold flex items-center justify-center cursor-pointer">
-                ?
-              </button>
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <Tooltip.Content
-                side="top"
-                align="center"
-                className="bg-white text-black border border-gray-300 shadow-lg rounded p-3 max-w-xs text-[11px] leading-snug z-50"
-              >
-                {tooltip}
-                <Tooltip.Arrow className="fill-white" />
-              </Tooltip.Content>
-            </Tooltip.Portal>
-          </Tooltip.Root>
-        </Tooltip.Provider>
+        <Popover.Root>
+          <Popover.Trigger asChild>
+            <button
+              className="w-4 h-4 rounded-full bg-gray-300 text-gray-800 text-[10px] font-bold flex items-center justify-center cursor-pointer"
+              aria-label="Mostrar información"
+            >
+              ?
+            </button>
+          </Popover.Trigger>
+          <Popover.Portal>
+            <Popover.Content
+              side="top"
+              align="center"
+              sideOffset={4}
+              className="bg-white text-black border border-gray-300 shadow-lg rounded p-3 max-w-xs text-[11px] leading-snug z-50"
+            >
+              {tooltip}
+              <Popover.Arrow className="fill-white" />
+            </Popover.Content>
+          </Popover.Portal>
+        </Popover.Root>
       )}
     </div>
     <p className="text-sm font-bold">{value}</p>
   </div>
 );
-
 
 const GainBox = ({ label, value }: { label: string; value: number }) => (
   <div className="flex-1 rounded-md border border-white bg-[#03AE5B]/90 py-2 text-center">
@@ -324,40 +305,30 @@ const NumInput = ({
   prefix,
   value,
   onChange,
-  onBlur,        // ← opcional
+  onBlur,
   min,
 }: {
   label: string;
   prefix: string;
   value: number;
   onChange: (v: number) => void;
-  onBlur?: (v: number) => void;   // opcional
+  onBlur?: (v: number) => void;
   min?: number;
 }) => (
   <div className="flex-1 space-y-1">
-    <label className="block text-xs font-semibold text-gray-300">
-      {label}
-    </label>
-
+    <label className="block text-xs font-semibold text-gray-300">{label}</label>
     <div className="relative">
       <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-bold">
         {prefix}
       </span>
-
       <input
         type="number"
         value={value === 0 ? "" : value}
         onChange={(e) => onChange(+e.target.value)}
-        /* se invoca solo si existe */
         onBlur={(e) => onBlur?.(+e.target.value)}
         min={min}
-        className="h-12 w-full bg-gray-600/70 py-1 pl-10 pr-2
-                   text-center text-lg font-semibold focus:outline-none"
+        className="h-12 w-full bg-gray-600/70 py-1 pl-10 pr-2 text-center text-lg font-semibold focus:outline-none"
       />
     </div>
   </div>
 );
-
-
-
-
