@@ -17,10 +17,10 @@ type InvestmentShare = {
 
 const InvestmentShareContext = createContext<InvestmentShare>({
   investmentAmount: 2000,
-  setInvestmentAmount: () => {},
+  setInvestmentAmount: () => { },
   commission: 0,
   propertyValue: 0,
-  setPropertyValue: () => {},
+  setPropertyValue: () => { },
 });
 
 function calculateCommission(
@@ -37,7 +37,16 @@ function calculateCommission(
 }
 
 export function InvestmentShareProvider({ children }: { children: ReactNode }) {
-  const [investmentAmount, setInvestmentAmount] = useState<number>(2000);
+  const [investmentAmount, setInvestmentAmount] = useState<number>(() => {
+    // Intenta leer de localStorage usando el ID de la URL
+    if (typeof window !== "undefined") {
+      const urlParts = window.location.pathname.split("/");
+      const stored = localStorage.getItem(`investmentAmount`);
+      return stored ? parseFloat(stored) : 2000;
+    }
+    return 2000;
+  });
+
   const [propertyValue, setPropertyValue] = useState<number>(0);
   const [commission, setCommission] = useState<number>(0);
 

@@ -7,6 +7,7 @@ import FAQSection from "@/components/FAQ";
 import { CartProvider } from "context/CartContext";
 import WhatsappButton from "@/components/WhatsappButton";
 import Script from "next/script";
+import { InvestmentShareProvider } from "context/InvestmentContext";
 
 
 const montserrat = Montserrat({
@@ -44,16 +45,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} relative`}
       >
-        <CartProvider>
-          <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col">
-            <Navbar />
-            <WhatsappButton />
-            <main className="flex-1 flex flex-col">{children}</main>
-            <FAQSection />
-            <Footer />
-          </div>
-        </CartProvider>
 
+        <InvestmentShareProvider>
+          <CartProvider>
+            <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col">
+              <Navbar />
+              <WhatsappButton />
+              <main className="flex-1 flex flex-col">{children}</main>
+              <FAQSection />
+              <Footer />
+            </div>
+          </CartProvider>
+        </InvestmentShareProvider>
       </body>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}

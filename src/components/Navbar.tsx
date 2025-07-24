@@ -9,6 +9,8 @@ import { useCart } from "context/CartContext";
 import { useState, useEffect } from "react";
 import { User } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
+import { useInvestmentShare } from "context/InvestmentContext";
+
 
 export default function Navbar() {
   const { count, firstPendingToken } = useCart();

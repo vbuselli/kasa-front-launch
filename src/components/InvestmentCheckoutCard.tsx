@@ -9,6 +9,9 @@ import ReservationTimer from "./ReservationTimer";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import InvestmentSteps from "./InvestmentSteps";
+import { useParams } from "next/navigation";
+import { useMyAssetTokens } from "../hooks/useMyAssetTokens";
+
 
 const formatCurrency = (value: number) =>
   `S/ ${value.toLocaleString("en-US", {
@@ -107,7 +110,23 @@ export default function InvestmentCheckoutCard({
   const [terms, setTerms] = useState(false);
   const [ownership, setOwnership] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
+  const params = useParams();
+  const tokenId = params?.id;
 
+  const { tokens } = useMyAssetTokens();
+
+  const [activeToken, setActiveToken] = useState<AssetPopulated | null>(null);
+
+
+  useEffect(() => {
+    if (tokenId && tokens.length > 0) {
+      const match = tokens.find((t) => t.id === tokenId);
+      if (match) setActiveToken(match);
+    }
+  }, [tokens]);
+
+  console.log(investmentAmount)
+  
   const {
     register,
     formState: { errors },

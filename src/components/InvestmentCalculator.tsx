@@ -7,7 +7,6 @@ import { track } from "@/lib/gtag";
 import { InfoIcon } from "lucide-react";
 import * as Popover from '@radix-ui/react-popover';
 
-
 type Props = {
   id: string;
   minimumInvestment: number;
@@ -97,6 +96,7 @@ export default function InvestmentCalculator(props: Props) {
         }
       );
       const { id: tokenId } = await res.json();
+      localStorage.setItem(`investmentAmount`, amount.toString());
       router.push(`/protected/checkout/${tokenId}`);
     } catch {
       router.push("/sign-in");
