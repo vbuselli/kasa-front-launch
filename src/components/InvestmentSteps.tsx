@@ -29,7 +29,7 @@ const steps: Step[] = [
   },
   {
     title: "Firma el contrato",
-    description: "xxxxx",
+    description: "Completa tu inversión firmando tu contrato",
 
   },
 ];
@@ -50,7 +50,7 @@ export default function InvestmentSteps({
       <div className="flex items-center justify-between cursor-pointer" onClick={() => setOpen(!open)}>
         <div>
           <h2 className="text-xl font-bold">¡Completa tu inversión!</h2>
-          <p className="text-sm italic text-gray-300">En tan solo 3 pasos</p>
+          <p className="text-sm italic text-gray-300">En tan solo 4 pasos</p>
         </div>
         {open ? <ChevronUp className="text-white" /> : <ChevronDown className="text-white" />}
       </div>

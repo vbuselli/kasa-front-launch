@@ -50,12 +50,12 @@ export default function PaymentSuccess() {
 
   if (isVerified === "not_verified") {
     return (
-      <div className="min-h-screen bg-[#101A28] text-white px-6 py-12 grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-16 items-start">        <div className="relative md:sticky md:top-6">
+      <div className="rounded-tl-[30px] min-h-screen bg-[#101A28] text-white px-6 py-12 grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-16 items-start">        <div className="relative md:sticky md:top-6">
         <InvestmentSteps currentStepIndex={2} completedSteps={[0, 1]} />
       </div>
 
         <div className="bg-[#101A28] border border-white rounded-lg p-8 text-center flex flex-col items-center gap-6 h-full pt-20">
-          <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-lg">2</div>
+          <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-lg">4</div>
           <h2 className="text-2xl font-semibold">¡Ya estás cerca!</h2>
           <p className="text-base text-gray-300">
             ¡Enviaste tu transferencia con éxito! <br />
@@ -76,7 +76,7 @@ export default function PaymentSuccess() {
 
   else if (isVerified === "verified" && tokenReadyToSign == null) {
     return (
-      <div className="min-h-screen bg-[#101A28] text-white px-6 py-12 grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-16 items-start">        <div className="relative md:sticky md:top-6">
+      <div className="rounded-tl-[30px] min-h-screen bg-[#101A28] text-white px-6 py-12 grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-16 items-start">        <div className="relative md:sticky md:top-6">
         <InvestmentSteps completedSteps={[0, 1, 2]} />
       </div>
 
@@ -120,13 +120,13 @@ export default function PaymentSuccess() {
 
   else if (isVerified === "verified" && tokenReadyToSign && activeToken?.document_sign_url) {
     return (
-      <div className="min-h-screen bg-[#101A28] text-white px-6 py-12 grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-16 items-start">
+      <div className="rounded-tl-[30px] min-h-screen bg-[#101A28] text-white px-6 py-12 grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-16 items-start">
         <div className="relative md:sticky md:top-6">
           <InvestmentSteps completedSteps={[0, 1, 2]} />
         </div>
 
         <div className="bg-[#101A28] border border-white/30 rounded-lg p-8 text-center flex flex-col items-center gap-6 h-full pt-20">
-          <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-lg">2</div>
+          <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-lg">4</div>
 
           <h2 className="text-2xl font-semibold">¡Último paso!</h2>
 
@@ -171,7 +171,7 @@ export default function PaymentSuccess() {
 
   else if (isVerified == "sent") {
     return (
-      <div className="min-h-screen bg-[#101A28] text-white px-12 py-12 grid grid-cols-[340px_1fr] gap-16 items-start">
+      <div className="rounded-tl-[30px] min-h-screen bg-[#101A28] text-white px-12 py-12 grid grid-cols-[340px_1fr] gap-16 items-start">
         <div className="relative md:sticky md:top-6">
           <InvestmentSteps completedSteps={[0, 1, 2]} />
         </div>

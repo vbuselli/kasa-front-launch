@@ -41,10 +41,11 @@ export default function AssetTokenCard(assetToken: AssetTokenCardProps) {
     : 0;
 
   const completed = owned_shares === total_shares;
-
+  
   useEffect(() => {
     const fetchImage = async () => {
       try {
+        console.log(id)
         const imagesResponse = await fetch(
           `${process.env.NEXT_PUBLIC_APP_URL}/api/assets/${id}/images`,
           {

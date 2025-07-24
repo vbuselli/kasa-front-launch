@@ -1,8 +1,9 @@
 import { User } from "@supabase/supabase-js";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { AssetPopulated } from "types/models";
 import { track } from "@/lib/gtag";
+import { createClient } from "@/utils/supabase/client";
 
 type Props = {
   assetToken: AssetPopulated;
@@ -20,7 +21,16 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
       ? "estatus"
       : "inversion"
   );
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (user) return;
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user);
+    });
+  }, []);
+
 
   // Add this state to track validation click
   const [hasClickedValidation, setHasClickedValidation] = useState(false);
@@ -39,6 +49,7 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
   };
 
   useEffect(() => {
+
     if (assetToken.state === "pre-funding") {
       track("pago_completo", {
         proyecto_id: assetToken.asset.id,
@@ -66,21 +77,11 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
     { key: "apreciacion", label: "Apreciación", disabled: true },
   ];
 
-  const fetchUser = async () => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/auth`);
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data);
-      }
-    } catch { }
-  };
 
   useEffect(() => {
-    fetchUser();
-  }, []);
-  useEffect(() => {
+
     if (assetToken.state === "documents_pending") {
+
       track("kyc_completo", {
         proyecto_id: assetToken.asset.id,
         user_id: user?.id,
@@ -89,8 +90,8 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
   }, [assetToken.state, assetToken.asset.id, user?.id]);
 
   return (
-    <div className="text-white mt-6 flex flex-col space-y-6 p-3">
-      <div className="flex space-x-2">
+    <div className="text-white flex flex-col space-y-6 p-3">
+      {/* <div className="flex space-x-2">
         {tabs.map((tab) => (
           <button
             key={tab.key}
@@ -113,7 +114,7 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
             {tab.label}
           </button>
         ))}
-      </div>
+      </div> */}
 
       {activeTab === "inversion" && (
         <>
@@ -125,9 +126,13 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
           <div>
             <span className="font-semibold">Dirección</span>
             <p className="text-sm">{assetToken.asset.address}</p>
-            <span className="text-primary text-xs font-semibold">
-              Ver detalle
-            </span>
+
+            <Link href={`investments/${assetToken.asset.id}`} onClick={closeDrawer} >
+              <span className="text-primary text-xs font-semibold">
+                Ver detalle
+              </span>
+            </Link>
+
           </div>
 
           <div>
@@ -192,7 +197,7 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
                   <span className="font-normal">RUC:</span>{" "}
                   {assetToken.asset.spv_ruc}
                 </div>
-                <div className="font-bold">
+                {/* <div className="font-bold">
                   <span className="font-normal">Dirección Legal:</span>{" "}
                   {assetToken.asset.spv_address}
                 </div>
@@ -200,7 +205,7 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
                   <span className="text-primary font-normal">
                     Descargar documentos legales
                   </span>
-                </div>
+                </div> */}
               </div>
               <div className="space-y-1">
                 <div className="font-bold">
@@ -215,7 +220,7 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
                   <span className="font-normal">Inversión:</span> S/{" "}
                   {(assetToken.num_shares * 100).toLocaleString("es-PE")}
                 </div>
-                <div className="font-bold">
+                {/* <div className="font-bold">
                   <span className="font-normal">Territorio comprado:</span>{" "}
                   {(
                     (assetToken.asset.square_cm * assetToken.num_shares) /
@@ -236,7 +241,7 @@ const AssetTokenDrawerContent: React.FC<Props> = ({
                 </div>
                 <div className="text-primary font-semibold">
                   Relación accionistas
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
