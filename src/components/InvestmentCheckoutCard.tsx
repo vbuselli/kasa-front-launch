@@ -164,8 +164,8 @@ export default function InvestmentCheckoutCard({
 
 
   return (
-    <div className="grid grid-cols-[340px_1fr] items-start">
-      <div className="sticky top-12 self-start ">
+    <div className="grid grid-cols-1 md:grid-cols-[340px_1fr] items-start gap-6">
+      <div className="relative md:sticky md:top-12 self-start">
         <InvestmentSteps currentStepIndex={1} completedSteps={[0]} />
       </div>
 
