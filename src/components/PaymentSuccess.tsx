@@ -41,7 +41,7 @@ export default function PaymentSuccess() {
       : null;
 
   const isReadyToSign = isVerified === "verified" && !!tokenReadyToSign;
-  
+
 
   console.log("activeToken:", activeToken);
   console.log("tokenReadyToSign:", tokenReadyToSign);
@@ -55,7 +55,7 @@ export default function PaymentSuccess() {
       </div>
 
         <div className="bg-[#101A28] border border-white rounded-lg p-8 text-center flex flex-col items-center gap-6 h-full pt-20">
-          <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-lg">4</div>
+          <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-lg">2</div>
           <h2 className="text-2xl font-semibold">¡Ya estás cerca!</h2>
           <p className="text-base text-gray-300">
             ¡Enviaste tu transferencia con éxito! <br />
