@@ -69,7 +69,7 @@ export default function ValidateIdentityPage() {
       router.replace("/protected/validate-identity");
     }
 
-    else {
+    else if ((isVerified === "verified" || isVerified === "true" || isVerified === "send")) {
       router.replace("/protected/success");
     }
   }, [isVerified, verificationLoading, router]);
