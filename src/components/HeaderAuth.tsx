@@ -28,7 +28,7 @@ export default function AuthButton({ user }: { user: User | null }) {
     <div className="flex gap-2 lg:ml-2">
       <Link href="/sign-in" passHref>
         <button
-          className="bg-transparent border border-primary text-white text-sm px-2.5 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer text-nowrap"
+          className="bg-primary text-white text-sm px-2.5 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer text-nowrap"
           onClick={(e) => e.stopPropagation()}
         >
           Ingresar
