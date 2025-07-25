@@ -34,14 +34,14 @@ export default function AuthButton({ user }: { user: User | null }) {
           Ingresar
         </button>
       </Link>
-      <Link href="/sign-up" passHref>
+      {/* <Link href="/sign-up" passHref>
         <button
           className="bg-primary text-white text-sm px-2.5 py-2 rounded hover:bg-primary-dark transition-colors cursor-pointer text-nowrap"
           onClick={(e) => e.stopPropagation()}
         >
           Empezar Ahora
         </button>
-      </Link>
+      </Link> */}
     </div>
   );
 }

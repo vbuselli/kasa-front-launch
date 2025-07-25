@@ -79,13 +79,13 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
           Ingresar con Google
         </button>
       </form>
-
+{/* 
       <p className="text-sm mt-4">
         ¿No tienes una cuenta?{" "}
         <Link className="font-medium underline" href="/sign-up">
           Empezar Ahora
         </Link>
-      </p>
+      </p> */}
 
       <p className="text-xs text-gray-500 text-center mt-2">
         Al continuar declaras estar de acuerdo con los{" "}
