@@ -104,6 +104,7 @@ export default function InvestmentCheckoutCard({
 
   const {
     expires_at,
+    num_shares,
     asset: { id, total_price, square_cm, rent_roi, apreciation_roi, name, spv_ruc, spv_name, project_duration },
   } = asset_token;
 
@@ -118,13 +119,14 @@ export default function InvestmentCheckoutCard({
   const [activeToken, setActiveToken] = useState<AssetPopulated | null>(null);
 
 
+
   useEffect(() => {
     if (tokenId && tokens.length > 0) {
       const match = tokens.find((t) => t.id === tokenId);
       if (match) setActiveToken(match);
     }
   }, [tokens]);
-
+  console.log(asset_token)
   console.log(investmentAmount)
   
   const {
@@ -199,10 +201,10 @@ export default function InvestmentCheckoutCard({
             </div>
 
             <div className="flex justify-between px-4 md:px-0">
-              <span className="font-medium">Área por adquirir:</span>
+              <span className="font-medium">Fracciones por comprar:</span>
               <span className="font-bold">
                 {/*TODO: esto es un hack para calcular el área total en cm²*/}
-                {(square_cm * ((investmentAmount / 100) / asset_token.asset.total_shares)).toFixed(2)} cm<sup>2</sup>
+                {num_shares} fracciones
               </span>
             </div>
 
@@ -471,13 +473,13 @@ export default function InvestmentCheckoutCard({
                         className="block text-sm font-medium mb-2"
                         htmlFor="referral_code"
                       >
-                        Código de referencia (opcional)
+                        ¿Tienes un código de referido? (Opcional)
                       </label>
                       <input
                         id="referral_code"
                         type="text"
                         className="w-full border border-gray-600 bg-gray-800 rounded px-3 py-2 text-white focus:outline-none focus:border-green-500"
-                        placeholder="Ingresa tu código de referencia"
+                        placeholder="Si lo tienes, ingresalo aquí"
                         {...register("referral_code")}
                       />
                       {errors.referral_code && (
