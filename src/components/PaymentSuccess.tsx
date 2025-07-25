@@ -191,10 +191,11 @@ export default function PaymentSuccess() {
 
           <button
             disabled={!isReadyToSign}
-            className={`${isReadyToSign
-              ? "bg-primary hover:bg-primary/80 cursor-pointer"
-              : "bg-white text-gray-500 cursor-not-allowed"
-              } text-white font-semibold py-2 px-6 rounded-md`}
+            className={`py-2 px-6 rounded-md font-semibold
+    ${isReadyToSign
+                ? "bg-primary hover:bg-primary/80 text-white cursor-pointer"
+                : "bg-white text-gray-500 cursor-not-allowed"}
+  `}
             onClick={() => isReadyToSign}
           >
             Ir a firmar mi contrato
