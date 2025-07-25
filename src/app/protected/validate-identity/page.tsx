@@ -65,7 +65,7 @@ export default function ValidateIdentityPage() {
   useEffect(() => {
     if (verificationLoading) return;
     console.log(isVerified)
-    if (isVerified === "not_verified") {
+    if (isVerified === "not_verified" || isVerified === "false") {
       router.replace("/protected/validate-identity");
     }
 
