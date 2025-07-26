@@ -74,7 +74,7 @@ export default function PaymentSuccess() {
     );
   }
 
-  else if (isVerified === "verified" && tokenReadyToSign == null) {
+  else if ((isVerified === "verified" || isVerified == "true") && tokenReadyToSign == null) {
     return (
       <div className="rounded-tl-[30px] min-h-screen bg-[#101A28] text-white px-6 py-12 grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-16 items-start">        <div className="relative md:sticky md:top-6">
         <InvestmentSteps completedSteps={[0, 1, 2]} />
@@ -118,7 +118,7 @@ export default function PaymentSuccess() {
   }
 
 
-  else if (isVerified === "verified" && tokenReadyToSign && activeToken?.document_sign_url) {
+  else if ((isVerified === "verified" || isVerified == "true") && tokenReadyToSign && activeToken?.document_sign_url) {
     return (
       <div className="rounded-tl-[30px] min-h-screen bg-[#101A28] text-white px-6 py-12 grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-16 items-start">
         <div className="relative md:sticky md:top-6">
