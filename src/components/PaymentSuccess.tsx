@@ -171,7 +171,7 @@ export default function PaymentSuccess() {
 
   else if (isVerified == "sent") {
     return (
-      <div className="rounded-tl-[30px] min-h-screen bg-[#101A28] text-white px-12 py-12 grid grid-cols-[340px_1fr] gap-16 items-start">
+      <div className="rounded-tl-[30px] min-h-screen bg-[#101A28] text-white px-6 py-12 grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-16 items-start">
         <div className="relative md:sticky md:top-6">
           <InvestmentSteps completedSteps={[0, 1, 2]} />
         </div>
